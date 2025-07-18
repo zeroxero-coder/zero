@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap');
+
+* {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: rgb(44, 44, 44);
+}
+
+/* زر back */
+.back-button {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 1000;
+}
+
+.back-button a {
+  text-decoration: none;
+  color: white;
+  border: 2px solid white;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+.back-button a:hover {
+  background-color: rgb(198, 71, 71);
+  cursor: pointer;
+}
+
+/* صفحة الصور */
+.pages {
+  padding-top: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.page-block {
+  margin-bottom: 40px;
+  text-align: center;
+}
+
+.page-number {
+  color: rgb(198, 71, 71);
+  background-color: white;
+  padding: 10px 20px;
+  border: 2px solid rgb(198, 71, 71);
+  border-radius: 8px;
+  margin-bottom: 16px;
+  display: inline-block;
+}
+
+.page-img {
+  max-width: 90%;
+  max-height: 1100px;
+  border-radius: 12px;
+  border: 2px solid rgb(198, 71, 71);
+  object-fit: cover;
+}
+
+/* استجابة الشاشات الصغيرة */
+@media (max-width: 768px) {
+  .back-button a {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+
+  .page-number {
+    font-size: 16px;
+    padding: 6px 12px;
+  }
+
+  .page-img {
+    max-width: 100%;
+    max-height: 800px;
+  }
+}
