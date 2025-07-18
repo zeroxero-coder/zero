@@ -288,7 +288,7 @@ section {
     padding: 100px 15px;
     flex-direction: column;
     text-align: center;
-     min-height: 107vh;
+     min-height: 125vh;
   }
 
   .fras {
@@ -300,6 +300,7 @@ section {
   }
 
   .words {
+    padding-top: 60px;
     text-align: center;
     margin: 0 auto;
   }
@@ -363,7 +364,7 @@ section {
     padding: 100px 15px;
     flex-direction: column;
     text-align: center;
-     min-height: 107vh;
+     min-height: 125vh;
   }
 
   .fras {
@@ -374,6 +375,7 @@ section {
   }
 
   .words {
+    padding-top: 60px;
     text-align: center;
     margin: 0 auto;
   }
