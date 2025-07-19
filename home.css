@@ -316,6 +316,7 @@ section {
     font-size: 0.9em;
   }
   .content {
+  display: flex;
   padding-right: 80px;
   flex-direction: column;
   flex-wrap: wrap-reverse;
