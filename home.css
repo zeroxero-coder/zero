@@ -359,7 +359,9 @@ section {
     width: 100%;
   }
 
-  /*iphone 12 */
+
+}
+ /*iphone 12 */
   @media screen and (max-width: 390px) {
   .main {
     padding: 100px 15px;
@@ -488,8 +490,5 @@ section {
     width: 280px;
     margin: 20px;
   }
-}
-
-
 }
 
