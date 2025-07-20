@@ -476,6 +476,7 @@ section {
 
   .fras {
     max-width: 60%;
+    position: relative;
     margin: 0;
   }
 
