@@ -3,68 +3,45 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>zero nero</title>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
   <link rel="stylesheet" href="style.css" />
-  <title>zero nero</title>
-
-    <style>
-  img {
-    -webkit-user-drag: none;
-    user-drag: none;
-    pointer-events: fill;
-  }
-</style>
 
   <style>
-  img {
-    -webkit-user-drag: none;
-  }
+    img {
+      -webkit-user-drag: none;
+      user-drag: none;
+    }
 
-  /* نافذة التكبير */
-  #lightbox {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.85);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-  }
+    /* نافذة التكبير */
+    #lightbox {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.85);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
 
-  #lightbox img {
-    max-width: 90%;
-    max-height: 90%;
-    pointer-events: none;
-  }
+    #lightbox img {
+      max-width: 90%;
+      max-height: 90%;
+      pointer-events: none;
+    }
 
-  #lightbox:target {
-    display: flex;
-  }
-
-  .close-btn {
-    position: absolute;
-    top: 20px;
-    right: 30px;
-    font-size: 30px;
-    color: white;
-    cursor: pointer;
-  }
-
-    .img-wrapper {
-  pointer-events: none;
-  touch-action: none;
-}
-
-.img-wrapper img {
-  pointer-events: auto;
-  touch-action: manipulation;
-}
-
-</style>
-
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      font-size: 30px;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
 </head>
 <body>
 
@@ -75,90 +52,64 @@
   </header>
 
   <section class="gallery">
-    <div><img class="p" src="pages/1244.png" alt="img" /></div>
-<div><img class="p" src="pages/1307.png" alt="img" /></div>
-<div><img class="p" src="pages/1320.png" alt="img" /></div>
-<div><img class="p" src="pages/1326.png" alt="img" /></div>
-<div><img class="p" src="pages/1350.png" alt="img" /></div>
-<img class="p" src="pages/1350.png" oncontextmenu="return false" />
-<div><img class="p" src="pages/1379.png" alt="img" /></div>
-<div><img class="p" src="pages/1103.png" alt="img" /></div>
-<div><img class="p" src="pages/1525.png" alt="img" /></div>
-<div><img class="p" src="pages/1315.png" alt="img" /></div>
-<div><img class="p" src="pages/pa/photo_10_2025-07-21_16-02-31.jpg" alt="img" /></div>
-<div><img class="p" src="pages/pa/photo_11_2025-07-21_16-02-31.jpg" alt="img" /></div>
-<div><img class="p" src="pages/pa/photo_12_2025-07-21_16-02-31.jpg" alt="img" /></div>
-<div><img class="p" src="pages/pa/photo_13_2025-07-21_16-02-31.jpg" alt="img" /></div>
-<div><img class="p" src="pages/pa/photo_14_2025-07-21_16-02-31.jpg" alt="img" /></div>
-<div><img class="p" src="pages/pa/photo_15_2025-07-21_16-02-31.jpg" alt="img" /></div>
-<div><img class="p" src="pages/pa/photo_17_2025-07-21_16-02-31.jpg" alt="img" /></div>
-<div><img class="p" src="pages/pa/photo_1_2025-07-21_16-02-31.jpg" alt="img" /></div>
-<div><img class="p" src="pages/pa/photo_2_2025-07-21_16-02-31.jpg" alt="img" /></div>
-<div><img class="p" src="pages/pa/photo_3_2025-07-21_16-02-31.jpg" alt="img" /></div>
-<div><img class="p" src="pages/pa/photo_4_2025-07-21_16-02-31.jpg" alt="img" /></div>
-<div><img class="p" src="pages/pa/photo_5_2025-07-21_16-02-31.jpg" alt="img" /></div>
-<div><img class="p" src="pages/pa/photo_6_2025-07-21_16-02-31.jpg" alt="img" /></div>
-<div><img class="p" src="pages/pa/photo_16_2025-07-21_16-02-31.jpg" alt="img" /></div>
-<div><img class="p" src="pages/pa/photo_7_2025-07-21_16-02-31.jpg" alt="img" /></div>
-<div><img class="p" src="pages/pa/photo_8_2025-07-21_16-02-31.jpg" alt="img" /></div>
-
+    <!-- أمثلة على الصور -->
+    <div><img class="p" src="pages/1244.png" alt="img" oncontextmenu="return false" /></div>
+    <div><img class="p" src="pages/1307.png" alt="img" oncontextmenu="return false" /></div>
+    <div><img class="p" src="pages/1350.png" alt="img" oncontextmenu="return false" /></div>
+    <div><img class="p" src="pages/1379.png" alt="img" oncontextmenu="return false" /></div>
+    <div><img class="p" src="pages/pa/photo_5_2025-07-21_16-02-31.jpg" alt="img" oncontextmenu="return false" /></div>
+    <!-- أضف بقية الصور كما تحب بنفس الشكل -->
   </section>
 
-  
+  <!-- نافذة عرض مكبرة -->
+  <div id="lightbox">
+    <span class="close-btn" onclick="closeLightbox()">×</span>
+    <img id="lightbox-img" src="" alt="Zoomed Image" />
+  </div>
 
-<!-- نافذة عرض مكبرة -->
-<div id="lightbox">
-  <span class="close-btn" onclick="closeLightbox()">×</span>
-  <img id="lightbox-img" src="" alt="Zoomed Image" />
-</div>
-
-<script>
-  // منع الزر الأيمن
-  document.addEventListener('contextmenu', function (e) {
-    e.preventDefault();
-  });
-
-  // منع سحب الصور
-  document.querySelectorAll('img').forEach(img => {
-    img.setAttribute('draggable', 'false');
-  });
-
-  // تكبير الصور
-  document.querySelectorAll('.gallery img').forEach(img => {
-    img.addEventListener('click', () => {
-      document.getElementById('lightbox-img').src = img.src;
-      document.getElementById('lightbox').style.display = 'flex';
-    });
-  });
-
-  function closeLightbox() {
-    document.getElementById('lightbox').style.display = 'none';
-  }
-<script>
-  // منع الضغط المطول فقط بدون تعطيل الضغط العادي
-  let touchTimer;
-
-  function preventLongPress(e) {
-    touchTimer = setTimeout(() => {
+  <script>
+    // منع الزر الأيمن
+    document.addEventListener('contextmenu', function (e) {
       e.preventDefault();
-    }, 500); // نصف ثانية كافية ليُعتبر ضغط مطول
-  }
+    });
 
-  function cancelLongPress() {
-    clearTimeout(touchTimer);
-  }
+    // منع سحب الصور
+    document.querySelectorAll('img').forEach(img => {
+      img.setAttribute('draggable', 'false');
+    });
 
-  // تطبيقه على كل الصور
-  document.querySelectorAll('.gallery img').forEach(img => {
-    img.addEventListener('touchstart', preventLongPress);
-    img.addEventListener('touchend', cancelLongPress);
-    img.addEventListener('touchmove', cancelLongPress);
-    img.addEventListener('touchcancel', cancelLongPress);
-  });
-</script>
+    // تكبير الصور
+    document.querySelectorAll('.gallery img').forEach(img => {
+      img.addEventListener('click', () => {
+        document.getElementById('lightbox-img').src = img.src;
+        document.getElementById('lightbox').style.display = 'flex';
+      });
+    });
 
+    function closeLightbox() {
+      document.getElementById('lightbox').style.display = 'none';
+    }
 
-</script>
+    // منع الضغط المطول في الجوال فقط بدون تعطيل الضغط العادي
+    let touchTimer;
+
+    function preventLongPress(e) {
+      touchTimer = setTimeout(() => {
+        e.preventDefault();
+      }, 500); // نصف ثانية
+    }
+
+    function cancelLongPress() {
+      clearTimeout(touchTimer);
+    }
+
+    document.querySelectorAll('.gallery img').forEach(img => {
+      img.addEventListener('touchstart', preventLongPress);
+      img.addEventListener('touchend', cancelLongPress);
+      img.addEventListener('touchmove', cancelLongPress);
+      img.addEventListener('touchcancel', cancelLongPress);
+    });
+  </script>
 
 </body>
 </html>
