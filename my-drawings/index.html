@@ -30,6 +30,17 @@
     <a href="pages/1525.png"><img class="p" src="pages/1525.png" /></a>
     <a href="pages/1315.png"><img class="p" src="pages/1315.png" /></a>
   </section>
+<script>
+  // منع الزر الأيمن
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+  });
+
+  // منع سحب الصور
+  document.querySelectorAll('img').forEach(img => {
+    img.setAttribute('draggable', 'false');
+  });
+</script>
 
 </body>
 </html>
