@@ -79,7 +79,8 @@
 <div><img class="p" src="pages/1307.png" alt="img" /></div>
 <div><img class="p" src="pages/1320.png" alt="img" /></div>
 <div><img class="p" src="pages/1326.png" alt="img" /></div>
-<div class="img-wrapper"><img class="p" src="pages/1350.png" alt="img" /></div>
+<div><img class="p" src="pages/1350.png" alt="img" /></div>
+<img src="pages/1350.png" oncontextmenu="return false" ontouchstart="preventLongPress(event)" />
 <div><img class="p" src="pages/1379.png" alt="img" /></div>
 <div><img class="p" src="pages/1103.png" alt="img" /></div>
 <div><img class="p" src="pages/1525.png" alt="img" /></div>
@@ -102,6 +103,8 @@
 <div><img class="p" src="pages/pa/photo_8_2025-07-21_16-02-31.jpg" alt="img" /></div>
 
   </section>
+
+  
 
 <!-- نافذة عرض مكبرة -->
 <div id="lightbox">
@@ -131,6 +134,12 @@
   function closeLightbox() {
     document.getElementById('lightbox').style.display = 'none';
   }
+
+  function preventLongPress(e) {
+  e.preventDefault();
+  e.stopPropagation();
+}
+
 </script>
 
 </body>
