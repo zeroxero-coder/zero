@@ -80,7 +80,7 @@
 <div><img class="p" src="pages/1320.png" alt="img" /></div>
 <div><img class="p" src="pages/1326.png" alt="img" /></div>
 <div><img class="p" src="pages/1350.png" alt="img" /></div>
-<img class="p" src="pages/1350.png" oncontextmenu="return true" ontouchstart="preventLongPress(event)" />
+<img class="p" src="pages/1350.png" oncontextmenu="return false" />
 <div><img class="p" src="pages/1379.png" alt="img" /></div>
 <div><img class="p" src="pages/1103.png" alt="img" /></div>
 <div><img class="p" src="pages/1525.png" alt="img" /></div>
@@ -134,11 +134,29 @@
   function closeLightbox() {
     document.getElementById('lightbox').style.display = 'none';
   }
+<script>
+  // منع الضغط المطول فقط بدون تعطيل الضغط العادي
+  let touchTimer;
 
   function preventLongPress(e) {
-  e.preventDefault();
-  e.stopPropagation();
-}
+    touchTimer = setTimeout(() => {
+      e.preventDefault();
+    }, 500); // نصف ثانية كافية ليُعتبر ضغط مطول
+  }
+
+  function cancelLongPress() {
+    clearTimeout(touchTimer);
+  }
+
+  // تطبيقه على كل الصور
+  document.querySelectorAll('.gallery img').forEach(img => {
+    img.addEventListener('touchstart', preventLongPress);
+    img.addEventListener('touchend', cancelLongPress);
+    img.addEventListener('touchmove', cancelLongPress);
+    img.addEventListener('touchcancel', cancelLongPress);
+  });
+</script>
+
 
 </script>
 
