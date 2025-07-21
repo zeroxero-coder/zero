@@ -53,5 +53,17 @@
     </a>
   </div>
 
+  <script>
+  // منع الزر الأيمن
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+  });
+
+  // منع سحب الصور
+  document.querySelectorAll('img').forEach(img => {
+    img.setAttribute('draggable', 'false');
+  });
+</script>
+
 </body>
 </html>
