@@ -52,6 +52,17 @@
     color: white;
     cursor: pointer;
   }
+
+    .img-wrapper {
+  pointer-events: none;
+  touch-action: none;
+}
+
+.img-wrapper img {
+  pointer-events: auto;
+  touch-action: manipulation;
+}
+
 </style>
 
 </head>
@@ -68,7 +79,7 @@
 <div><img class="p" src="pages/1307.png" alt="img" /></div>
 <div><img class="p" src="pages/1320.png" alt="img" /></div>
 <div><img class="p" src="pages/1326.png" alt="img" /></div>
-<div><img class="p" src="pages/1350.png" alt="img" /></div>
+<div class="img-wrapper"><img class="p" src="pages/1350.png" alt="img" /></div>
 <div><img class="p" src="pages/1379.png" alt="img" /></div>
 <div><img class="p" src="pages/1103.png" alt="img" /></div>
 <div><img class="p" src="pages/1525.png" alt="img" /></div>
