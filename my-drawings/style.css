@@ -16,6 +16,11 @@ header {
   position: relative;
 }
 
+h1 {
+      text-align: center;
+      color: rgb(255, 255, 255);
+      margin-bottom: 40px;
+    }
 /* زر الرجوع */
 .x {
     position: fixed;
