@@ -40,6 +40,7 @@ header {
 
 /* المعرض */
 .gallery {
+  background: url(Untitled1627.jpg) no-repeat;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
