@@ -14,7 +14,7 @@ body {
 
 /* زر back */
 .back-button {
-  top: 20px;
+  top: 50px;
   left: 20px;
   z-index: 1000;
 }
