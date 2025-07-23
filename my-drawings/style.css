@@ -9,7 +9,7 @@
 }
 
 body {
-  background-color: rgb(44, 44, 44);
+  background: url(Untitled1627.jpg);
 }
 
 header {
@@ -40,7 +40,6 @@ header {
 
 /* المعرض */
 .gallery {
-  background: url(Untitled1627.jpg) no-repeat;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
