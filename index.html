@@ -476,12 +476,24 @@ function rebuildVids(){
   const vg=document.getElementById('vg');vg.innerHTML='';
   const t=T[lang];
   // Use netlify vids as fallback + uploaded vids
-  const videoSources=[
-    // Try uploaded files first, fallback to netlify
-    {src:'/mnt/user-data/uploads/IMG_1320.MP4',type:'video/mp4',fallback:'https://zeronero.netlify.app/my-animations/vid/0722.mp4'},
-    {src:'/mnt/user-data/uploads/IMG_1477.MOV',type:'video/quicktime',fallback:'https://zeronero.netlify.app/my-animations/vid/IMG_3582.MOV'},
-    {src:'/mnt/user-data/uploads/IMG_1699.MP4',type:'video/mp4',fallback:'https://zeronero.netlify.app/my-animations/vid/copy_7ADAA572-AEEF-41E5-B8AF-5E9F950195A2.mov'}
-  ];
+ const videoSources=[
+  {
+    src:'https://zeronero.netlify.app/my-animations/vid/IMG_1320.MP4',
+    type:'video/mp4'
+  },
+  {
+    src:'https://zeronero.netlify.app/my-animations/vid/IMG_3582.MOV',
+    type:'video/quicktime'
+  },
+  {
+    src:'https://zeronero.netlify.app/my-animations/vid/0722.mp4',
+    type:'video/mp4'
+  },
+  {
+    src:'https://zeronero.netlify.app/my-animations/vid/copy_7ADAA572-AEEF-41E5-B8AF-5E9F950195A2.mov',
+    type:'video/quicktime'
+  }
+];
   
   videoSources.forEach((v,i)=>{
     const d=document.createElement('div');d.className='vc';
