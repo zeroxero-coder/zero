@@ -1,4 +1,11 @@
-
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ZERO NERO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Bebas+Neue&display=swap');
 *{margin:0;padding:0;box-sizing:border-box}
@@ -17,6 +24,14 @@ body.day{--b:#f5f0eb;--b2:#ede5de;--b3:#e5dbd4;--b4:#d8cec7;--b5:#c9bfba;--w:#1a
 .lbtn{width:100%;background:var(--m3);color:var(--w);border:none;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:2px;padding:11px;border-radius:4px;cursor:pointer;transition:background .2s}
 .lbtn:hover{background:var(--m2)}
 .lerr{color:var(--m3);font-size:.8rem;margin-top:.5rem;min-height:1.2rem}
+
+/* GOOGLE LOGIN BTN */
+.gbtn{width:100%;background:var(--b3);border:1px solid var(--b5);color:var(--w);font-family:'Tajawal',sans-serif;font-size:.9rem;padding:10px;border-radius:4px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:1rem}
+.gbtn:hover{border-color:var(--m3);color:var(--m3)}
+.gbtn svg{width:18px;height:18px;flex-shrink:0}
+.ldiv{display:flex;align-items:center;gap:10px;margin-bottom:1rem}
+.ldiv::before,.ldiv::after{content:'';flex:1;height:1px;background:var(--b5)}
+.ldiv span{font-size:.7rem;color:var(--w3);white-space:nowrap}
 
 /* INTRO */
 #intro{display:none;min-height:100vh;align-items:center;justify-content:center;background:var(--b);flex-direction:column;gap:1rem}
@@ -42,6 +57,36 @@ body.day nav{background:rgba(245,240,235,.96)}
 .cbtn{background:var(--b3);border:1px solid var(--b5);color:var(--w3);font-family:'Bebas Neue',sans-serif;font-size:.75rem;letter-spacing:1px;padding:5px 10px;border-radius:3px;cursor:pointer;transition:all .2s}
 body.day .cbtn{background:var(--b2);border-color:var(--b4)}
 .cbtn:hover{border-color:var(--m3);color:var(--m3)}
+
+/* HAMBURGER MENU BUTTON */
+.menu-btn{background:none;border:none;cursor:pointer;display:flex;flex-direction:column;gap:5px;padding:5px;margin-left:4px}
+.menu-btn span{display:block;width:22px;height:2px;background:var(--w3);border-radius:2px;transition:all .3s}
+.menu-btn:hover span{background:var(--m3)}
+
+/* SIDE PANEL */
+.side-panel{position:fixed;top:0;right:-320px;width:300px;height:100vh;background:var(--b2);border-left:1px solid var(--b5);z-index:9000;transition:right .35s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;padding:0}
+.side-panel.open{right:0}
+body[dir="ltr"] .side-panel{right:auto;left:-320px;border-left:none;border-right:1px solid var(--b5)}
+body[dir="ltr"] .side-panel.open{left:0}
+.sp-head{display:flex;align-items:center;justify-content:space-between;padding:1.2rem 1.4rem;border-bottom:1px solid var(--b5)}
+.sp-logo{font-family:'Bebas Neue',sans-serif;font-size:1.3rem;color:var(--m3);letter-spacing:3px}
+.sp-close{background:none;border:none;color:var(--w3);font-size:1.3rem;cursor:pointer;transition:color .2s}
+.sp-close:hover{color:var(--m3)}
+.sp-body{padding:1.4rem;flex:1;display:flex;flex-direction:column;gap:.6rem}
+.sp-user{background:var(--b3);border:1px solid var(--b5);border-radius:5px;padding:1rem;margin-bottom:.5rem;display:flex;align-items:center;gap:.75rem}
+.sp-avatar{width:40px;height:40px;border-radius:50%;background:var(--m4);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue',sans-serif;font-size:1.1rem;color:var(--m3);flex-shrink:0;overflow:hidden}
+.sp-avatar img{width:100%;height:100%;object-fit:cover}
+.sp-uname{font-size:.88rem;color:var(--w);font-weight:600}
+.sp-uemail{font-size:.72rem;color:var(--w3)}
+.sp-btn{width:100%;padding:11px 14px;border-radius:4px;border:1px solid var(--b5);background:var(--b3);color:var(--w);font-family:'Tajawal',sans-serif;font-size:.9rem;cursor:pointer;transition:all .2s;display:flex;align-items:center;gap:10px;text-align:right}
+.sp-btn:hover{border-color:var(--m3);color:var(--m3)}
+.sp-btn.primary{background:var(--m3);border-color:var(--m3);color:#fff}
+.sp-btn.primary:hover{background:var(--m2)}
+.sp-btn svg{flex-shrink:0;width:17px;height:17px}
+.sp-divider{height:1px;background:var(--b5);margin:.3rem 0}
+.sp-label{font-size:.65rem;letter-spacing:2px;color:var(--w3);opacity:.5;text-transform:uppercase;padding:0 2px}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:8999}
+.overlay.show{display:block}
 
 /* PAGES */
 .page{display:none}
@@ -91,6 +136,9 @@ body.day .wc{background:var(--b2);border-color:var(--b4)}
 .wd{font-size:.8rem;color:var(--w3);line-height:1.65}
 .wa{display:flex;align-items:center;gap:5px;margin-top:.65rem;color:var(--m3);font-size:.78rem;font-weight:700}
 
+/* LOCKED BADGE */
+.lock-badge{position:absolute;top:10px;left:10px;background:rgba(10,10,10,.8);border:1px solid var(--m3);color:var(--m3);font-family:'Bebas Neue',sans-serif;font-size:.7rem;letter-spacing:1px;padding:3px 9px;border-radius:2px;z-index:3;display:flex;align-items:center;gap:4px}
+
 /* INNER */
 .inner{display:none;padding:2rem;max-width:1100px;margin:0 auto;animation:fu .35s ease}
 .inner.active{display:block}
@@ -124,6 +172,10 @@ body.day .wc{background:var(--b2);border-color:var(--b4)}
 .chi p{font-size:.75rem;color:var(--w3)}
 .cha{margin-right:auto;color:var(--b5);font-size:1.2rem}
 .chc:hover .cha{color:var(--m3)}
+/* LOCKED CHAPTER */
+.chc.locked{opacity:.85;cursor:default}
+.chc.locked:hover{border-color:var(--m3);background:var(--b2)}
+.ch-lock-icon{font-size:.85rem;color:var(--m3)}
 .rdr{display:none}
 .rdr.active{display:block}
 .rh{display:flex;align-items:center;justify-content:space-between;margin-bottom:1.5rem;gap:1rem}
@@ -140,7 +192,27 @@ body.day .wc{background:var(--b2);border-color:var(--b4)}
 .vv video{width:100%;display:block;max-height:220px;object-fit:cover;background:var(--b)}
 .vi{padding:1rem}
 .vit{font-family:'Bebas Neue',sans-serif;font-size:1.05rem;color:var(--w);letter-spacing:1px;margin-bottom:2px}
-.vis{font-size:.75rem;color:var(--w3)}
+.vis2{font-size:.75rem;color:var(--w3)}
+
+/* SUBSCRIBE MODAL */
+.sub-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:8000;align-items:center;justify-content:center;padding:1rem}
+.sub-modal.open{display:flex}
+.sub-box{background:var(--b2);border:1px solid var(--b5);border-radius:8px;width:100%;max-width:420px;padding:2.5rem 2rem;text-align:center;position:relative}
+.sub-box h2{font-family:'Bebas Neue',sans-serif;font-size:2rem;color:var(--m3);letter-spacing:2px;margin-bottom:.4rem}
+.sub-box p{font-size:.9rem;color:var(--w3);margin-bottom:1.5rem;line-height:1.7}
+.sub-price{font-family:'Bebas Neue',sans-serif;font-size:2.8rem;color:var(--w);margin-bottom:1.5rem;line-height:1}
+.sub-price span{font-size:1rem;color:var(--w3);font-family:'Tajawal',sans-serif}
+.apple-pay-btn{width:100%;background:#000;color:#fff;border:none;border-radius:8px;padding:14px;font-size:1rem;font-family:-apple-system,sans-serif;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:.75rem;transition:opacity .2s}
+.apple-pay-btn:hover{opacity:.85}
+.apple-pay-btn svg{width:20px;height:20px}
+.sub-close{position:absolute;top:12px;left:12px;background:none;border:none;color:var(--w3);font-size:1.3rem;cursor:pointer;transition:color .2s}
+body[dir="ltr"] .sub-close{left:auto;right:12px}
+.sub-close:hover{color:var(--m3)}
+.sub-features{display:flex;flex-direction:column;gap:.5rem;margin-bottom:1.5rem;text-align:right}
+body[dir="ltr"] .sub-features{text-align:left}
+.sub-features li{display:flex;align-items:center;gap:8px;font-size:.85rem;color:var(--w3);list-style:none}
+.sub-features li::before{content:'✓';color:var(--m3);font-weight:700;flex-shrink:0}
+.need-login-msg{font-size:.82rem;color:var(--m3);margin-top:.5rem}
 
 /* LIGHTBOX */
 .lb{display:none;position:fixed;inset:0;background:rgba(0,0,0,.93);z-index:9999;align-items:center;justify-content:center;padding:1rem}
@@ -151,10 +223,73 @@ body.day .wc{background:var(--b2);border-color:var(--b4)}
 .lbn:hover{background:var(--m3)}
 .lbp{right:12px}.lbnx{left:12px}
 
+/* GOOGLE AUTH MODAL */
+.auth-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:8500;align-items:center;justify-content:center;padding:1rem}
+.auth-modal.open{display:flex}
+.auth-box{background:var(--b2);border:1px solid var(--b5);border-radius:8px;width:100%;max-width:360px;padding:2.5rem 2rem;text-align:center;position:relative}
+.auth-box h2{font-family:'Bebas Neue',sans-serif;font-size:1.8rem;color:var(--m3);letter-spacing:2px;margin-bottom:.5rem}
+.auth-box p{font-size:.85rem;color:var(--w3);margin-bottom:1.5rem}
+.auth-tabs{display:flex;border-bottom:1px solid var(--b5);margin-bottom:1.5rem}
+.auth-tab{flex:1;background:none;border:none;color:var(--w3);font-family:'Tajawal',sans-serif;font-size:.9rem;padding:.6rem;cursor:pointer;border-bottom:2px solid transparent;transition:all .2s}
+.auth-tab.active{color:var(--m3);border-bottom-color:var(--m3)}
+.auth-section{display:none}.auth-section.active{display:block}
+.auth-close{position:absolute;top:12px;left:12px;background:none;border:none;color:var(--w3);font-size:1.3rem;cursor:pointer;transition:color .2s}
+body[dir="ltr"] .auth-close{left:auto;right:12px}
+.auth-close:hover{color:var(--m3)}
+.auth-or{display:flex;align-items:center;gap:10px;margin:1rem 0;color:var(--w3);font-size:.75rem}
+.auth-or::before,.auth-or::after{content:'';flex:1;height:1px;background:var(--b5)}
+
 footer{background:var(--b);border-top:1px solid var(--b4);text-align:center;padding:1.25rem;font-size:.78rem;color:var(--w3);opacity:.4;margin-top:3rem}
 footer strong{color:var(--m3);opacity:1}
 </style>
+</head>
+<body>
 
+<!-- ══ SIDE PANEL OVERLAY ══ -->
+<div class="overlay" id="overlay" onclick="closePanel()"></div>
+
+<!-- ══ SIDE PANEL ══ -->
+<div class="side-panel" id="sidePanel">
+  <div class="sp-head">
+    <div class="sp-logo">ZERO NERO</div>
+    <button class="sp-close" onclick="closePanel()">✕</button>
+  </div>
+  <div class="sp-body">
+    <!-- User info area -->
+    <div class="sp-user" id="sp-user-area">
+      <div class="sp-avatar" id="sp-avatar">ZN</div>
+      <div>
+        <div class="sp-uname" id="sp-uname">الزائر</div>
+        <div class="sp-uemail" id="sp-uemail" style="font-size:.7rem;color:var(--w3)">غير مسجّل</div>
+      </div>
+    </div>
+
+    <div class="sp-label" id="sp-lbl-account">الحساب</div>
+    <button class="sp-btn primary" id="sp-login-btn" onclick="openAuthModal('login')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
+      <span id="sp-login-txt">تسجيل الدخول</span>
+    </button>
+    <button class="sp-btn" id="sp-register-btn" onclick="openAuthModal('register')">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <span id="sp-register-txt">إنشاء حساب</span>
+    </button>
+
+    <div class="sp-divider"></div>
+    <div class="sp-label" id="sp-lbl-sub">الاشتراك</div>
+    <button class="sp-btn" onclick="closePanel();openSubModal()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+      <span id="sp-sub-txt">اشترك الآن — 30 ريال</span>
+    </button>
+
+    <div class="sp-divider" id="sp-logout-div" style="display:none"></div>
+    <button class="sp-btn" id="sp-logout-btn" style="display:none" onclick="doLogout()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
+      <span id="sp-logout-txt">تسجيل الخروج</span>
+    </button>
+  </div>
+</div>
+
+<!-- ══ LOGIN SCREEN ══ -->
 <div id="ls">
   <div class="lbox">
     <div class="llogo">ZERO NERO</div>
@@ -165,14 +300,22 @@ footer strong{color:var(--m3);opacity:1}
   </div>
 </div>
 
+<!-- ══ INTRO ══ -->
 <div id="intro">
   <div id="it">ZERO NERO</div>
   <div id="il"></div>
 </div>
 
+<!-- ══ APP ══ -->
 <div id="app">
   <nav>
-    <div class="nlogo" onclick="showPage('home')">ZERO<span> NERO</span></div>
+    <div style="display:flex;align-items:center;gap:8px">
+      <!-- HAMBURGER (top corner, 3 lines) -->
+      <button class="menu-btn" onclick="openPanel()" title="القائمة" id="hamburger-btn">
+        <span></span><span></span><span></span>
+      </button>
+      <div class="nlogo" onclick="showPage('home')">ZERO<span> NERO</span></div>
+    </div>
     <div class="nlinks">
       <button onclick="showPage('home')" id="nav-home" class="active">الرئيسية</button>
       <button onclick="showPage('works')" id="nav-works">أعمالي</button>
@@ -183,7 +326,7 @@ footer strong{color:var(--m3);opacity:1}
     </div>
   </nav>
 
-  <!-- HOME -->
+  <!-- ══ HOME ══ -->
   <div id="page-home" class="page active">
     <div class="hero">
       <div class="hl">
@@ -204,53 +347,71 @@ footer strong{color:var(--m3);opacity:1}
       </div>
       <div class="hr">
         <div class="hiw">
-          <img src="https://zeronero.netlify.app/Untitled1626.png" alt="Zero Nero Character Art" onerror="this.style.opacity='.15'">
-          <div class="ifr"></div>
-          <div class="ifr2"></div>
+          <img id="hero-img" src="https://zeronero.netlify.app/Untitled1626.png" alt="Zero Nero Character Art" onerror="this.style.opacity='.15'">
+          <div class="ifr"></div><div class="ifr2"></div>
           <div class="itag" id="titag">أبوفراس الشعواني</div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- WORKS -->
+  <!-- ══ WORKS ══ -->
   <div id="page-works" class="page">
     <div class="wp">
       <div class="se">PORTFOLIO</div>
       <div class="sh" id="twt">أعمالي</div>
       <div class="wg">
+
+        <!-- CARD 1: رسومات -->
         <div class="wc" onclick="showInner('drawings')">
           <div class="wt"><img src="https://zeronero.netlify.app/my-drawings/pages/1244.png" alt=""><div class="ov"></div><div class="wbg">+28</div></div>
-          <div class="wb"><div class="wtt">DRAWINGS</div><p class="wd" id="tc1d">معرض رسوماتي — شخصيات ومشاهد متنوعة</p><div class="wa" id="tc1a">استعرض ←</div></div>
+          <div class="wb">
+            <div class="wtt" id="tc1t">الرسومات</div>
+            <p class="wd" id="tc1d">معرض رسوماتي — شخصيات ومشاهد متنوعة</p>
+            <div class="wa" id="tc1a">استعرض ←</div>
+          </div>
         </div>
+
+        <!-- CARD 2: مانجا -->
         <div class="wc" onclick="showInner('manga')">
-          <div class="wt" id="manga-thumb"><img id="manga-cover-thumb" src="" alt=""><div class="ov"></div><div class="wbg">2 فصول</div></div>
-          <div class="wb"><div class="wtt">MANGA — J.E.T</div><p class="wd" id="tc2d">مانجا أصيلة من تأليف ورسم أبوفراس الشعواني</p><div class="wa" id="tc2a">اقرأ ←</div></div>
+          <div class="wt"><img id="manga-cover-thumb" src="https://zeronero.netlify.app/jet-pdf/file/jetphoto.jpg" alt=""><div class="ov"></div><div class="wbg" id="ch-badge">فصلان</div></div>
+          <div class="wb">
+            <div class="wtt" id="tc2t">المانجا</div>
+            <p class="wd" id="tc2d">مانجا أصيلة من تأليف ورسم أبوفراس الشعواني</p>
+            <div class="wa" id="tc2a">اقرأ ←</div>
+          </div>
         </div>
+
+        <!-- CARD 3: انيميشن -->
         <div class="wc" onclick="showInner('animation')">
-          <div class="wt" id="anim-thumb"><video id="anim-preview" muted loop autoplay playsinline preload="none" style="width:100%;height:100%;object-fit:cover;opacity:.6"></video><div class="ov"></div><div class="wbg">4 مقاطع</div></div>
-          <div class="wb"><div class="wtt">ANIMATIONS</div><p class="wd" id="tc3d">مقاطع انيميشن من الرسم حتى التحريك الكامل</p><div class="wa" id="tc3a">شاهد ←</div></div>
+          <div class="wt"><video id="anim-preview" muted loop autoplay playsinline preload="none" style="width:100%;height:100%;object-fit:cover;opacity:.6"></video><div class="ov"></div><div class="wbg">4 مقاطع</div></div>
+          <div class="wb">
+            <div class="wtt" id="tc3t">الرسوم الحركية</div>
+            <p class="wd" id="tc3d">مقاطع انيميشن من الرسم حتى التحريك الكامل</p>
+            <div class="wa" id="tc3a">شاهد ←</div>
+          </div>
         </div>
+
       </div>
     </div>
 
-    <!-- DRAWINGS -->
+    <!-- ══ DRAWINGS INNER ══ -->
     <div id="inner-drawings" class="inner">
       <div style="max-width:1100px;margin:0 auto">
-        <button class="bk" onclick="hideInner('drawings')">← رجوع</button>
+        <button class="bk" onclick="hideInner('drawings')" id="bk-drawings">← رجوع</button>
         <div class="se">GALLERY</div>
         <div class="sh" id="tgh">رسوماتي</div>
         <div class="gal" id="gal"></div>
       </div>
     </div>
 
-    <!-- MANGA -->
+    <!-- ══ MANGA INNER ══ -->
     <div id="inner-manga" class="inner">
       <div style="max-width:900px;margin:0 auto">
-        <button class="bk" onclick="hideInner('manga')">← رجوع</button>
+        <button class="bk" onclick="hideInner('manga')" id="bk-manga">← رجوع</button>
         <div id="mm">
           <div class="mb">
-            <div class="mc"><img id="manga-cover-img" src="" alt="J.E.T Cover"></div>
+            <div class="mc"><img id="manga-cover-img" src="https://zeronero.netlify.app/jet-pdf/file/jetphoto.jpg" alt="J.E.T Cover"></div>
             <div>
               <div class="mt" id="manga-title-txt">J.E.T</div>
               <div class="mm">
@@ -263,13 +424,30 @@ footer strong{color:var(--m3);opacity:1}
           </div>
           <div class="se">CHAPTERS</div>
           <div class="chl">
-            <div class="chc" onclick="openChapter(1,'Jet Stone',16)"><div class="chn">01</div><div class="chd"></div><div class="chi"><h4>Jet Stone</h4><p id="tcp1">الفصل الأول — 16 صفحة</p></div><div class="cha">›</div></div>
-            <div class="chc" onclick="openChapter(2,'Outcasts',14)"><div class="chn">02</div><div class="chd"></div><div class="chi"><h4>Outcasts</h4><p id="tcp2">الفصل الثاني — 14 صفحة</p></div><div class="cha">›</div></div>
+            <div class="chc" onclick="openChapter(1,'Jet Stone',16)">
+              <div class="chn">01</div><div class="chd"></div>
+              <div class="chi"><h4>Jet Stone</h4><p id="tcp1">الفصل الأول — 16 صفحة</p></div>
+              <div class="cha">›</div>
+            </div>
+            <div class="chc" onclick="openChapter(2,'Outcasts',14)">
+              <div class="chn">02</div><div class="chd"></div>
+              <div class="chi"><h4>Outcasts</h4><p id="tcp2">الفصل الثاني — 14 صفحة</p></div>
+              <div class="cha">›</div>
+            </div>
+            <!-- CHAPTER 3 — LOCKED -->
+            <div class="chc locked" onclick="tryChapter3()">
+              <div class="chn" style="color:var(--w3)">03</div><div class="chd"></div>
+              <div class="chi">
+                <h4 id="ch3-title">الفصل الثالث</h4>
+                <p id="tcp3">الفصل الثالث — قريباً — اشتراك مطلوب</p>
+              </div>
+              <div class="cha"><span class="ch-lock-icon">🔒</span></div>
+            </div>
           </div>
         </div>
         <div class="rdr" id="rdr">
           <div class="rh">
-            <button class="bk" onclick="closeReader()" style="margin:0">← الفصول</button>
+            <button class="bk" onclick="closeReader()" style="margin:0" id="bk-chapters">← الفصول</button>
             <div class="rt" id="rtitle"></div>
             <div style="font-size:.75rem;color:var(--w3)" id="rcnt"></div>
           </div>
@@ -278,10 +456,10 @@ footer strong{color:var(--m3);opacity:1}
       </div>
     </div>
 
-    <!-- ANIMATION -->
+    <!-- ══ ANIMATION INNER ══ -->
     <div id="inner-animation" class="inner">
       <div style="max-width:960px;margin:0 auto">
-        <button class="bk" onclick="hideInner('animation')">← رجوع</button>
+        <button class="bk" onclick="hideInner('animation')" id="bk-animation">← رجوع</button>
         <div class="se">ANIMATIONS</div>
         <div class="sh" id="tah">مقاطع الحركة</div>
         <div class="vg" id="vg"></div>
@@ -292,7 +470,7 @@ footer strong{color:var(--m3);opacity:1}
   <footer><strong>ZERO NERO</strong> · أبوفراس علي الشعواني · MANGAKA / ANIMATOR</footer>
 </div>
 
-<!-- LIGHTBOX -->
+<!-- ══ LIGHTBOX ══ -->
 <div class="lb" id="lb" onclick="lbOut(event)">
   <button class="lbx" onclick="closeLB()">✕</button>
   <button class="lbn lbp" onclick="lbN(1)">‹</button>
@@ -300,220 +478,545 @@ footer strong{color:var(--m3);opacity:1}
   <button class="lbn lbnx" onclick="lbN(-1)">›</button>
 </div>
 
-<script>
-const PASS='ZERO NERO';
-let lang='ar',dark=true,lbIdx=0;
+<!-- ══ SUBSCRIBE MODAL ══ -->
+<div class="sub-modal" id="subModal">
+  <div class="sub-box">
+    <button class="sub-close" onclick="closeSubModal()">✕</button>
+    <h2 id="sub-title">الاشتراك</h2>
+    <p id="sub-desc">احصل على وصول كامل لجميع الفصول والمحتوى الحصري</p>
+    <div class="sub-price">30 <span id="sub-currency">ريال / شهر</span></div>
+    <ul class="sub-features" id="sub-features">
+      <li id="sf1">جميع فصول المانجا بما فيها الجديدة</li>
+      <li id="sf2">وصول مبكر للفصول القادمة</li>
+      <li id="sf3">محتوى حصري خلف الكواليس</li>
+    </ul>
+    <div id="sub-login-notice" class="need-login-msg" style="margin-bottom:1rem;display:none" id="sub-login-notice"></div>
+    <button class="apple-pay-btn" onclick="handleApplePay()">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.7 9.05 7.4c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.39-1.32 2.76-2.54 4zm-3.1-17.52c.06 2.06-1.52 3.7-3.44 3.56-.26-1.88 1.7-3.7 3.44-3.56z"/>
+      </svg>
+      <span id="sub-pay-txt">الدفع بـ Apple Pay</span>
+    </button>
+    <div id="sub-need-login" style="display:none">
+      <p class="need-login-msg" id="sub-need-login-msg">يجب تسجيل الدخول أولاً للاشتراك</p>
+      <button class="sp-btn primary" style="width:100%;margin-top:.75rem;justify-content:center;display:flex;gap:8px;align-items:center" onclick="closeSubModal();openAuthModal('login')">
+        <span id="sub-goto-login">تسجيل الدخول</span>
+      </button>
+    </div>
+  </div>
+</div>
 
-// ── TRANSLATIONS ──
-const T={
-  ar:{role:'MANGAKA / ANIMATOR',name:'أبوفراس<br>علي <em>الشعواني</em>',en:'ABUFARRAS ALI SHAWANI',desc:'رسام مانجا ومحرّك متخصص في خلق عوالم بصرية آسرة. أمزج بين روح الأنيمي وهوية عربية أصيلة لأروي قصصاً لا تُنسى.',s1:'رسمة',s2:'مانجا',s3:'انيميشن',wt:'أعمالي',c1d:'معرض رسوماتي — شخصيات ومشاهد متنوعة',c1a:'استعرض ←',c2d:'مانجا أصيلة من تأليف ورسم أبوفراس الشعواني',c2a:'اقرأ ←',c3d:'مقاطع انيميشن من الرسم حتى التحريك الكامل',c3a:'شاهد ←',gh:'رسوماتي',ah:'مقاطع الحركة',l1:'رسم وكتابة',l2:'الناشر',cp1:'الفصل الأول — 16 صفحة',cp2:'الفصل الثاني — 14 صفحة',itag:'أبوفراس الشعواني',lsub:'أدخل كلمة المرور',ph:'••••••••',lbt:'دخول',vi:['انيميشن ٠١','انيميشن ٠٢','انيميشن ٠٣'],vs:'مقطع حركة',ph:'الرئيسية',pw:'أعمالي',lb:'EN',dir:'rtl',
-    cover:'ja', desc:'رسام مانجا ومحرّك متخصص في خلق عوالم بصرية آسرة. أمزج بين روح الأنمي وهوية عربية أصيلة لأروي قصصاً ساحرة.',mt:'الكهرمان الأسود'},
-  en:{role:'MANGAKA / ANIMATOR',name:'Abufarras<br>Ali <em>Shawani</em>',en:'ABUFARRAS ALI SHAWANI',desc:'A manga artist and animator crafting immersive visual worlds, blending anime aesthetics with authentic Arabic identity.',s1:'Drawings',s2:'Manga',s3:'Animations',wt:'My Works',c1d:'Drawing gallery — characters, scenes & visual experiments',c1a:'Explore →',c2d:'Original manga written and drawn by Abufarras Shawani',c2a:'Read →',c3d:'Animation clips from first sketch to final motion',c3a:'Watch →',gh:'Drawings',ah:'Animation Clips',l1:'Art & Story',l2:'Publisher',cp1:'Chapter 1 — 16 pages',cp2:'Chapter 2 — 14 pages',itag:'Abufarras Shawani',lsub:'Enter password',ph:'password',lbt:'Enter',vi:['Animation 01','Animation 02','Animation 03'],vs:'Motion clip',ph:'Home',pw:'Works',lb:'AR',dir:'ltr',
-    cover:'je', desc:'A manga artist and animator crafting immersive visual worlds, blending anime aesthetics with authentic Arabic identity..',mt:'JET'}
+<!-- ══ AUTH MODAL ══ -->
+<div class="auth-modal" id="authModal">
+  <div class="auth-box">
+    <button class="auth-close" onclick="closeAuthModal()">✕</button>
+    <h2>ZERO NERO</h2>
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tab-login" onclick="switchAuthTab('login')" id="auth-tab-login-btn">تسجيل الدخول</button>
+      <button class="auth-tab" id="tab-register" onclick="switchAuthTab('register')" id="auth-tab-reg-btn">إنشاء حساب</button>
+    </div>
+    <!-- LOGIN TAB -->
+    <div class="auth-section active" id="auth-login">
+      <button class="gbtn" onclick="googleSignIn()">
+        <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        <span id="auth-google-login-txt">تسجيل الدخول بـ Google</span>
+      </button>
+      <div class="auth-or"><span id="auth-or-txt">أو</span></div>
+      <input class="linput" id="login-email" type="email" placeholder="البريد الإلكتروني">
+      <input class="linput" id="login-pass" type="password" placeholder="كلمة المرور">
+      <button class="lbtn" onclick="emailLogin()" id="auth-login-btn-txt">دخول</button>
+    </div>
+    <!-- REGISTER TAB -->
+    <div class="auth-section" id="auth-register">
+      <button class="gbtn" onclick="googleSignIn()">
+        <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
+        <span id="auth-google-reg-txt">التسجيل بـ Google</span>
+      </button>
+      <div class="auth-or"><span>أو</span></div>
+      <input class="linput" id="reg-name" type="text" placeholder="الاسم">
+      <input class="linput" id="reg-email" type="email" placeholder="البريد الإلكتروني">
+      <input class="linput" id="reg-pass" type="password" placeholder="كلمة المرور">
+      <button class="lbtn" onclick="emailRegister()" id="auth-reg-btn-txt">إنشاء حساب</button>
+    </div>
+    <div class="lerr" id="auth-err"></div>
+  </div>
+</div>
+
+<!-- ══ APPLE PAY SUCCESS MODAL ══ -->
+<div class="sub-modal" id="paySuccessModal">
+  <div class="sub-box">
+    <h2 style="color:#30d158">✓</h2>
+    <h2 id="pay-success-title">تم الاشتراك!</h2>
+    <p id="pay-success-msg" style="margin-bottom:1.5rem">أصبح بإمكانك قراءة جميع الفصول الآن.</p>
+    <button class="lbtn" onclick="closePaySuccess()">رائع!</button>
+  </div>
+</div>
+
+<script>
+// ══ CONSTANTS ══
+const PASS = 'ZERO NERO';
+let lang = 'ar', dark = true, lbIdx = 0;
+let currentUser = null; // {name, email, photo, subscribed}
+
+// ══ TRANSLATIONS ══
+const T = {
+  ar: {
+    role:'MANGAKA / ANIMATOR',
+    name:'أبوفراس<br>علي <em>الشعواني</em>',
+    en:'ABUFARRAS ALI SHAWANI',
+    desc:'رسام مانجا ومحرّك متخصص في خلق عوالم بصرية آسرة. أمزج بين روح الأنمي وهوية عربية أصيلة لأروي قصصاً ساحرة.',
+    s1:'رسمة', s2:'مانجا', s3:'انيميشن',
+    wt:'أعمالي',
+    c1t:'الرسومات', c1d:'معرض رسوماتي — شخصيات ومشاهد متنوعة', c1a:'استعرض ←',
+    c2t:'المانجا', c2d:'مانجا أصيلة من تأليف ورسم أبوفراس الشعواني', c2a:'اقرأ ←',
+    c3t:'الرسوم الحركية', c3d:'مقاطع انيميشن من الرسم حتى التحريك الكامل', c3a:'شاهد ←',
+    gh:'رسوماتي', ah:'مقاطع الحركة',
+    l1:'رسم وكتابة', l2:'الناشر',
+    cp1:'الفصل الأول — 16 صفحة', cp2:'الفصل الثاني — 14 صفحة',
+    cp3:'الفصل الثالث — قريباً — اشتراك مطلوب', ch3:'الفصل الثالث',
+    itag:'أبوفراس الشعواني',
+    lsub:'أدخل كلمة المرور', ph:'••••••••', lbt:'دخول',
+    vi:['انيميشن ٠١','انيميشن ٠٢','انيميشن ٠٣','انيميشن ٠٤'], vs:'مقطع حركة',
+    navHome:'الرئيسية', navWorks:'أعمالي', lb:'EN', dir:'rtl',
+    cover:'https://zeronero.netlify.app/jet-pdf/file/jetphoto.jpg',
+    desc2:'رسام مانجا ومحرّك متخصص في خلق عوالم بصرية آسرة. أمزج بين روح الأنمي وهوية عربية أصيلة لأروي قصصاً ساحرة.',
+    mt:'J.E.T', chBadge:'فصلان',
+    bkDrawings:'← رجوع', bkManga:'← رجوع', bkAnimation:'← رجوع', bkChapters:'← الفصول',
+    // panel
+    guest:'الزائر', notLogged:'غير مسجّل',
+    spLogin:'تسجيل الدخول', spRegister:'إنشاء حساب',
+    spSub:'اشترك الآن — 30 ريال', spLogout:'تسجيل الخروج',
+    spLblAccount:'الحساب', spLblSub:'الاشتراك',
+    // sub modal
+    subTitle:'الاشتراك', subDesc:'احصل على وصول كامل لجميع الفصول والمحتوى الحصري',
+    subCurrency:'ريال / شهر',
+    sf1:'جميع فصول المانجا بما فيها الجديدة',
+    sf2:'وصول مبكر للفصول القادمة',
+    sf3:'محتوى حصري خلف الكواليس',
+    subPay:'الدفع بـ Apple Pay',
+    subNeedLogin:'يجب تسجيل الدخول أولاً للاشتراك',
+    subGotoLogin:'تسجيل الدخول',
+    // auth modal
+    authGoogleLogin:'تسجيل الدخول بـ Google',
+    authGoogleReg:'التسجيل بـ Google',
+    authOr:'أو',
+    authLoginTab:'تسجيل الدخول', authRegTab:'إنشاء حساب',
+    authLoginBtn:'دخول', authRegBtn:'إنشاء حساب',
+    // pay success
+    paySuccessTitle:'تم الاشتراك!',
+    paySuccessMsg:'أصبح بإمكانك قراءة جميع الفصول الآن.',
+    // lock
+    lockMsg:'هذا الفصل مقيّد للمشتركين'
+  },
+  en: {
+    role:'MANGAKA / ANIMATOR',
+    name:'Abufarras<br>Ali <em>Shawani</em>',
+    en:'ABUFARRAS ALI SHAWANI',
+    desc:'A manga artist and animator crafting immersive visual worlds, blending anime aesthetics with authentic Arabic identity.',
+    s1:'Drawings', s2:'Manga', s3:'Animations',
+    wt:'My Works',
+    c1t:'Drawings', c1d:'Drawing gallery — characters, scenes & visual experiments', c1a:'Explore →',
+    c2t:'Manga', c2d:'Original manga written and drawn by Abufarras Shawani', c2a:'Read →',
+    c3t:'Animation', c3d:'Animation clips from first sketch to final motion', c3a:'Watch →',
+    gh:'Drawings', ah:'Animation Clips',
+    l1:'Art & Story', l2:'Publisher',
+    cp1:'Chapter 1 — 16 pages', cp2:'Chapter 2 — 14 pages',
+    cp3:'Chapter 3 — Coming Soon — Subscription Required', ch3:'Chapter 3',
+    itag:'Abufarras Shawani',
+    lsub:'Enter password', ph:'password', lbt:'Enter',
+    vi:['Animation 01','Animation 02','Animation 03','Animation 04'], vs:'Motion clip',
+    navHome:'Home', navWorks:'Works', lb:'AR', dir:'ltr',
+    cover:'https://zeronero.netlify.app/jet-pdf/file/jetphoto.jpg',
+    desc2:'A manga artist and animator crafting immersive visual worlds, blending anime aesthetics with authentic Arabic identity.',
+    mt:'J.E.T', chBadge:'2 Chapters',
+    bkDrawings:'← Back', bkManga:'← Back', bkAnimation:'← Back', bkChapters:'← Chapters',
+    // panel
+    guest:'Guest', notLogged:'Not logged in',
+    spLogin:'Sign In', spRegister:'Create Account',
+    spSub:'Subscribe — 30 SAR', spLogout:'Sign Out',
+    spLblAccount:'Account', spLblSub:'Subscription',
+    // sub modal
+    subTitle:'Subscribe', subDesc:'Get full access to all chapters and exclusive content',
+    subCurrency:'SAR / month',
+    sf1:'All manga chapters including new releases',
+    sf2:'Early access to upcoming chapters',
+    sf3:'Exclusive behind-the-scenes content',
+    subPay:'Pay with Apple Pay',
+    subNeedLogin:'Please sign in first to subscribe',
+    subGotoLogin:'Sign In',
+    // auth modal
+    authGoogleLogin:'Sign in with Google',
+    authGoogleReg:'Sign up with Google',
+    authOr:'or',
+    authLoginTab:'Sign In', authRegTab:'Create Account',
+    authLoginBtn:'Sign In', authRegBtn:'Create Account',
+    // pay success
+    paySuccessTitle:'Subscribed!',
+    paySuccessMsg:'You can now read all chapters.',
+    // lock
+    lockMsg:'This chapter is for subscribers only'
+  }
 };
 
-// ── BASE64 COVERS (uploaded files) ──
-const COVERS={};
-</script>
+// ══ APPLY LANGUAGE ══
+function applyLang() {
+  const t = T[lang];
+  document.documentElement.setAttribute('lang', lang);
+  document.documentElement.setAttribute('dir', t.dir);
+  document.body.style.direction = t.dir;
 
-<script>
-// ── LOAD BASE64 IMAGES FROM SERVER ──
-// Using the real uploaded files via blob URLs
-const fileMap={};
+  const set = (id, val, html=false) => {
+    const el = document.getElementById(id);
+    if (el) { if (html) el.innerHTML = val; else el.textContent = val; }
+  };
 
-// Manga covers
-async function loadCovers(){
-  // We'll use the netlify URL for existing cover
-  COVERS.ja='https://zeronero.netlify.app/jet-pdf/file/jetphoto.jpg';
-  COVERS.je='https://zeronero.netlify.app/jet-pdf/file/jetphoto.jpg';
-  // Set covers now
-  document.getElementById('manga-cover-thumb').src=COVERS[T[lang].cover];
-  document.getElementById('manga-cover-img').src=COVERS[T[lang].cover];
-}
+  // Hero
+  set('tr', t.role);
+  set('tn', t.name, true);
+  set('ten', t.en);
+  set('td', t.desc);
+  set('ts1', t.s1); set('ts2', t.s2); set('ts3', t.s3);
+  set('titag', t.itag);
 
-// ── VIDEO SRCS (using blob from uploaded files) ──
-const vidSrcs=[
-  'https://zeronero.netlify.app/my-animations/vid/IMG_3582.MOV',
-  'https://zeronero.netlify.app/my-animations/vid/IMG_1320.MP4',
-  'https://zeronero.netlify.app/my-animations/vid/0722.mp4',
-  'https://zeronero.netlify.app/my-animations/vid/copy_7ADAA572-AEEF-41E5-B8AF-5E9F950195A2.mov'
-];
+  // Nav
+  set('nav-home', t.navHome); set('nav-works', t.navWorks);
+  set('lbtn2', t.lb);
 
-// ── APPLY LANGUAGE ──
-function applyLang(){
-  const t=T[lang];
-  document.body.style.direction=t.dir;
-  document.getElementById('tr').textContent=t.role;
-  document.getElementById('tn').innerHTML=t.name;
-  document.getElementById('ten').textContent=t.en;
-  document.getElementById('td').textContent=t.desc;
-  document.getElementById('ts1').textContent=t.s1;
-  document.getElementById('ts2').textContent=t.s2;
-  document.getElementById('ts3').textContent=t.s3;
-  document.getElementById('twt').textContent=t.wt;
-  document.getElementById('tc1d').textContent=t.c1d;
-  document.getElementById('tc1a').textContent=t.c1a;
-  document.getElementById('tc2d').textContent=t.c2d;
-  document.getElementById('tc2a').textContent=t.c2a;
-  document.getElementById('tc3d').textContent=t.c3d;
-  document.getElementById('tc3a').textContent=t.c3a;
-  document.getElementById('tgh').textContent=t.gh;
-  document.getElementById('tah').textContent=t.ah;
-  document.getElementById('tl1').textContent=t.l1;
-  document.getElementById('tl2').textContent=t.l2;
-  document.getElementById('tcp1').textContent=t.cp1;
-  document.getElementById('tcp2').textContent=t.cp2;
-  document.getElementById('titag').textContent=t.itag;
-  document.getElementById('lbtn2').textContent=t.lb;
-  document.getElementById('nav-home').textContent=t.ph;
-  document.getElementById('nav-works').textContent=t.pw;
-  document.getElementById('lsubt').textContent=t.lsub;
-  document.getElementById('pwi').placeholder=t.ph;
-  document.querySelector('.lbtn').textContent=t.lbt;
-  document.getElementById('manga-desc').textContent=t.desc;
-  document.getElementById('manga-title-txt').textContent=t.mt;
-  // Update covers
-  const cover=COVERS[t.cover]||'https://zeronero.netlify.app/jet-pdf/file/jetphoto.jpg';
-  document.getElementById('manga-cover-thumb').src=cover;
-  document.getElementById('manga-cover-img').src=cover;
+  // Works
+  set('twt', t.wt);
+  set('tc1t', t.c1t); set('tc1d', t.c1d); set('tc1a', t.c1a);
+  set('tc2t', t.c2t); set('tc2d', t.c2d); set('tc2a', t.c2a);
+  set('tc3t', t.c3t); set('tc3d', t.c3d); set('tc3a', t.c3a);
+  set('ch-badge', t.chBadge);
+
+  // Inner
+  set('tgh', t.gh); set('tah', t.ah);
+  set('tl1', t.l1); set('tl2', t.l2);
+  set('tcp1', t.cp1); set('tcp2', t.cp2);
+  set('tcp3', t.cp3); set('ch3-title', t.ch3);
+  set('manga-title-txt', t.mt);
+  set('manga-desc', t.desc2);
+  set('bk-drawings', t.bkDrawings);
+  set('bk-manga', t.bkManga);
+  set('bk-animation', t.bkAnimation);
+  set('bk-chapters', t.bkChapters);
+
+  // Login screen
+  set('lsubt', t.lsub);
+  document.getElementById('pwi').placeholder = t.ph;
+  document.querySelector('.lbtn').textContent = t.lbt;
+
+  // Side panel
+  set('sp-lbl-account', t.spLblAccount);
+  set('sp-lbl-sub', t.spLblSub);
+  set('sp-login-txt', t.spLogin);
+  set('sp-register-txt', t.spRegister);
+  set('sp-sub-txt', t.spSub);
+  set('sp-logout-txt', t.spLogout);
+  updatePanelUser();
+
+  // Sub modal
+  set('sub-title', t.subTitle);
+  set('sub-desc', t.subDesc);
+  set('sub-currency', t.subCurrency);
+  set('sf1', t.sf1); set('sf2', t.sf2); set('sf3', t.sf3);
+  set('sub-pay-txt', t.subPay);
+  set('sub-need-login-msg', t.subNeedLogin);
+  set('sub-goto-login', t.subGotoLogin);
+
+  // Auth modal
+  set('tab-login', t.authLoginTab);
+  set('tab-register', t.authRegTab);
+  set('auth-google-login-txt', t.authGoogleLogin);
+  set('auth-google-reg-txt', t.authGoogleReg);
+  set('auth-or-txt', t.authOr);
+  set('auth-login-btn-txt', t.authLoginBtn);
+  set('auth-reg-btn-txt', t.authRegBtn);
+
+  // Pay success
+  set('pay-success-title', t.paySuccessTitle);
+  set('pay-success-msg', t.paySuccessMsg);
+
+  // Manga cover
+  document.getElementById('manga-cover-thumb').src = t.cover;
+  document.getElementById('manga-cover-img').src = t.cover;
+
+  // Videos
   rebuildVids();
 }
 
-function toggleLang(){lang=lang==='ar'?'en':'ar';applyLang()}
-function toggleTheme(){dark=!dark;document.body.classList.toggle('day',!dark);document.getElementById('tbtn').textContent=dark?'☀':'☾'}
+function toggleLang() { lang = lang === 'ar' ? 'en' : 'ar'; applyLang(); }
+function toggleTheme() {
+  dark = !dark;
+  document.body.classList.toggle('day', !dark);
+  document.getElementById('tbtn').textContent = dark ? '☀' : '☾';
+}
 
-// ── LOGIN ──
-function tryLogin(){
-  const v=document.getElementById('pwi').value.trim().toUpperCase();
-  if(v===PASS){
-    document.getElementById('ls').style.display='none';
-    runIntro();
+// ══ PANEL ══
+function openPanel() {
+  document.getElementById('sidePanel').classList.add('open');
+  document.getElementById('overlay').classList.add('show');
+}
+function closePanel() {
+  document.getElementById('sidePanel').classList.remove('open');
+  document.getElementById('overlay').classList.remove('show');
+}
+
+function updatePanelUser() {
+  const t = T[lang];
+  const area = document.getElementById('sp-user-area');
+  const uname = document.getElementById('sp-uname');
+  const uemail = document.getElementById('sp-uemail');
+  const avatar = document.getElementById('sp-avatar');
+  const loginBtn = document.getElementById('sp-login-btn');
+  const regBtn = document.getElementById('sp-register-btn');
+  const logoutBtn = document.getElementById('sp-logout-btn');
+  const logoutDiv = document.getElementById('sp-logout-div');
+
+  if (currentUser) {
+    uname.textContent = currentUser.name;
+    uemail.textContent = currentUser.email;
+    if (currentUser.photo) {
+      avatar.innerHTML = `<img src="${currentUser.photo}" alt="">`;
+    } else {
+      avatar.textContent = currentUser.name.charAt(0).toUpperCase();
+    }
+    loginBtn.style.display = 'none';
+    regBtn.style.display = 'none';
+    logoutBtn.style.display = 'flex';
+    logoutDiv.style.display = 'block';
   } else {
-    document.getElementById('lerr').textContent='كلمة المرور غير صحيحة';
-    document.getElementById('pwi').value='';
-    setTimeout(()=>document.getElementById('lerr').textContent='',2500);
+    uname.textContent = t.guest;
+    uemail.textContent = t.notLogged;
+    avatar.textContent = 'ZN';
+    loginBtn.style.display = 'flex';
+    regBtn.style.display = 'flex';
+    logoutBtn.style.display = 'none';
+    logoutDiv.style.display = 'none';
   }
 }
-document.getElementById('pwi').addEventListener('keydown',e=>{if(e.key==='Enter')tryLogin()});
 
-function runIntro(){
-  const intro=document.getElementById('intro');
+function doLogout() {
+  currentUser = null;
+  updatePanelUser();
+  closePanel();
+}
+
+// ══ AUTH MODAL ══
+function openAuthModal(tab) {
+  document.getElementById('authModal').classList.add('open');
+  switchAuthTab(tab || 'login');
+}
+function closeAuthModal() { document.getElementById('authModal').classList.remove('open'); }
+
+function switchAuthTab(tab) {
+  ['login','register'].forEach(t => {
+    document.getElementById('tab-'+t).classList.toggle('active', t===tab);
+    document.getElementById('auth-'+t).classList.toggle('active', t===tab);
+  });
+}
+
+function googleSignIn() {
+  // Simulate Google sign-in (UI demo)
+  const email = 'user@gmail.com';
+  const name = lang === 'ar' ? 'مستخدم Google' : 'Google User';
+  currentUser = { name, email, photo: null, subscribed: false };
+  updatePanelUser();
+  closeAuthModal();
+  closePanel();
+}
+
+function emailLogin() {
+  const email = document.getElementById('login-email').value.trim();
+  const pass = document.getElementById('login-pass').value;
+  if (!email || !pass) { document.getElementById('auth-err').textContent = lang === 'ar' ? 'الرجاء تعبئة جميع الحقول' : 'Please fill all fields'; return; }
+  currentUser = { name: email.split('@')[0], email, photo: null, subscribed: false };
+  updatePanelUser();
+  closeAuthModal();
+}
+
+function emailRegister() {
+  const name = document.getElementById('reg-name').value.trim();
+  const email = document.getElementById('reg-email').value.trim();
+  const pass = document.getElementById('reg-pass').value;
+  if (!name || !email || !pass) { document.getElementById('auth-err').textContent = lang === 'ar' ? 'الرجاء تعبئة جميع الحقول' : 'Please fill all fields'; return; }
+  currentUser = { name, email, photo: null, subscribed: false };
+  updatePanelUser();
+  closeAuthModal();
+}
+
+// ══ SUBSCRIBE MODAL ══
+function openSubModal() {
+  document.getElementById('subModal').classList.add('open');
+  const appleBtn = document.querySelector('.apple-pay-btn');
+  const needLogin = document.getElementById('sub-need-login');
+  if (currentUser) {
+    appleBtn.style.display = 'flex';
+    needLogin.style.display = 'none';
+  } else {
+    appleBtn.style.display = 'none';
+    needLogin.style.display = 'block';
+  }
+}
+function closeSubModal() { document.getElementById('subModal').classList.remove('open'); }
+
+function handleApplePay() {
+  if (!currentUser) { openAuthModal('login'); return; }
+  // Simulate Apple Pay
+  closeSubModal();
+  currentUser.subscribed = true;
+  document.getElementById('paySuccessModal').classList.add('open');
+}
+function closePaySuccess() { document.getElementById('paySuccessModal').classList.remove('open'); }
+
+// ══ CHAPTER 3 ══
+function tryChapter3() {
+  if (currentUser && currentUser.subscribed) {
+    openChapter(3, 'Chapter 3', 16);
+  } else if (!currentUser) {
+    openAuthModal('login');
+  } else {
+    openSubModal();
+  }
+}
+
+// ══ LOGIN ══
+const PASS2 = 'ZERO NERO';
+function tryLogin() {
+  const v = document.getElementById('pwi').value.trim().toUpperCase();
+  if (v === PASS2) {
+    document.getElementById('ls').style.display = 'none';
+    runIntro();
+  } else {
+    document.getElementById('lerr').textContent = lang === 'ar' ? 'كلمة المرور غير صحيحة' : 'Wrong password';
+    document.getElementById('pwi').value = '';
+    setTimeout(() => document.getElementById('lerr').textContent = '', 2500);
+  }
+}
+document.getElementById('pwi').addEventListener('keydown', e => { if (e.key === 'Enter') tryLogin(); });
+
+function runIntro() {
+  const intro = document.getElementById('intro');
   intro.classList.add('show');
-  setTimeout(()=>{document.getElementById('it').classList.add('vis');document.getElementById('il').classList.add('exp')},80);
-  setTimeout(()=>{intro.style.opacity='0';intro.style.transition='opacity .5s'},2200);
-  setTimeout(()=>{
-    intro.classList.remove('show');intro.style.opacity='';intro.style.transition='';
+  setTimeout(() => { document.getElementById('it').classList.add('vis'); document.getElementById('il').classList.add('exp'); }, 80);
+  setTimeout(() => { intro.style.opacity = '0'; intro.style.transition = 'opacity .5s'; }, 2200);
+  setTimeout(() => {
+    intro.classList.remove('show'); intro.style.opacity = ''; intro.style.transition = '';
     document.getElementById('app').classList.add('show');
-    loadCovers();
     applyLang();
     setupAnimPreview();
-  },2750);
+  }, 2750);
 }
 
-// ── ANIMATION PREVIEW (card thumbnail) ──
-function setupAnimPreview(){
-  const v=document.getElementById('anim-preview');
-  v.src=vidSrcs[0];
-  v.load();
+// ══ ANIMATION PREVIEW ══
+const vidSrcs = [
+  'https://zeronero.netlify.app/my-animations/vid/IMG_1320.MP4',
+  'https://zeronero.netlify.app/my-animations/vid/IMG_3582.MOV',
+  'https://zeronero.netlify.app/my-animations/vid/0722.mp4',
+  'https://zeronero.netlify.app/my-animations/vid/copy_7ADAA572-AEEF-41E5-B8AF-5E9F950195A2.mov'
+];
+function setupAnimPreview() {
+  const v = document.getElementById('anim-preview');
+  v.src = vidSrcs[0]; v.load();
 }
 
-// ── GALLERY ──
-const BD='https://zeronero.netlify.app/my-drawings/pages/';
-const imgs=[BD+'1244.png',BD+'1307.png',BD+'1320.png',BD+'1326.png',BD+'1350.png',BD+'1379.png',BD+'1103.png',BD+'1525.png',BD+'1315.png',BD+'pa/photo_10_2025-07-21_16-02-31.jpg',BD+'pa/photo_11_2025-07-21_16-02-31.jpg',BD+'pa/photo_12_2025-07-21_16-02-31.jpg',BD+'pa/photo_13_2025-07-21_16-02-31.jpg',BD+'pa/photo_14_2025-07-21_16-02-31.jpg',BD+'pa/photo_15_2025-07-21_16-02-31.jpg',BD+'pa/photo_17_2025-07-21_16-02-31.jpg',BD+'pa/photo_1_2025-07-21_16-02-31.jpg',BD+'pa/photo_2_2025-07-21_16-02-31.jpg',BD+'pa/photo_3_2025-07-21_16-02-31.jpg',BD+'pa/photo_4_2025-07-21_16-02-31.jpg',BD+'pa/photo_5_2025-07-21_16-02-31.jpg',BD+'pa/photo_6_2025-07-21_16-02-31.jpg',BD+'pa/photo_16_2025-07-21_16-02-31.jpg',BD+'pa/photo_7_2025-07-21_16-02-31.jpg',BD+'pa/photo_8_2025-07-21_16-02-31.jpg',BD+'pa/photo_1_2025-09-04_12-12-58.jpg',BD+'pa/photo_2_2025-09-04_12-12-58.jpg',BD+'pa/photo_4_2025-09-04_12-12-58.jpg'];
-const gal=document.getElementById('gal');
-imgs.forEach((s,i)=>{
-  const d=document.createElement('div');d.className='gi';
-  d.innerHTML=`<img src="${s}" alt="${i+1}" loading="lazy"><div class="giov"><span class="gilbl">#${i+1}</span></div>`;
-  d.onclick=()=>openLB(i);
+// ══ GALLERY ══
+const BD = 'https://zeronero.netlify.app/my-drawings/pages/';
+const imgs = [
+  BD+'1244.png',BD+'1307.png',BD+'1320.png',BD+'1326.png',BD+'1350.png',BD+'1379.png',
+  BD+'1103.png',BD+'1525.png',BD+'1315.png',
+  BD+'pa/photo_10_2025-07-21_16-02-31.jpg',BD+'pa/photo_11_2025-07-21_16-02-31.jpg',
+  BD+'pa/photo_12_2025-07-21_16-02-31.jpg',BD+'pa/photo_13_2025-07-21_16-02-31.jpg',
+  BD+'pa/photo_14_2025-07-21_16-02-31.jpg',BD+'pa/photo_15_2025-07-21_16-02-31.jpg',
+  BD+'pa/photo_17_2025-07-21_16-02-31.jpg',BD+'pa/photo_1_2025-07-21_16-02-31.jpg',
+  BD+'pa/photo_2_2025-07-21_16-02-31.jpg',BD+'pa/photo_3_2025-07-21_16-02-31.jpg',
+  BD+'pa/photo_4_2025-07-21_16-02-31.jpg',BD+'pa/photo_5_2025-07-21_16-02-31.jpg',
+  BD+'pa/photo_6_2025-07-21_16-02-31.jpg',BD+'pa/photo_16_2025-07-21_16-02-31.jpg',
+  BD+'pa/photo_7_2025-07-21_16-02-31.jpg',BD+'pa/photo_8_2025-07-21_16-02-31.jpg',
+  BD+'pa/photo_1_2025-09-04_12-12-58.jpg',BD+'pa/photo_2_2025-09-04_12-12-58.jpg',
+  BD+'pa/photo_4_2025-09-04_12-12-58.jpg'
+];
+const gal = document.getElementById('gal');
+imgs.forEach((s, i) => {
+  const d = document.createElement('div'); d.className = 'gi';
+  d.innerHTML = `<img src="${s}" alt="${i+1}" loading="lazy"><div class="giov"><span class="gilbl">#${i+1}</span></div>`;
+  d.onclick = () => openLB(i);
   gal.appendChild(d);
 });
 
-// ── LIGHTBOX ──
-function openLB(i){lbIdx=i;document.getElementById('lbimg').src=imgs[i];document.getElementById('lb').classList.add('open')}
-function closeLB(){document.getElementById('lb').classList.remove('open')}
-function lbN(d){lbIdx=(lbIdx+d+imgs.length)%imgs.length;document.getElementById('lbimg').src=imgs[lbIdx]}
-function lbOut(e){if(e.target===document.getElementById('lb'))closeLB()}
-document.addEventListener('keydown',e=>{
-  if(!document.getElementById('lb').classList.contains('open'))return;
-  if(e.key==='ArrowRight')lbN(1);if(e.key==='ArrowLeft')lbN(-1);if(e.key==='Escape')closeLB();
+// ══ LIGHTBOX ══
+function openLB(i) { lbIdx = i; document.getElementById('lbimg').src = imgs[i]; document.getElementById('lb').classList.add('open'); }
+function closeLB() { document.getElementById('lb').classList.remove('open'); }
+function lbN(d) { lbIdx = (lbIdx + d + imgs.length) % imgs.length; document.getElementById('lbimg').src = imgs[lbIdx]; }
+function lbOut(e) { if (e.target === document.getElementById('lb')) closeLB(); }
+document.addEventListener('keydown', e => {
+  if (!document.getElementById('lb').classList.contains('open')) return;
+  if (e.key === 'ArrowRight') lbN(1); if (e.key === 'ArrowLeft') lbN(-1); if (e.key === 'Escape') closeLB();
 });
 
-// ── MANGA ──
-const ch1b='https://zeronero.netlify.app/jet-pdf/file/chapter1/pages/';
-const ch1p=['page1.PNG','p2.png','p3.png','p3.5.png','p4.png','p5.png','p6.png','p7.png','p9.png','p10.png','p11.png','p12.png','p13.png','p14.png','p15.png','p16.png'];
-const ch2b='https://zeronero.netlify.app/jet-pdf/file/chapter2/pages2/';
-const ch2p=['c1.png','c2.png','c3.png','c4.png','c5.png','c6.png','c7.png','c8.png','c9.png','c10.png','c11.png','c12.png','c13.png','c14.png'];
-function openChapter(n,title,total){
-  document.getElementById('mm').style.display='none';
-  const r=document.getElementById('rdr');r.classList.add('active');
-  document.getElementById('rtitle').textContent=`CH.0${n} — ${title}`;
-  document.getElementById('rcnt').textContent=`${total} pg`;
-  const c=document.getElementById('rpgs');c.innerHTML='';
-  const base=n===1?ch1b:ch2b,pages=n===1?ch1p:ch2p;
-  pages.forEach((f,i)=>{
-    const w=document.createElement('div');w.className='mp';
-    w.innerHTML=`<img src="${base+f}" alt="${i+1}" loading="lazy"><div class="pn">${i+1}/${total}</div>`;
+// ══ MANGA CHAPTERS ══
+const ch1b = 'https://zeronero.netlify.app/jet-pdf/file/chapter1/pages/';
+const ch1p = ['page1.PNG','p2.png','p3.png','p3.5.png','p4.png','p5.png','p6.png','p7.png','p9.png','p10.png','p11.png','p12.png','p13.png','p14.png','p15.png','p16.png'];
+const ch2b = 'https://zeronero.netlify.app/jet-pdf/file/chapter2/pages2/';
+const ch2p = ['c1.png','c2.png','c3.png','c4.png','c5.png','c6.png','c7.png','c8.png','c9.png','c10.png','c11.png','c12.png','c13.png','c14.png'];
+// Chapter 3 uses same pages as chapter 2 (copy) — replace when real pages are ready
+const ch3b = 'https://zeronero.netlify.app/jet-pdf/file/chapter2/pages2/';
+const ch3p = ['c1.png','c2.png','c3.png','c4.png','c5.png','c6.png','c7.png','c8.png','c9.png','c10.png','c11.png','c12.png','c13.png','c14.png'];
+
+function openChapter(n, title, total) {
+  document.getElementById('mm').style.display = 'none';
+  const r = document.getElementById('rdr'); r.classList.add('active');
+  document.getElementById('rtitle').textContent = `CH.0${n} — ${title}`;
+  document.getElementById('rcnt').textContent = `${total} pg`;
+  const c = document.getElementById('rpgs'); c.innerHTML = '';
+  let base, pages;
+  if (n === 1) { base = ch1b; pages = ch1p; }
+  else if (n === 2) { base = ch2b; pages = ch2p; }
+  else { base = ch3b; pages = ch3p; }
+  pages.forEach((f, i) => {
+    const w = document.createElement('div'); w.className = 'mp';
+    w.innerHTML = `<img src="${base + f}" alt="${i+1}" loading="lazy"><div class="pn">${i+1}/${total}</div>`;
     c.appendChild(w);
   });
 }
-function closeReader(){
+function closeReader() {
   document.getElementById('rdr').classList.remove('active');
-  document.getElementById('mm').style.display='block';
-  document.getElementById('rpgs').innerHTML='';
+  document.getElementById('mm').style.display = 'block';
+  document.getElementById('rpgs').innerHTML = '';
 }
 
-// ── VIDEOS (real uploaded files) ──
-// We'll use base64 for the 4 uploaded videos
-// Since they are available via uploads path, we create object URLs
-const uploadedVids=[
-  {name:'IMG_1320.MP4',type:'video/mp4'},
-  {name:'IMG_1477.MOV',type:'video/quicktime'},
-   {name:'IMG_1320.MP4',type:'video/quicktime'},
-  {name:'IMG_1699.MP4',type:'video/mp4'}
-];
-
-function rebuildVids(){
-  const vg=document.getElementById('vg');vg.innerHTML='';
-  const t=T[lang];
-  // Use netlify vids as fallback + uploaded vids
- const videoSources=[
-  {
-    src:'https://zeronero.netlify.app/my-animations/vid/IMG_1320.MP4',
-    type:'video/mp4'
-  },
-  {
-    src:'https://zeronero.netlify.app/my-animations/vid/IMG_3582.MOV',
-    type:'video/quicktime'
-  },
-  {
-    src:'https://zeronero.netlify.app/my-animations/vid/0722.mp4',
-    type:'video/mp4'
-  },
-  {
-    src:'https://zeronero.netlify.app/my-animations/vid/copy_7ADAA572-AEEF-41E5-B8AF-5E9F950195A2.mov',
-    type:'video/quicktime'
-  }
-];
-  
-  videoSources.forEach((v,i)=>{
-    const d=document.createElement('div');d.className='vc';
-    d.innerHTML=`<div class="vv"><video controls preload="metadata" style="width:100%;max-height:220px;object-fit:cover;background:var(--b)"><source src="${v.fallback}" type="${v.type}"><source src="${v.src}" type="${v.type}"></video></div><div class="vi"><div class="vit">${t.vi[i]}</div><div class="vis">${t.vs}</div></div>`;
+// ══ VIDEOS ══
+function rebuildVids() {
+  const vg = document.getElementById('vg'); if (!vg) return;
+  vg.innerHTML = '';
+  const t = T[lang];
+  const videoSources = [
+    { src: 'https://zeronero.netlify.app/my-animations/vid/IMG_1320.MP4', type: 'video/mp4' },
+    { src: 'https://zeronero.netlify.app/my-animations/vid/IMG_3582.MOV', type: 'video/quicktime' },
+    { src: 'https://zeronero.netlify.app/my-animations/vid/0722.mp4', type: 'video/mp4' },
+    { src: 'https://zeronero.netlify.app/my-animations/vid/copy_7ADAA572-AEEF-41E5-B8AF-5E9F950195A2.mov', type: 'video/quicktime' }
+  ];
+  videoSources.forEach((v, i) => {
+    const d = document.createElement('div'); d.className = 'vc';
+    d.innerHTML = `<div class="vv"><video controls preload="metadata" style="width:100%;max-height:220px;object-fit:cover;background:var(--b)"><source src="${v.src}" type="${v.type}"></video></div><div class="vi"><div class="vit">${t.vi[i] || 'Animation ' + (i+1)}</div><div class="vis2">${t.vs}</div></div>`;
     vg.appendChild(d);
   });
 }
 
-// ── NAV ──
-function showPage(id){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.getElementById('page-'+id).classList.add('active');
-  document.querySelectorAll('.nlinks button').forEach(b=>b.classList.remove('active'));
-  document.getElementById('nav-'+id).classList.add('active');
-  if(id!=='works')document.querySelectorAll('.inner').forEach(i=>i.classList.remove('active'));
+// ══ NAV ══
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('.nlinks button').forEach(b => b.classList.remove('active'));
+  document.getElementById('nav-' + id).classList.add('active');
+  if (id !== 'works') document.querySelectorAll('.inner').forEach(i => i.classList.remove('active'));
 }
-function showInner(id){
-  document.querySelectorAll('.inner').forEach(i=>i.classList.remove('active'));
-  document.getElementById('inner-'+id).classList.add('active');
-  window.scrollTo({top:0,behavior:'smooth'});
+function showInner(id) {
+  document.querySelectorAll('.inner').forEach(i => i.classList.remove('active'));
+  document.getElementById('inner-' + id).classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
-function hideInner(id){document.getElementById('inner-'+id).classList.remove('active')}
+function hideInner(id) { document.getElementById('inner-' + id).classList.remove('active'); }
 </script>
+</body>
+</html>
