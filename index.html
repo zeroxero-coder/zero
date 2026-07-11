@@ -6,6 +6,7 @@
 <title>ZERO NERO</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+<script src="https://accounts.google.com/gsi/client" async defer></script>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Bebas+Neue&display=swap');
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
@@ -124,7 +125,7 @@ body.day .hiw img{filter:contrast(1.02) brightness(.95)}
 .se{font-family:'Bebas Neue',sans-serif;font-size:.78rem;letter-spacing:4px;color:var(--m3);display:flex;align-items:center;gap:10px;margin-bottom:.6rem}
 .se::before{content:'';width:22px;height:1px;background:var(--m3)}
 .sh{font-family:'Bebas Neue',sans-serif;font-size:2.6rem;color:var(--w);margin-bottom:2rem;letter-spacing:1px}
-.wg{display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem}
+.wg{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem}
 .wc{background:var(--b2);border:1px solid var(--b5);border-radius:4px;overflow:hidden;cursor:pointer;transition:border-color .25s,transform .25s}
 body.day .wc{background:var(--b2);border-color:var(--b4)}
 .wc:hover{border-color:var(--m3);transform:translateY(-4px)}
@@ -224,6 +225,32 @@ body[dir="ltr"] .sub-features{text-align:left}
 .lbn{position:fixed;top:50%;transform:translateY(-50%);background:rgba(123,28,46,.45);border:none;color:var(--w);width:42px;height:42px;border-radius:50%;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .2s}
 .lbn:hover{background:var(--m3)}
 .lbp{right:12px}.lbnx{left:12px}
+
+/* 3D MODELS CARD & GALLERY */
+.m3d-thumb{display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--b3),var(--b2))}
+.m3d-gal{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1rem;margin-top:1.5rem}
+.m3d-card{background:var(--b2);border:1px solid var(--b5);border-radius:4px;overflow:hidden;cursor:pointer;transition:border-color .25s,transform .25s}
+.m3d-card:hover{border-color:var(--m3);transform:translateY(-3px)}
+.m3d-card-thumb{position:relative;width:100%;height:190px;background:linear-gradient(135deg,var(--b3),var(--b2));display:flex;align-items:center;justify-content:center;overflow:hidden}
+.m3d-card-thumb img{width:100%;height:100%;object-fit:cover}
+.m3d-card-thumb svg{width:50%;height:50%;opacity:.5}
+.m3d-card-badge{position:absolute;bottom:8px;right:10px;background:rgba(10,10,10,.8);color:var(--w3);font-family:'Bebas Neue',sans-serif;font-size:.72rem;letter-spacing:1px;padding:2px 8px;border-radius:2px}
+.m3d-card-name{padding:.7rem .85rem;font-size:.88rem;color:var(--w2);font-weight:500}
+.m3d-empty-msg{color:var(--w3);font-size:.9rem;margin-top:1rem;opacity:.7}
+
+/* 3D VIEWER MODAL */
+.m3d-viewer{display:none;position:fixed;inset:0;background:rgba(8,8,10,.97);z-index:9999;flex-direction:column;padding:1rem;padding-top:calc(1rem + env(safe-area-inset-top));padding-bottom:calc(1rem + env(safe-area-inset-bottom))}
+.m3d-viewer.open{display:flex}
+.m3d-canvas-wrap{flex:1;position:relative;border-radius:6px;overflow:hidden;background:radial-gradient(circle at center,#1a1a1e,#0a0a0c)}
+.m3d-canvas-wrap canvas{display:block;width:100%!important;height:100%!important;touch-action:none}
+.m3d-hint{position:fixed;top:16px;left:50%;transform:translateX(-50%);color:var(--w3);font-size:.78rem;letter-spacing:.5px;background:rgba(10,10,10,.6);padding:5px 14px;border-radius:20px;pointer-events:none;z-index:2}
+.m3d-status{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:var(--w3);font-family:'Tajawal',sans-serif;font-size:.9rem;text-align:center;pointer-events:none}
+.m3d-status.error{color:var(--m3)}
+@media (max-width:600px){
+  .m3d-gal{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.7rem}
+  .m3d-card-thumb{height:140px}
+  .m3d-hint{font-size:.68rem;top:10px}
+}
 
 /* GOOGLE AUTH MODAL */
 .auth-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:8500;align-items:center;justify-content:center;padding:1rem;padding-top:calc(1rem + env(safe-area-inset-top));padding-bottom:calc(1rem + env(safe-area-inset-bottom))}
@@ -503,6 +530,23 @@ footer strong{color:var(--m3);opacity:1}
           </div>
         </div>
 
+        <!-- CARD 4: نماذج ثلاثية الأبعاد -->
+        <div class="wc" onclick="showInner('models3d')">
+          <div class="wt m3d-thumb">
+            <svg viewBox="0 0 200 200" style="width:60%;height:60%;opacity:.55" fill="none" stroke="var(--m3)" stroke-width="3">
+              <polygon points="100,15 175,58 175,142 100,185 25,142 25,58" stroke-linejoin="round"/>
+              <polyline points="25,58 100,100 175,58" stroke-linejoin="round"/>
+              <line x1="100" y1="100" x2="100" y2="185"/>
+            </svg>
+            <div class="ov"></div><div class="wbg" id="m3d-badge">3D</div>
+          </div>
+          <div class="wb">
+            <div class="wtt" id="tc4t">نماذج ثلاثية الأبعاد</div>
+            <p class="wd" id="tc4d">مجسمات وشخصيات ثلاثية الأبعاد قابلة للتدوير والاستكشاف</p>
+            <div class="wa" id="tc4a">استكشف ←</div>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -579,6 +623,18 @@ footer strong{color:var(--m3);opacity:1}
         <div class="vg" id="vg"></div>
       </div>
     </div>
+
+    <!-- ══ 3D MODELS INNER ══ -->
+    <div id="inner-models3d" class="inner">
+      <div style="max-width:1100px;margin:0 auto">
+        <button class="bk" onclick="hideInner('models3d')" id="bk-models">← رجوع</button>
+        <div id="models3d-anchor"></div>
+        <div class="se">3D MODELS</div>
+        <div class="sh" id="tmh">النماذج ثلاثية الأبعاد</div>
+        <p id="m3d-empty" class="m3d-empty-msg" style="display:none">لا توجد نماذج بعد — أضف ملفات FBX لعرضها هنا</p>
+        <div class="m3d-gal" id="m3dgal"></div>
+      </div>
+    </div>
   </div>
 
   <footer><strong>ZERO NERO</strong> · أبوفراس علي الشعواني · MANGAKA / ANIMATOR</footer>
@@ -590,6 +646,14 @@ footer strong{color:var(--m3);opacity:1}
   <button class="lbn lbp" onclick="lbN(1)">‹</button>
   <img id="lbimg" src="" alt="">
   <button class="lbn lbnx" onclick="lbN(-1)">›</button>
+</div>
+
+<!-- ══ 3D MODEL VIEWER ══ -->
+<div class="m3d-viewer" id="m3dViewer">
+  <button class="lbx" onclick="close3DViewer()">✕</button>
+  <div class="m3d-hint" id="m3dHint">🖱 Drag to rotate · Scroll to zoom</div>
+  <div class="m3d-canvas-wrap" id="m3dCanvasWrap"></div>
+  <div class="m3d-status" id="m3dStatus"></div>
 </div>
 
 <!-- ══ SUBSCRIBE MODAL ══ -->
@@ -672,6 +736,23 @@ const PASS = 'ZERO NERO';
 let lang = 'ar', dark = true, lbIdx = 0;
 let currentUser = null; // {name, email, photo, subscribed}
 
+// ══ GOOGLE OAUTH CONFIG ══
+// 🔴 مهم: استبدلي القيمة بالأسفل بالـ Client ID اللي تحصلين عليه من Google Cloud Console
+// (راجعي الشرح في الرسالة عشان خطوات الحصول عليه بالضبط)
+const GOOGLE_CLIENT_ID = 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
+
+// ══ SESSION PERSISTENCE (localStorage) ══
+function saveSession() {
+  try { localStorage.setItem('zn_user', JSON.stringify(currentUser)); } catch (e) {}
+}
+function loadSession() {
+  try {
+    const raw = localStorage.getItem('zn_user');
+    if (raw) currentUser = JSON.parse(raw);
+  } catch (e) { currentUser = null; }
+}
+loadSession();
+
 // ══ TRANSLATIONS ══
 const T = {
   ar: {
@@ -684,7 +765,8 @@ const T = {
     c1t:'الرسومات', c1d:'معرض رسوماتي — شخصيات ومشاهد متنوعة', c1a:'استعرض ←',
     c2t:'المانجا', c2d:'مانجا أصيلة من تأليف ورسم أبوفراس الشعواني', c2a:'اقرأ ←',
     c3t:'الرسوم الحركية', c3d:'مقاطع انيميشن من الرسم حتى التحريك الكامل', c3a:'شاهد ←',
-    gh:'رسوماتي', ah:'مقاطع الحركة',
+    c4t:'نماذج ثلاثية الأبعاد', c4d:'مجسمات وشخصيات ثلاثية الأبعاد قابلة للتدوير والاستكشاف', c4a:'استكشف ←',
+    gh:'رسوماتي', ah:'مقاطع الحركة', mh:'النماذج ثلاثية الأبعاد',
     l1:'رسم وكتابة', l2:'الناشر',
     cp1:'الفصل الأول — 16 صفحة', cp2:'الفصل الثاني — 14 صفحة',
     cp3:'الفصل الثالث — قريباً — اشتراك مطلوب', ch3:'الفصل الثالث',
@@ -695,7 +777,9 @@ const T = {
     cover:'https://zeronero.netlify.app/manga-cover.jpg',
     desc2:'رسام مانجا ومحرّك متخصص في خلق عوالم بصرية آسرة. أمزج بين روح الأنمي وهوية عربية أصيلة لأروي قصصاً ساحرة.',
     mt:'J.E.T', chBadge:'فصلان',
-    bkDrawings:'← رجوع', bkManga:'← رجوع', bkAnimation:'← رجوع', bkChapters:'← الفصول',
+    bkDrawings:'← رجوع', bkManga:'← رجوع', bkAnimation:'← رجوع', bkModels:'← رجوع', bkChapters:'← الفصول',
+    m3dLoading:'جاري تحميل النموذج...', m3dError:'تعذر تحميل النموذج ثلاثي الأبعاد',
+    m3dEmpty:'لا توجد نماذج بعد — أضف ملفات FBX لعرضها هنا',
     // panel
     guest:'الزائر', notLogged:'غير مسجّل',
     spLogin:'تسجيل الدخول', spRegister:'إنشاء حساب',
@@ -732,7 +816,8 @@ const T = {
     c1t:'Drawings', c1d:'Drawing gallery — characters, scenes & visual experiments', c1a:'Explore →',
     c2t:'Manga', c2d:'Original manga written and drawn by Abufarras Shawani', c2a:'Read →',
     c3t:'Animation', c3d:'Animation clips from first sketch to final motion', c3a:'Watch →',
-    gh:'Drawings', ah:'Animation Clips',
+    c4t:'3D Models', c4d:'Interactive 3D characters and models — rotate & explore', c4a:'Explore →',
+    gh:'Drawings', ah:'Animation Clips', mh:'3D Models',
     l1:'Art & Story', l2:'Publisher',
     cp1:'Chapter 1 — 16 pages', cp2:'Chapter 2 — 14 pages',
     cp3:'Chapter 3 — Coming Soon — Subscription Required', ch3:'Chapter 3',
@@ -742,7 +827,9 @@ const T = {
     cover:'https://zeronero.netlify.app/manga-cover-en.jpg',
     desc2:'A manga artist and animator crafting immersive visual worlds, blending anime aesthetics with authentic Arabic identity.',
     mt:'J.E.T', chBadge:'2 Chapters',
-    bkDrawings:'← Back', bkManga:'← Back', bkAnimation:'← Back', bkChapters:'← Chapters',
+    bkDrawings:'← Back', bkManga:'← Back', bkAnimation:'← Back', bkModels:'← Back', bkChapters:'← Chapters',
+    m3dLoading:'Loading model...', m3dError:'Could not load the 3D model',
+    m3dEmpty:'No models yet — add FBX files to display them here',
     // panel
     guest:'Guest', notLogged:'Not logged in',
     spLogin:'Sign In', spRegister:'Create Account',
@@ -800,10 +887,11 @@ function applyLang() {
   set('tc1t', t.c1t); set('tc1d', t.c1d); set('tc1a', t.c1a);
   set('tc2t', t.c2t); set('tc2d', t.c2d); set('tc2a', t.c2a);
   set('tc3t', t.c3t); set('tc3d', t.c3d); set('tc3a', t.c3a);
+  set('tc4t', t.c4t); set('tc4d', t.c4d); set('tc4a', t.c4a);
   set('ch-badge', t.chBadge);
 
   // Inner
-  set('tgh', t.gh); set('tah', t.ah);
+  set('tgh', t.gh); set('tah', t.ah); set('tmh', t.mh);
   set('tl1', t.l1); set('tl2', t.l2);
   set('tcp1', t.cp1); set('tcp2', t.cp2);
   set('tcp3', t.cp3); set('ch3-title', t.ch3);
@@ -812,7 +900,9 @@ function applyLang() {
   set('bk-drawings', t.bkDrawings);
   set('bk-manga', t.bkManga);
   set('bk-animation', t.bkAnimation);
+  set('bk-models', t.bkModels);
   set('bk-chapters', t.bkChapters);
+  set('m3d-empty', t.m3dEmpty);
 
   // Login screen
   set('lsubt', t.lsub);
@@ -911,6 +1001,7 @@ function updatePanelUser() {
 
 function doLogout() {
   currentUser = null;
+  saveSession();
   updatePanelUser();
   closePanel();
 }
@@ -929,14 +1020,55 @@ function switchAuthTab(tab) {
   });
 }
 
+// ══ GOOGLE SIGN-IN (real OAuth via Google Identity Services) ══
+let googleTokenClient = null;
+function initGoogleAuth() {
+  if (googleTokenClient) return true;
+  if (typeof google === 'undefined' || !google.accounts || !google.accounts.oauth2) return false;
+  googleTokenClient = google.accounts.oauth2.initTokenClient({
+    client_id: GOOGLE_CLIENT_ID,
+    scope: 'openid email profile',
+    callback: async (resp) => {
+      if (resp.error) {
+        document.getElementById('auth-err').textContent = lang === 'ar' ? 'تعذر تسجيل الدخول بواسطة Google' : 'Google sign-in failed';
+        return;
+      }
+      try {
+        const r = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
+          headers: { Authorization: 'Bearer ' + resp.access_token }
+        });
+        const profile = await r.json();
+        currentUser = {
+          name: profile.name || profile.email.split('@')[0],
+          email: profile.email,
+          photo: profile.picture || null,
+          subscribed: (currentUser && currentUser.email === profile.email) ? currentUser.subscribed : false
+        };
+        saveSession();
+        updatePanelUser();
+        closeAuthModal();
+        closePanel();
+      } catch (e) {
+        document.getElementById('auth-err').textContent = lang === 'ar' ? 'تعذر جلب بيانات الحساب' : 'Could not fetch account data';
+      }
+    }
+  });
+  return true;
+}
 function googleSignIn() {
-  // Simulate Google sign-in (UI demo)
-  const email = 'user@gmail.com';
-  const name = lang === 'ar' ? 'مستخدم Google' : 'Google User';
-  currentUser = { name, email, photo: null, subscribed: false };
-  updatePanelUser();
-  closeAuthModal();
-  closePanel();
+  if (GOOGLE_CLIENT_ID.startsWith('YOUR_GOOGLE_CLIENT_ID')) {
+    document.getElementById('auth-err').textContent = lang === 'ar'
+      ? 'لم يتم إعداد Google Client ID بعد — راجعي التعليمات'
+      : 'Google Client ID is not configured yet — check the setup instructions';
+    return;
+  }
+  if (!initGoogleAuth()) {
+    document.getElementById('auth-err').textContent = lang === 'ar'
+      ? 'تعذر تحميل خدمة Google، تأكدي من الاتصال بالإنترنت'
+      : 'Could not load Google service, check your connection';
+    return;
+  }
+  googleTokenClient.requestAccessToken();
 }
 
 function emailLogin() {
@@ -944,6 +1076,7 @@ function emailLogin() {
   const pass = document.getElementById('login-pass').value;
   if (!email || !pass) { document.getElementById('auth-err').textContent = lang === 'ar' ? 'الرجاء تعبئة جميع الحقول' : 'Please fill all fields'; return; }
   currentUser = { name: email.split('@')[0], email, photo: null, subscribed: false };
+  saveSession();
   updatePanelUser();
   closeAuthModal();
 }
@@ -954,6 +1087,7 @@ function emailRegister() {
   const pass = document.getElementById('reg-pass').value;
   if (!name || !email || !pass) { document.getElementById('auth-err').textContent = lang === 'ar' ? 'الرجاء تعبئة جميع الحقول' : 'Please fill all fields'; return; }
   currentUser = { name, email, photo: null, subscribed: false };
+  saveSession();
   updatePanelUser();
   closeAuthModal();
 }
@@ -978,6 +1112,7 @@ function handleApplePay() {
   // Simulate Apple Pay
   closeSubModal();
   currentUser.subscribed = true;
+  saveSession();
   document.getElementById('paySuccessModal').classList.add('open');
 }
 function closePaySuccess() { document.getElementById('paySuccessModal').classList.remove('open'); }
@@ -1067,6 +1202,147 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowRight') lbN(1); if (e.key === 'ArrowLeft') lbN(-1); if (e.key === 'Escape') closeLB();
 });
 
+// ══ 3D MODELS ══
+// أضف نماذج FBX هنا: ضعي ملف الـ .fbx داخل مجلد models/ في الريبو، وأضيفي سطر جديد بالأسفل
+const MD = 'https://zeronero.netlify.app/models/';
+const models3D = [
+  // مثال: { name: 'اسم النموذج', file: MD + 'model1.fbx', thumb: MD + 'model1-thumb.jpg' },
+];
+
+function render3DGallery() {
+  const wrap = document.getElementById('m3dgal');
+  const empty = document.getElementById('m3d-empty');
+  wrap.innerHTML = '';
+  if (!models3D.length) { empty.style.display = 'block'; return; }
+  empty.style.display = 'none';
+  models3D.forEach((m, i) => {
+    const c = document.createElement('div'); c.className = 'm3d-card';
+    c.innerHTML = `<div class="m3d-card-thumb">${
+      m.thumb
+        ? `<img src="${m.thumb}" alt="${m.name}" loading="lazy" onerror="this.remove()">`
+        : `<svg viewBox="0 0 200 200" fill="none" stroke="var(--m3)" stroke-width="3"><polygon points="100,15 175,58 175,142 100,185 25,142 25,58" stroke-linejoin="round"/><polyline points="25,58 100,100 175,58" stroke-linejoin="round"/><line x1="100" y1="100" x2="100" y2="185"/></svg>`
+    }<div class="m3d-card-badge">3D</div></div><div class="m3d-card-name">${m.name}</div>`;
+    c.onclick = () => open3DViewer(i);
+    wrap.appendChild(c);
+  });
+}
+render3DGallery();
+
+// ── Three.js lazy loader (only loaded when the viewer is first opened) ──
+let threeLoaded = false, threeLoading = null;
+function loadScript(src) {
+  return new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = src; s.onload = resolve; s.onerror = reject;
+    document.head.appendChild(s);
+  });
+}
+function ensureThreeLoaded() {
+  if (threeLoaded) return Promise.resolve();
+  if (threeLoading) return threeLoading;
+  threeLoading = (async () => {
+    await loadScript('https://unpkg.com/three@0.128.0/build/three.min.js');
+    await loadScript('https://unpkg.com/three@0.128.0/examples/js/loaders/inflate.min.js');
+    await loadScript('https://unpkg.com/three@0.128.0/examples/js/loaders/FBXLoader.js');
+    await loadScript('https://unpkg.com/three@0.128.0/examples/js/controls/OrbitControls.js');
+    threeLoaded = true;
+  })();
+  return threeLoading;
+}
+
+// ── Viewer state ──
+let scene3d, camera3d, renderer3d, controls3d, currentObj3d, animId3d, resizeObs3d;
+
+async function open3DViewer(index) {
+  const m = models3D[index];
+  if (!m) return;
+  const viewer = document.getElementById('m3dViewer');
+  const status = document.getElementById('m3dStatus');
+  const t = T[lang];
+  viewer.classList.add('open');
+  status.textContent = t.m3dLoading; status.className = 'm3d-status';
+
+  try {
+    await ensureThreeLoaded();
+  } catch (e) {
+    status.textContent = t.m3dError; status.className = 'm3d-status error';
+    return;
+  }
+  init3DScene();
+  loadFBXModel(m.file, status, t);
+}
+
+function init3DScene() {
+  const wrap = document.getElementById('m3dCanvasWrap');
+  wrap.innerHTML = '';
+  const w = wrap.clientWidth, h = wrap.clientHeight;
+
+  scene3d = new THREE.Scene();
+  camera3d = new THREE.PerspectiveCamera(45, w / h, 0.1, 1000);
+  camera3d.position.set(0, 1.4, 4);
+
+  renderer3d = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer3d.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer3d.setSize(w, h);
+  wrap.appendChild(renderer3d.domElement);
+
+  const amb = new THREE.AmbientLight(0xffffff, 0.7); scene3d.add(amb);
+  const dir1 = new THREE.DirectionalLight(0xffffff, 0.9); dir1.position.set(3, 5, 4); scene3d.add(dir1);
+  const dir2 = new THREE.DirectionalLight(0x88aaff, 0.4); dir2.position.set(-4, 2, -3); scene3d.add(dir2);
+
+  controls3d = new THREE.OrbitControls(camera3d, renderer3d.domElement);
+  controls3d.enableDamping = true;
+  controls3d.dampingFactor = 0.08;
+  controls3d.minDistance = 0.5;
+  controls3d.maxDistance = 20;
+
+  if (resizeObs3d) resizeObs3d.disconnect();
+  resizeObs3d = new ResizeObserver(() => {
+    const nw = wrap.clientWidth, nh = wrap.clientHeight;
+    if (!nw || !nh) return;
+    camera3d.aspect = nw / nh; camera3d.updateProjectionMatrix();
+    renderer3d.setSize(nw, nh);
+  });
+  resizeObs3d.observe(wrap);
+
+  animate3d();
+}
+
+function loadFBXModel(url, status, t) {
+  if (currentObj3d) { scene3d.remove(currentObj3d); currentObj3d = null; }
+  const loader = new THREE.FBXLoader();
+  loader.load(url, (obj) => {
+    // توسيط النموذج وضبط حجمه ليملأ الإطار بشكل مناسب لجميع الشاشات (بما فيها الجوال)
+    const box = new THREE.Box3().setFromObject(obj);
+    const size = box.getSize(new THREE.Vector3());
+    const center = box.getCenter(new THREE.Vector3());
+    const maxDim = Math.max(size.x, size.y, size.z) || 1;
+    const scale = 2.2 / maxDim;
+    obj.scale.setScalar(scale);
+    obj.position.sub(center.multiplyScalar(scale));
+    scene3d.add(obj);
+    currentObj3d = obj;
+    status.textContent = '';
+  }, undefined, () => {
+    status.textContent = t.m3dError; status.className = 'm3d-status error';
+  });
+}
+
+function animate3d() {
+  animId3d = requestAnimationFrame(animate3d);
+  if (controls3d) controls3d.update();
+  if (renderer3d && scene3d && camera3d) renderer3d.render(scene3d, camera3d);
+}
+
+function close3DViewer() {
+  document.getElementById('m3dViewer').classList.remove('open');
+  if (animId3d) cancelAnimationFrame(animId3d);
+  if (resizeObs3d) resizeObs3d.disconnect();
+  if (renderer3d) { renderer3d.dispose(); renderer3d.forceContextLoss(); }
+  scene3d = camera3d = renderer3d = controls3d = currentObj3d = null;
+  document.getElementById('m3dCanvasWrap').innerHTML = '';
+}
+
 // ══ MANGA CHAPTERS ══
 const ch1b = 'https://zeronero.netlify.app/jet-pdf/file/chapter1/pages/';
 const ch1p = ['page1.jpg','page2.jpg','page3.jpg','page4.jpg','page5.jpg','page6.jpg','page7.jpg','page8.jpg','page9.jpg','page10.jpg','page11.jpg','page12.jpg','page13.jpg','page14.jpg','page15.jpg','page16.jpg'];
@@ -1139,7 +1415,7 @@ function showPage(id) {
   document.getElementById('nav-' + id).classList.add('active');
   if (id !== 'works') document.querySelectorAll('.inner').forEach(i => i.classList.remove('active'));
 }
-const innerScrollTargets = { drawings: 'drawings-anchor', manga: 'manga-anchor', animation: 'animation-anchor' };
+const innerScrollTargets = { drawings: 'drawings-anchor', manga: 'manga-anchor', animation: 'animation-anchor', models3d: 'models3d-anchor' };
 function showInner(id) {
   document.querySelectorAll('.inner').forEach(i => i.classList.remove('active'));
   document.getElementById('inner-' + id).classList.add('active');
