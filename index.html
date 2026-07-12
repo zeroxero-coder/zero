@@ -178,6 +178,39 @@ body.day .wc{background:var(--b2);border-color:var(--b4)}
 /* LOCKED CHAPTER */
 .chc.locked{opacity:.85;cursor:default}
 .chc.locked:hover{border-color:var(--m3);background:var(--b2)}
+
+/* COMMENT BUTTON ON CHAPTER CARDS */
+.cmt-btn{display:flex;align-items:center;gap:5px;background:var(--b3);border:1px solid var(--b5);color:var(--w3);padding:6px 10px;border-radius:20px;cursor:pointer;font-family:'Tajawal',sans-serif;font-size:.78rem;transition:all .2s;flex-shrink:0}
+.cmt-btn:hover{border-color:var(--m3);color:var(--m3)}
+.cmt-btn svg{width:15px;height:15px;flex-shrink:0}
+
+/* COMMENTS MODAL */
+.cmt-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9600;align-items:center;justify-content:center;padding:1rem;padding-top:calc(1rem + env(safe-area-inset-top));padding-bottom:calc(1rem + env(safe-area-inset-bottom))}
+.cmt-modal.open{display:flex}
+.cmt-box{background:var(--b2);border:1px solid var(--b5);border-radius:8px;width:100%;max-width:460px;max-height:85vh;padding:2rem 1.5rem 1.5rem;position:relative;display:flex;flex-direction:column}
+.cmt-title{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--m3);letter-spacing:1.5px;margin-bottom:1rem;text-align:center}
+.cmt-list{overflow-y:auto;flex:1;min-height:80px;max-height:38vh;margin-bottom:1rem;display:flex;flex-direction:column;gap:.7rem;padding-right:2px}
+.cmt-item{display:flex;gap:.6rem;background:var(--b3);border-radius:6px;padding:.6rem .75rem}
+.cmt-avatar{width:28px;height:28px;border-radius:50%;background:var(--m4);color:var(--w);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;flex-shrink:0}
+.cmt-body{flex:1;min-width:0}
+.cmt-meta{display:flex;justify-content:space-between;gap:.5rem;margin-bottom:2px}
+.cmt-name{font-size:.82rem;font-weight:600;color:var(--w2)}
+.cmt-time{font-size:.68rem;color:var(--w3);opacity:.7;flex-shrink:0}
+.cmt-text{font-size:.85rem;color:var(--w3);line-height:1.5;word-break:break-word;white-space:pre-wrap}
+.cmt-empty,.cmt-error,.cmt-loading{text-align:center;color:var(--w3);font-size:.85rem;opacity:.7;padding:1.5rem 0}
+.cmt-form{border-top:1px solid var(--b5);padding-top:1rem;display:flex;flex-direction:column;gap:.6rem}
+.cmt-input,.cmt-textarea{background:var(--b3);border:1px solid var(--b5);border-radius:5px;padding:.6rem .75rem;color:var(--w);font-family:'Tajawal',sans-serif;font-size:.85rem;width:100%;resize:vertical}
+.cmt-input:focus,.cmt-textarea:focus{outline:none;border-color:var(--m3)}
+.cmt-err{color:var(--m3);font-size:.78rem;min-height:1em}
+.cmt-submit{background:var(--m);border:none;color:var(--w);padding:.65rem;border-radius:5px;font-family:'Bebas Neue',sans-serif;letter-spacing:1px;font-size:.9rem;cursor:pointer;transition:background .2s}
+.cmt-submit:hover{background:var(--m2)}
+.cmt-submit:disabled{opacity:.6;cursor:default}
+@media (max-width:600px){
+  .cmt-box{padding:1.5rem 1.1rem 1.1rem;max-height:90vh}
+  .cmt-list{max-height:34vh}
+  .cmt-btn{padding:5px 8px;font-size:.72rem}
+  .cmt-btn svg{width:13px;height:13px}
+}
 .ch-lock-icon{font-size:.85rem;color:var(--m3)}
 .rdr{display:none}
 .rdr.active{display:block}
@@ -584,11 +617,19 @@ footer strong{color:var(--m3);opacity:1}
             <div class="chc" onclick="openChapter(1,'Jet Stone',16)">
               <div class="chn">01</div><div class="chd"></div>
               <div class="chi"><h4>Jet Stone</h4><p id="tcp1">الفصل الأول — 16 صفحة</p></div>
+              <button class="cmt-btn" onclick="event.stopPropagation();openComments(1)" aria-label="Comments">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                <span id="cmt-count-1">0</span>
+              </button>
               <div class="cha">›</div>
             </div>
             <div class="chc" onclick="openChapter(2,'Outcasts',14)">
               <div class="chn">02</div><div class="chd"></div>
               <div class="chi"><h4>Outcasts</h4><p id="tcp2">الفصل الثاني — 14 صفحة</p></div>
+              <button class="cmt-btn" onclick="event.stopPropagation();openComments(2)" aria-label="Comments">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+                <span id="cmt-count-2">0</span>
+              </button>
               <div class="cha">›</div>
             </div>
             <!-- CHAPTER 3 — LOCKED -->
@@ -654,6 +695,21 @@ footer strong{color:var(--m3);opacity:1}
   <div class="m3d-hint" id="m3dHint">🖱 Drag to rotate · Scroll to zoom</div>
   <div class="m3d-canvas-wrap" id="m3dCanvasWrap"></div>
   <div class="m3d-status" id="m3dStatus"></div>
+</div>
+
+<!-- ══ COMMENTS MODAL ══ -->
+<div class="cmt-modal" id="commentsModal">
+  <div class="cmt-box">
+    <button class="lbx" style="position:absolute" onclick="closeComments()">✕</button>
+    <h3 class="cmt-title" id="cmt-chapter-label">التعليقات</h3>
+    <div class="cmt-list" id="cmt-list"></div>
+    <div class="cmt-form">
+      <input type="text" id="cmt-name" class="cmt-input" maxlength="60" placeholder="اسمك">
+      <textarea id="cmt-text" class="cmt-textarea" maxlength="500" rows="2" placeholder="اكتب تعليقك..."></textarea>
+      <div class="cmt-err" id="cmt-err"></div>
+      <button class="cmt-submit" id="cmt-submit-btn" onclick="submitComment()">إرسال</button>
+    </div>
+  </div>
 </div>
 
 <!-- ══ SUBSCRIBE MODAL ══ -->
@@ -739,7 +795,7 @@ let currentUser = null; // {name, email, photo, subscribed}
 // ══ GOOGLE OAUTH CONFIG ══
 // 🔴 مهم: استبدلي القيمة بالأسفل بالـ Client ID اللي تحصلين عليه من Google Cloud Console
 // (راجعي الشرح في الرسالة عشان خطوات الحصول عليه بالضبط)
-const GOOGLE_CLIENT_ID = '56128309639-6e5mllff9bhkltpdp2k9ta1f5tk6ksjt.apps.googleusercontent.com';
+const GOOGLE_CLIENT_ID = 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
 
 // ══ SESSION PERSISTENCE (localStorage) ══
 function saveSession() {
@@ -780,6 +836,11 @@ const T = {
     bkDrawings:'← رجوع', bkManga:'← رجوع', bkAnimation:'← رجوع', bkModels:'← رجوع', bkChapters:'← الفصول',
     m3dLoading:'جاري تحميل النموذج...', m3dError:'تعذر تحميل النموذج ثلاثي الأبعاد',
     m3dEmpty:'لا توجد نماذج بعد — أضف ملفات FBX لعرضها هنا',
+    cmtTitlePrefix:'تعليقات — الفصل ', cmtNamePh:'اسمك', cmtTextPh:'اكتب تعليقك...',
+    cmtSubmit:'إرسال', cmtErrFill:'الرجاء تعبئة الاسم والتعليق',
+    cmtErrSend:'تعذر إرسال التعليق، حاولي مرة أخرى', cmtErrLoad:'تعذر تحميل التعليقات',
+    cmtEmpty:'لا توجد تعليقات بعد — كوني أول من يعلق!', cmtLoading:'جاري تحميل التعليقات...',
+    cmtNow:'الآن', cmtMinAgo:' د', cmtHourAgo:' س', cmtDayAgo:' ي', cmtAgoPrefix:'قبل ',
     // panel
     guest:'الزائر', notLogged:'غير مسجّل',
     spLogin:'تسجيل الدخول', spRegister:'إنشاء حساب',
@@ -831,6 +892,11 @@ const T = {
     bkDrawings:'← Back', bkManga:'← Back', bkAnimation:'← Back', bkModels:'← Back', bkChapters:'← Chapters',
     m3dLoading:'Loading model...', m3dError:'Could not load the 3D model',
     m3dEmpty:'No models yet — add FBX files to display them here',
+    cmtTitlePrefix:'Comments — Chapter ', cmtNamePh:'Your name', cmtTextPh:'Write a comment...',
+    cmtSubmit:'Post', cmtErrFill:'Please enter your name and a comment',
+    cmtErrSend:'Could not post comment, try again', cmtErrLoad:'Could not load comments',
+    cmtEmpty:'No comments yet — be the first!', cmtLoading:'Loading comments...',
+    cmtNow:'now', cmtMinAgo:'m ago', cmtHourAgo:'h ago', cmtDayAgo:'d ago', cmtAgoPrefix:'',
     // panel
     guest:'Guest', notLogged:'Not logged in',
     spLogin:'Sign In', spRegister:'Create Account',
@@ -904,6 +970,9 @@ function applyLang() {
   set('bk-models', t.bkModels);
   set('bk-chapters', t.bkChapters);
   set('m3d-empty', t.m3dEmpty);
+  document.getElementById('cmt-name').placeholder = t.cmtNamePh;
+  document.getElementById('cmt-text').placeholder = t.cmtTextPh;
+  set('cmt-submit-btn', t.cmtSubmit);
 
   // Login screen
   set('lsubt', t.lsub);
@@ -1344,6 +1413,132 @@ function close3DViewer() {
   document.getElementById('m3dCanvasWrap').innerHTML = '';
 }
 
+// ══ COMMENTS (Netlify Function + Netlify Blobs — shared across all visitors) ══
+const CMT_API = '/.netlify/functions/comments';
+let currentCommentChapter = null;
+
+function escapeHtml(s) {
+  const d = document.createElement('div');
+  d.textContent = s;
+  return d.innerHTML;
+}
+
+function timeAgo(ts) {
+  const t = T[lang];
+  const s = Math.floor((Date.now() - ts) / 1000);
+  if (s < 60) return t.cmtNow;
+  const m = Math.floor(s / 60);
+  if (m < 60) return t.cmtAgoPrefix + m + t.cmtMinAgo;
+  const h = Math.floor(m / 60);
+  if (h < 24) return t.cmtAgoPrefix + h + t.cmtHourAgo;
+  const d = Math.floor(h / 24);
+  return t.cmtAgoPrefix + d + t.cmtDayAgo;
+}
+
+async function openComments(chapter) {
+  currentCommentChapter = chapter;
+  const t = T[lang];
+  document.getElementById('commentsModal').classList.add('open');
+  document.getElementById('cmt-chapter-label').textContent = t.cmtTitlePrefix + chapter;
+  document.getElementById('cmt-list').innerHTML = `<div class="cmt-loading">${t.cmtLoading}</div>`;
+  document.getElementById('cmt-err').textContent = '';
+  document.getElementById('cmt-text').value = '';
+
+  const nameInput = document.getElementById('cmt-name');
+  if (currentUser && currentUser.name) {
+    nameInput.value = currentUser.name;
+    nameInput.readOnly = true;
+  } else {
+    nameInput.readOnly = false;
+  }
+
+  await loadComments(chapter);
+}
+
+function closeComments() {
+  document.getElementById('commentsModal').classList.remove('open');
+}
+
+async function loadComments(chapter) {
+  const t = T[lang];
+  try {
+    const r = await fetch(`${CMT_API}?chapter=${chapter}`);
+    if (!r.ok) throw new Error('bad response');
+    const data = await r.json();
+    renderComments(data);
+    updateCommentCount(chapter, data.length);
+  } catch (e) {
+    document.getElementById('cmt-list').innerHTML = `<div class="cmt-error">${t.cmtErrLoad}</div>`;
+  }
+}
+
+function renderComments(list) {
+  const t = T[lang];
+  const wrap = document.getElementById('cmt-list');
+  if (!list || !list.length) {
+    wrap.innerHTML = `<div class="cmt-empty">${t.cmtEmpty}</div>`;
+    return;
+  }
+  wrap.innerHTML = list.slice().reverse().map(c => `
+    <div class="cmt-item">
+      <div class="cmt-avatar">${escapeHtml((c.name || '?').charAt(0).toUpperCase())}</div>
+      <div class="cmt-body">
+        <div class="cmt-meta"><span class="cmt-name">${escapeHtml(c.name)}</span><span class="cmt-time">${timeAgo(c.time)}</span></div>
+        <div class="cmt-text">${escapeHtml(c.text)}</div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function updateCommentCount(chapter, n) {
+  const el = document.getElementById('cmt-count-' + chapter);
+  if (el) el.textContent = n;
+}
+
+async function loadCommentCounts() {
+  [1, 2].forEach(async (ch) => {
+    try {
+      const r = await fetch(`${CMT_API}?chapter=${ch}`);
+      if (!r.ok) return;
+      const data = await r.json();
+      updateCommentCount(ch, data.length);
+    } catch (e) {}
+  });
+}
+
+async function submitComment() {
+  const t = T[lang];
+  const nameInput = document.getElementById('cmt-name');
+  const textInput = document.getElementById('cmt-text');
+  const err = document.getElementById('cmt-err');
+  const btn = document.getElementById('cmt-submit-btn');
+  const name = nameInput.value.trim();
+  const text = textInput.value.trim();
+  err.textContent = '';
+
+  if (!name || !text) { err.textContent = t.cmtErrFill; return; }
+
+  btn.disabled = true;
+  try {
+    const r = await fetch(`${CMT_API}?chapter=${currentCommentChapter}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ name, text })
+    });
+    if (!r.ok) throw new Error('bad response');
+    const data = await r.json();
+    renderComments(data);
+    updateCommentCount(currentCommentChapter, data.length);
+    textInput.value = '';
+  } catch (e) {
+    err.textContent = t.cmtErrSend;
+  } finally {
+    btn.disabled = false;
+  }
+}
+
+loadCommentCounts();
+
 // ══ MANGA CHAPTERS ══
 const ch1b = 'https://zeronero.netlify.app/jet-pdf/file/chapter1/pages/';
 const ch1p = ['page1.jpg','page2.jpg','page3.jpg','page4.jpg','page5.jpg','page6.jpg','page7.jpg','page8.jpg','page9.jpg','page10.jpg','page11.jpg','page12.jpg','page13.jpg','page14.jpg','page15.jpg','page16.jpg'];
@@ -1397,9 +1592,9 @@ function rebuildVids() {
   const t = T[lang];
   const videoSources = [
     { src: 'https://zeronero.netlify.app/my-animations/vid/IMG_1320.MP4', type: 'video/mp4' },
-    { src: 'https://zeronero.netlify.app/my-animations/vid/IMG_3582.MOV', type: 'video/mp4' },
+    { src: 'https://zeronero.netlify.app/my-animations/vid/IMG_3582.MOV', type: 'video/quicktime' },
     { src: 'https://zeronero.netlify.app/my-animations/vid/0722.mp4', type: 'video/mp4' },
-    { src: 'https://zeronero.netlify.app/my-animations/vid/copy_7ADAA572-AEEF-41E5-B8AF-5E9F950195A2.mov', type: 'video/mp4' }
+    { src: 'https://zeronero.netlify.app/my-animations/vid/copy_7ADAA572-AEEF-41E5-B8AF-5E9F950195A2.mov', type: 'video/quicktime' }
   ];
   videoSources.forEach((v, i) => {
     const d = document.createElement('div'); d.className = 'vc';
