@@ -179,38 +179,6 @@ body.day .wc{background:var(--b2);border-color:var(--b4)}
 .chc.locked{opacity:.85;cursor:default}
 .chc.locked:hover{border-color:var(--m3);background:var(--b2)}
 
-/* COMMENT BUTTON ON CHAPTER CARDS */
-.cmt-btn{display:flex;align-items:center;gap:5px;background:var(--b3);border:1px solid var(--b5);color:var(--w3);padding:6px 10px;border-radius:20px;cursor:pointer;font-family:'Tajawal',sans-serif;font-size:.78rem;transition:all .2s;flex-shrink:0}
-.cmt-btn:hover{border-color:var(--m3);color:var(--m3)}
-.cmt-btn svg{width:15px;height:15px;flex-shrink:0}
-
-/* COMMENTS MODAL */
-.cmt-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:9600;align-items:center;justify-content:center;padding:1rem;padding-top:calc(1rem + env(safe-area-inset-top));padding-bottom:calc(1rem + env(safe-area-inset-bottom))}
-.cmt-modal.open{display:flex}
-.cmt-box{background:var(--b2);border:1px solid var(--b5);border-radius:8px;width:100%;max-width:460px;max-height:85vh;padding:2rem 1.5rem 1.5rem;position:relative;display:flex;flex-direction:column}
-.cmt-title{font-family:'Bebas Neue',sans-serif;font-size:1.5rem;color:var(--m3);letter-spacing:1.5px;margin-bottom:1rem;text-align:center}
-.cmt-list{overflow-y:auto;flex:1;min-height:80px;max-height:38vh;margin-bottom:1rem;display:flex;flex-direction:column;gap:.7rem;padding-right:2px}
-.cmt-item{display:flex;gap:.6rem;background:var(--b3);border-radius:6px;padding:.6rem .75rem}
-.cmt-avatar{width:28px;height:28px;border-radius:50%;background:var(--m4);color:var(--w);display:flex;align-items:center;justify-content:center;font-size:.8rem;font-weight:700;flex-shrink:0}
-.cmt-body{flex:1;min-width:0}
-.cmt-meta{display:flex;justify-content:space-between;gap:.5rem;margin-bottom:2px}
-.cmt-name{font-size:.82rem;font-weight:600;color:var(--w2)}
-.cmt-time{font-size:.68rem;color:var(--w3);opacity:.7;flex-shrink:0}
-.cmt-text{font-size:.85rem;color:var(--w3);line-height:1.5;word-break:break-word;white-space:pre-wrap}
-.cmt-empty,.cmt-error,.cmt-loading{text-align:center;color:var(--w3);font-size:.85rem;opacity:.7;padding:1.5rem 0}
-.cmt-form{border-top:1px solid var(--b5);padding-top:1rem;display:flex;flex-direction:column;gap:.6rem}
-.cmt-input,.cmt-textarea{background:var(--b3);border:1px solid var(--b5);border-radius:5px;padding:.6rem .75rem;color:var(--w);font-family:'Tajawal',sans-serif;font-size:.85rem;width:100%;resize:vertical}
-.cmt-input:focus,.cmt-textarea:focus{outline:none;border-color:var(--m3)}
-.cmt-err{color:var(--m3);font-size:.78rem;min-height:1em}
-.cmt-submit{background:var(--m);border:none;color:var(--w);padding:.65rem;border-radius:5px;font-family:'Bebas Neue',sans-serif;letter-spacing:1px;font-size:.9rem;cursor:pointer;transition:background .2s}
-.cmt-submit:hover{background:var(--m2)}
-.cmt-submit:disabled{opacity:.6;cursor:default}
-@media (max-width:600px){
-  .cmt-box{padding:1.5rem 1.1rem 1.1rem;max-height:90vh}
-  .cmt-list{max-height:34vh}
-  .cmt-btn{padding:5px 8px;font-size:.72rem}
-  .cmt-btn svg{width:13px;height:13px}
-}
 .ch-lock-icon{font-size:.85rem;color:var(--m3)}
 .rdr{display:none}
 .rdr.active{display:block}
@@ -445,29 +413,11 @@ footer strong{color:var(--m3);opacity:1}
       <span id="sp-register-txt">إنشاء حساب</span>
     </button>
 
-    <div class="sp-divider"></div>
-    <div class="sp-label" id="sp-lbl-sub">الاشتراك</div>
-    <button class="sp-btn" onclick="closePanel();openSubModal()">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
-      <span id="sp-sub-txt">اشترك الآن — 19.99 ريال</span>
-    </button>
-
     <div class="sp-divider" id="sp-logout-div" style="display:none"></div>
     <button class="sp-btn" id="sp-logout-btn" style="display:none" onclick="doLogout()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg>
       <span id="sp-logout-txt">تسجيل الخروج</span>
     </button>
-  </div>
-</div>
-
-<!-- ══ LOGIN SCREEN ══ -->
-<div id="ls">
-  <div class="lbox">
-    <div class="llogo">ZERO NERO</div>
-    <div class="lsub" id="lsubt">أدخل كلمة المرور</div>
-    <input class="linput" id="pwi" type="password" placeholder="••••••••" autocomplete="off">
-    <button class="lbtn" onclick="tryLogin()">دخول</button>
-    <div class="lerr" id="lerr"></div>
   </div>
 </div>
 
@@ -617,27 +567,19 @@ footer strong{color:var(--m3);opacity:1}
             <div class="chc" onclick="openChapter(1,'Jet Stone',16)">
               <div class="chn">01</div><div class="chd"></div>
               <div class="chi"><h4>Jet Stone</h4><p id="tcp1">الفصل الأول — 16 صفحة</p></div>
-              <button class="cmt-btn" onclick="event.stopPropagation();openComments(1)" aria-label="Comments">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-                <span id="cmt-count-1">0</span>
-              </button>
               <div class="cha">›</div>
             </div>
             <div class="chc" onclick="openChapter(2,'Outcasts',14)">
               <div class="chn">02</div><div class="chd"></div>
               <div class="chi"><h4>Outcasts</h4><p id="tcp2">الفصل الثاني — 14 صفحة</p></div>
-              <button class="cmt-btn" onclick="event.stopPropagation();openComments(2)" aria-label="Comments">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
-                <span id="cmt-count-2">0</span>
-              </button>
               <div class="cha">›</div>
             </div>
-            <!-- CHAPTER 3 — LOCKED -->
-            <div class="chc locked" onclick="tryChapter3()">
+            <!-- CHAPTER 3 — COMING SOON -->
+            <div class="chc locked">
               <div class="chn" style="color:var(--w3)">03</div><div class="chd"></div>
               <div class="chi">
                 <h4 id="ch3-title">الفصل الثالث</h4>
-                <p id="tcp3">الفصل الثالث — قريباً — اشتراك مطلوب</p>
+                <p id="tcp3">الفصل الثالث — قريباً</p>
               </div>
               <div class="cha"><span class="ch-lock-icon">🔒</span></div>
             </div>
@@ -697,49 +639,6 @@ footer strong{color:var(--m3);opacity:1}
   <div class="m3d-status" id="m3dStatus"></div>
 </div>
 
-<!-- ══ COMMENTS MODAL ══ -->
-<div class="cmt-modal" id="commentsModal">
-  <div class="cmt-box">
-    <button class="lbx" style="position:absolute" onclick="closeComments()">✕</button>
-    <h3 class="cmt-title" id="cmt-chapter-label">التعليقات</h3>
-    <div class="cmt-list" id="cmt-list"></div>
-    <div class="cmt-form">
-      <input type="text" id="cmt-name" class="cmt-input" maxlength="60" placeholder="اسمك">
-      <textarea id="cmt-text" class="cmt-textarea" maxlength="500" rows="2" placeholder="اكتب تعليقك..."></textarea>
-      <div class="cmt-err" id="cmt-err"></div>
-      <button class="cmt-submit" id="cmt-submit-btn" onclick="submitComment()">إرسال</button>
-    </div>
-  </div>
-</div>
-
-<!-- ══ SUBSCRIBE MODAL ══ -->
-<div class="sub-modal" id="subModal">
-  <div class="sub-box">
-    <button class="sub-close" onclick="closeSubModal()">✕</button>
-    <h2 id="sub-title">الاشتراك</h2>
-    <p id="sub-desc">احصل على وصول كامل لجميع الفصول والمحتوى الحصري</p>
-    <div class="sub-price">19.99 <span id="sub-currency">ريال / شهر</span></div>
-    <ul class="sub-features" id="sub-features">
-      <li id="sf1">جميع فصول المانجا بما فيها الجديدة</li>
-      <li id="sf2">وصول مبكر للفصول القادمة</li>
-      <li id="sf3">محتوى حصري خلف الكواليس</li>
-    </ul>
-    <div id="sub-login-notice" class="need-login-msg" style="margin-bottom:1rem;display:none" id="sub-login-notice"></div>
-    <button class="apple-pay-btn" onclick="handleApplePay()">
-      <svg viewBox="0 0 24 24" fill="currentColor">
-        <path d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.7 9.05 7.4c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.39-1.32 2.76-2.54 4zm-3.1-17.52c.06 2.06-1.52 3.7-3.44 3.56-.26-1.88 1.7-3.7 3.44-3.56z"/>
-      </svg>
-      <span id="sub-pay-txt">الدفع بـ Apple Pay</span>
-    </button>
-    <div id="sub-need-login" style="display:none">
-      <p class="need-login-msg" id="sub-need-login-msg">يجب تسجيل الدخول أولاً للاشتراك</p>
-      <button class="sp-btn primary" style="width:100%;margin-top:.75rem;justify-content:center;display:flex;gap:8px;align-items:center" onclick="closeSubModal();openAuthModal('login')">
-        <span id="sub-goto-login">تسجيل الدخول</span>
-      </button>
-    </div>
-  </div>
-</div>
-
 <!-- ══ AUTH MODAL ══ -->
 <div class="auth-modal" id="authModal">
   <div class="auth-box">
@@ -776,19 +675,8 @@ footer strong{color:var(--m3);opacity:1}
   </div>
 </div>
 
-<!-- ══ APPLE PAY SUCCESS MODAL ══ -->
-<div class="sub-modal" id="paySuccessModal">
-  <div class="sub-box">
-    <h2 style="color:#30d158">✓</h2>
-    <h2 id="pay-success-title">تم الاشتراك!</h2>
-    <p id="pay-success-msg" style="margin-bottom:1.5rem">أصبح بإمكانك قراءة جميع الفصول الآن.</p>
-    <button class="lbtn" onclick="closePaySuccess()">رائع!</button>
-  </div>
-</div>
-
 <script>
 // ══ CONSTANTS ══
-const PASS = 'ZERO NERO';
 let lang = 'ar', dark = true, lbIdx = 0;
 let currentUser = null; // {name, email, photo, subscribed}
 
@@ -825,7 +713,7 @@ const T = {
     gh:'رسوماتي', ah:'مقاطع الحركة', mh:'النماذج ثلاثية الأبعاد',
     l1:'رسم وكتابة', l2:'الناشر',
     cp1:'الفصل الأول — 16 صفحة', cp2:'الفصل الثاني — 14 صفحة',
-    cp3:'الفصل الثالث — قريباً — اشتراك مطلوب', ch3:'الفصل الثالث',
+    cp3:'الفصل الثالث — قريباً', ch3:'الفصل الثالث',
     itag:'أبوفراس الشعواني', authorName:'أبوفراس الشعواني',
     lsub:'أدخل كلمة المرور', ph:'••••••••', lbt:'دخول',
     vi:['انيميشن ٠١','انيميشن ٠٢','انيميشن ٠٣','انيميشن ٠٤'], vs:'مقطع حركة',
@@ -836,36 +724,17 @@ const T = {
     bkDrawings:'← رجوع', bkManga:'← رجوع', bkAnimation:'← رجوع', bkModels:'← رجوع', bkChapters:'← الفصول',
     m3dLoading:'جاري تحميل النموذج...', m3dError:'تعذر تحميل النموذج ثلاثي الأبعاد',
     m3dEmpty:'لا توجد نماذج بعد — أضف ملفات FBX لعرضها هنا',
-    cmtTitlePrefix:'تعليقات — الفصل ', cmtNamePh:'اسمك', cmtTextPh:'اكتب تعليقك...',
-    cmtSubmit:'إرسال', cmtErrFill:'الرجاء تعبئة الاسم والتعليق',
-    cmtErrSend:'تعذر إرسال التعليق، حاولي مرة أخرى', cmtErrLoad:'تعذر تحميل التعليقات',
-    cmtEmpty:'لا توجد تعليقات بعد — كوني أول من يعلق!', cmtLoading:'جاري تحميل التعليقات...',
-    cmtNow:'الآن', cmtMinAgo:' د', cmtHourAgo:' س', cmtDayAgo:' ي', cmtAgoPrefix:'قبل ',
     // panel
     guest:'الزائر', notLogged:'غير مسجّل',
     spLogin:'تسجيل الدخول', spRegister:'إنشاء حساب',
-    spSub:'اشترك الآن — 19.99 ريال', spLogout:'تسجيل الخروج',
-    spLblAccount:'الحساب', spLblSub:'الاشتراك',
-    // sub modal
-    subTitle:'الاشتراك', subDesc:'احصل على وصول كامل لجميع الفصول والمحتوى الحصري',
-    subCurrency:'ريال / شهر',
-    sf1:'جميع فصول المانجا بما فيها الجديدة',
-    sf2:'وصول مبكر للفصول القادمة',
-    sf3:'محتوى حصري خلف الكواليس',
-    subPay:'الدفع بـ Apple Pay',
-    subNeedLogin:'يجب تسجيل الدخول أولاً للاشتراك',
-    subGotoLogin:'تسجيل الدخول',
+    spLogout:'تسجيل الخروج',
+    spLblAccount:'الحساب',
     // auth modal
     authGoogleLogin:'تسجيل الدخول بـ Google',
     authGoogleReg:'التسجيل بـ Google',
     authOr:'أو',
     authLoginTab:'تسجيل الدخول', authRegTab:'إنشاء حساب',
     authLoginBtn:'دخول', authRegBtn:'إنشاء حساب',
-    // pay success
-    paySuccessTitle:'تم الاشتراك!',
-    paySuccessMsg:'أصبح بإمكانك قراءة جميع الفصول الآن.',
-    // lock
-    lockMsg:'هذا الفصل مقيّد للمشتركين'
   },
   en: {
     role:'MANGAKA / ANIMATOR',
@@ -881,7 +750,7 @@ const T = {
     gh:'Drawings', ah:'Animation Clips', mh:'3D Models',
     l1:'Art & Story', l2:'Publisher',
     cp1:'Chapter 1 — 16 pages', cp2:'Chapter 2 — 14 pages',
-    cp3:'Chapter 3 — Coming Soon — Subscription Required', ch3:'Chapter 3',
+    cp3:'Chapter 3 — Coming Soon', ch3:'Chapter 3',
     itag:'Abufarras Shawani', authorName:'Abufarras Shawani',
     lsub:'Enter password', ph:'password', lbt:'Enter',
     vi:['Animation 01','Animation 02','Animation 03','Animation 04'], vs:'Motion clip',
@@ -892,36 +761,17 @@ const T = {
     bkDrawings:'← Back', bkManga:'← Back', bkAnimation:'← Back', bkModels:'← Back', bkChapters:'← Chapters',
     m3dLoading:'Loading model...', m3dError:'Could not load the 3D model',
     m3dEmpty:'No models yet — add FBX files to display them here',
-    cmtTitlePrefix:'Comments — Chapter ', cmtNamePh:'Your name', cmtTextPh:'Write a comment...',
-    cmtSubmit:'Post', cmtErrFill:'Please enter your name and a comment',
-    cmtErrSend:'Could not post comment, try again', cmtErrLoad:'Could not load comments',
-    cmtEmpty:'No comments yet — be the first!', cmtLoading:'Loading comments...',
-    cmtNow:'now', cmtMinAgo:'m ago', cmtHourAgo:'h ago', cmtDayAgo:'d ago', cmtAgoPrefix:'',
     // panel
     guest:'Guest', notLogged:'Not logged in',
     spLogin:'Sign In', spRegister:'Create Account',
-    spSub:'Subscribe — 19.99 SAR', spLogout:'Sign Out',
-    spLblAccount:'Account', spLblSub:'Subscription',
-    // sub modal
-    subTitle:'Subscribe', subDesc:'Get full access to all chapters and exclusive content',
-    subCurrency:'SAR / month',
-    sf1:'All manga chapters including new releases',
-    sf2:'Early access to upcoming chapters',
-    sf3:'Exclusive behind-the-scenes content',
-    subPay:'Pay with Apple Pay',
-    subNeedLogin:'Please sign in first to subscribe',
-    subGotoLogin:'Sign In',
+    spLogout:'Sign Out',
+    spLblAccount:'Account',
     // auth modal
     authGoogleLogin:'Sign in with Google',
     authGoogleReg:'Sign up with Google',
     authOr:'or',
     authLoginTab:'Sign In', authRegTab:'Create Account',
     authLoginBtn:'Sign In', authRegBtn:'Create Account',
-    // pay success
-    paySuccessTitle:'Subscribed!',
-    paySuccessMsg:'You can now read all chapters.',
-    // lock
-    lockMsg:'This chapter is for subscribers only'
   }
 };
 
@@ -970,32 +820,13 @@ function applyLang() {
   set('bk-models', t.bkModels);
   set('bk-chapters', t.bkChapters);
   set('m3d-empty', t.m3dEmpty);
-  document.getElementById('cmt-name').placeholder = t.cmtNamePh;
-  document.getElementById('cmt-text').placeholder = t.cmtTextPh;
-  set('cmt-submit-btn', t.cmtSubmit);
-
-  // Login screen
-  set('lsubt', t.lsub);
-  document.getElementById('pwi').placeholder = t.ph;
-  document.querySelector('.lbtn').textContent = t.lbt;
 
   // Side panel
   set('sp-lbl-account', t.spLblAccount);
-  set('sp-lbl-sub', t.spLblSub);
   set('sp-login-txt', t.spLogin);
   set('sp-register-txt', t.spRegister);
-  set('sp-sub-txt', t.spSub);
   set('sp-logout-txt', t.spLogout);
   updatePanelUser();
-
-  // Sub modal
-  set('sub-title', t.subTitle);
-  set('sub-desc', t.subDesc);
-  set('sub-currency', t.subCurrency);
-  set('sf1', t.sf1); set('sf2', t.sf2); set('sf3', t.sf3);
-  set('sub-pay-txt', t.subPay);
-  set('sub-need-login-msg', t.subNeedLogin);
-  set('sub-goto-login', t.subGotoLogin);
 
   // Auth modal
   set('tab-login', t.authLoginTab);
@@ -1005,10 +836,6 @@ function applyLang() {
   set('auth-or-txt', t.authOr);
   set('auth-login-btn-txt', t.authLoginBtn);
   set('auth-reg-btn-txt', t.authRegBtn);
-
-  // Pay success
-  set('pay-success-title', t.paySuccessTitle);
-  set('pay-success-msg', t.paySuccessMsg);
 
   // Manga cover
   document.getElementById('manga-cover-thumb').src = t.cover;
@@ -1162,56 +989,8 @@ function emailRegister() {
   closeAuthModal();
 }
 
-// ══ SUBSCRIBE MODAL ══
-function openSubModal() {
-  document.getElementById('subModal').classList.add('open');
-  const appleBtn = document.querySelector('.apple-pay-btn');
-  const needLogin = document.getElementById('sub-need-login');
-  if (currentUser) {
-    appleBtn.style.display = 'flex';
-    needLogin.style.display = 'none';
-  } else {
-    appleBtn.style.display = 'none';
-    needLogin.style.display = 'block';
-  }
-}
-function closeSubModal() { document.getElementById('subModal').classList.remove('open'); }
-
-function handleApplePay() {
-  if (!currentUser) { openAuthModal('login'); return; }
-  // Simulate Apple Pay
-  closeSubModal();
-  currentUser.subscribed = true;
-  saveSession();
-  document.getElementById('paySuccessModal').classList.add('open');
-}
-function closePaySuccess() { document.getElementById('paySuccessModal').classList.remove('open'); }
-
-// ══ CHAPTER 3 ══
-function tryChapter3() {
-  if (currentUser && currentUser.subscribed) {
-    openChapter(3, 'Chapter 3', 16);
-  } else if (!currentUser) {
-    openAuthModal('login');
-  } else {
-    openSubModal();
-  }
-}
-
-// ══ LOGIN ══
-const PASS2 = 'ZERO NERO';
-function tryLogin() {
-  const v = document.getElementById('pwi').value.trim().toUpperCase();
-  if (v === PASS2) {
-    document.getElementById('ls').style.display = 'none';
-    runIntro();
-  } else {
-    document.getElementById('lerr').textContent = lang === 'ar' ? 'كلمة المرور غير صحيحة' : 'Wrong password';
-    document.getElementById('pwi').value = '';
-    setTimeout(() => document.getElementById('lerr').textContent = '', 2500);
-  }
-}
-document.getElementById('pwi').addEventListener('keydown', e => { if (e.key === 'Enter') tryLogin(); });
+// ══ AUTO-START (password gate removed — intro plays automatically) ══
+runIntro();
 
 function runIntro() {
   const intro = document.getElementById('intro');
@@ -1227,15 +1006,15 @@ function runIntro() {
 }
 
 // ══ ANIMATION PREVIEW ══
-const vidSrcs = [
-  'https://zeronero.netlify.app/my-animations/vid/IMG_1320.MP4',
-  'https://zeronero.netlify.app/my-animations/vid/IMG_3582.MOV',
-  'https://zeronero.netlify.app/my-animations/vid/0722.mp4',
-  'https://zeronero.netlify.app/my-animations/vid/copy_7ADAA572-AEEF-41E5-B8AF-5E9F950195A2.mov'
-];
+const videoSources = [
+    { src: 'https://zeronero.netlify.app/my-animations/vid/IMG_1320.MP4', type: 'video/mp4' },
+    { src: 'https://zeronero.netlify.app/my-animations/vid/IMG_3582.MOV', type: 'video/mp4' },
+    { src: 'https://zeronero.netlify.app/my-animations/vid/0722.mp4', type: 'video/mp4' },
+    { src: 'https://zeronero.netlify.app/my-animations/vid/copy_7ADAA572-AEEF-41E5-B8AF-5E9F950195A2.mov', type: 'video/mp4' }
+  ];
 function setupAnimPreview() {
   const v = document.getElementById('anim-preview');
-  v.src = vidSrcs[0]; v.load();
+  v.src = videoSources[0].src; v.load();
 }
 
 // ══ GALLERY ══
@@ -1413,132 +1192,6 @@ function close3DViewer() {
   document.getElementById('m3dCanvasWrap').innerHTML = '';
 }
 
-// ══ COMMENTS (Netlify Function + Netlify Blobs — shared across all visitors) ══
-const CMT_API = '/.netlify/functions/comments';
-let currentCommentChapter = null;
-
-function escapeHtml(s) {
-  const d = document.createElement('div');
-  d.textContent = s;
-  return d.innerHTML;
-}
-
-function timeAgo(ts) {
-  const t = T[lang];
-  const s = Math.floor((Date.now() - ts) / 1000);
-  if (s < 60) return t.cmtNow;
-  const m = Math.floor(s / 60);
-  if (m < 60) return t.cmtAgoPrefix + m + t.cmtMinAgo;
-  const h = Math.floor(m / 60);
-  if (h < 24) return t.cmtAgoPrefix + h + t.cmtHourAgo;
-  const d = Math.floor(h / 24);
-  return t.cmtAgoPrefix + d + t.cmtDayAgo;
-}
-
-async function openComments(chapter) {
-  currentCommentChapter = chapter;
-  const t = T[lang];
-  document.getElementById('commentsModal').classList.add('open');
-  document.getElementById('cmt-chapter-label').textContent = t.cmtTitlePrefix + chapter;
-  document.getElementById('cmt-list').innerHTML = `<div class="cmt-loading">${t.cmtLoading}</div>`;
-  document.getElementById('cmt-err').textContent = '';
-  document.getElementById('cmt-text').value = '';
-
-  const nameInput = document.getElementById('cmt-name');
-  if (currentUser && currentUser.name) {
-    nameInput.value = currentUser.name;
-    nameInput.readOnly = true;
-  } else {
-    nameInput.readOnly = false;
-  }
-
-  await loadComments(chapter);
-}
-
-function closeComments() {
-  document.getElementById('commentsModal').classList.remove('open');
-}
-
-async function loadComments(chapter) {
-  const t = T[lang];
-  try {
-    const r = await fetch(`${CMT_API}?chapter=${chapter}`);
-    if (!r.ok) throw new Error('bad response');
-    const data = await r.json();
-    renderComments(data);
-    updateCommentCount(chapter, data.length);
-  } catch (e) {
-    document.getElementById('cmt-list').innerHTML = `<div class="cmt-error">${t.cmtErrLoad}</div>`;
-  }
-}
-
-function renderComments(list) {
-  const t = T[lang];
-  const wrap = document.getElementById('cmt-list');
-  if (!list || !list.length) {
-    wrap.innerHTML = `<div class="cmt-empty">${t.cmtEmpty}</div>`;
-    return;
-  }
-  wrap.innerHTML = list.slice().reverse().map(c => `
-    <div class="cmt-item">
-      <div class="cmt-avatar">${escapeHtml((c.name || '?').charAt(0).toUpperCase())}</div>
-      <div class="cmt-body">
-        <div class="cmt-meta"><span class="cmt-name">${escapeHtml(c.name)}</span><span class="cmt-time">${timeAgo(c.time)}</span></div>
-        <div class="cmt-text">${escapeHtml(c.text)}</div>
-      </div>
-    </div>
-  `).join('');
-}
-
-function updateCommentCount(chapter, n) {
-  const el = document.getElementById('cmt-count-' + chapter);
-  if (el) el.textContent = n;
-}
-
-async function loadCommentCounts() {
-  [1, 2].forEach(async (ch) => {
-    try {
-      const r = await fetch(`${CMT_API}?chapter=${ch}`);
-      if (!r.ok) return;
-      const data = await r.json();
-      updateCommentCount(ch, data.length);
-    } catch (e) {}
-  });
-}
-
-async function submitComment() {
-  const t = T[lang];
-  const nameInput = document.getElementById('cmt-name');
-  const textInput = document.getElementById('cmt-text');
-  const err = document.getElementById('cmt-err');
-  const btn = document.getElementById('cmt-submit-btn');
-  const name = nameInput.value.trim();
-  const text = textInput.value.trim();
-  err.textContent = '';
-
-  if (!name || !text) { err.textContent = t.cmtErrFill; return; }
-
-  btn.disabled = true;
-  try {
-    const r = await fetch(`${CMT_API}?chapter=${currentCommentChapter}`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, text })
-    });
-    if (!r.ok) throw new Error('bad response');
-    const data = await r.json();
-    renderComments(data);
-    updateCommentCount(currentCommentChapter, data.length);
-    textInput.value = '';
-  } catch (e) {
-    err.textContent = t.cmtErrSend;
-  } finally {
-    btn.disabled = false;
-  }
-}
-
-loadCommentCounts();
-
 // ══ MANGA CHAPTERS ══
 const ch1b = 'https://zeronero.netlify.app/jet-pdf/file/chapter1/pages/';
 const ch1p = ['page1.jpg','page2.jpg','page3.jpg','page4.jpg','page5.jpg','page6.jpg','page7.jpg','page8.jpg','page9.jpg','page10.jpg','page11.jpg','page12.jpg','page13.jpg','page14.jpg','page15.jpg','page16.jpg'];
@@ -1590,12 +1243,6 @@ function rebuildVids() {
   const vg = document.getElementById('vg'); if (!vg) return;
   vg.innerHTML = '';
   const t = T[lang];
-  const videoSources = [
-    { src: 'https://zeronero.netlify.app/my-animations/vid/IMG_1320.MP4', type: 'video/mp4' },
-    { src: 'https://zeronero.netlify.app/my-animations/vid/IMG_3582.MOV', type: 'video/mp4' },
-    { src: 'https://zeronero.netlify.app/my-animations/vid/0722.mp4', type: 'video/mp4' },
-    { src: 'https://zeronero.netlify.app/my-animations/vid/copy_7ADAA572-AEEF-41E5-B8AF-5E9F950195A2.mov', type: 'video/mp4' }
-  ];
   videoSources.forEach((v, i) => {
     const d = document.createElement('div'); d.className = 'vc';
     d.innerHTML = `<div class="vv"><video controls preload="metadata" style="width:100%;max-height:220px;object-fit:cover;background:var(--b)"><source src="${v.src}" type="${v.type}"></video></div><div class="vi"><div class="vit">${t.vi[i] || 'Animation ' + (i+1)}</div><div class="vis2">${t.vs}</div></div>`;
