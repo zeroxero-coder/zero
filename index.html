@@ -571,7 +571,7 @@ footer strong{color:var(--m3);opacity:1}
             <div>
               <div class="mt" id="manga-title-txt">J.E.T</div>
               <div class="mm">
-                <div class="mmi"><label id="tl1">رسم وكتابة</label><span>أبوفراس الشعواني</span></div>
+                <div class="mmi"><label id="tl1">رسم وكتابة</label><span id="tauthor">أبوفراس الشعواني</span></div>
                 <div class="mmi"><label id="tl2">الناشر</label><span>Zero Nero</span></div>
               </div>
               <div class="gtgs"><span class="gt">VAGUENESS</span><span class="gt">ACTION</span><span class="gt">DRAMA</span><span class="gt">IMAGINATION</span><span class="gt">SUPER POWERS</span></div>
@@ -739,7 +739,7 @@ let currentUser = null; // {name, email, photo, subscribed}
 // ══ GOOGLE OAUTH CONFIG ══
 // 🔴 مهم: استبدلي القيمة بالأسفل بالـ Client ID اللي تحصلين عليه من Google Cloud Console
 // (راجعي الشرح في الرسالة عشان خطوات الحصول عليه بالضبط)
-const GOOGLE_CLIENT_ID = '56128309639-6e5mllff9bhkltpdp2k9ta1f5tk6ksjt.apps.googleusercontent.com';
+const GOOGLE_CLIENT_ID = 'YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com';
 
 // ══ SESSION PERSISTENCE (localStorage) ══
 function saveSession() {
@@ -770,7 +770,7 @@ const T = {
     l1:'رسم وكتابة', l2:'الناشر',
     cp1:'الفصل الأول — 16 صفحة', cp2:'الفصل الثاني — 14 صفحة',
     cp3:'الفصل الثالث — قريباً — اشتراك مطلوب', ch3:'الفصل الثالث',
-    itag:'أبوفراس الشعواني',
+    itag:'أبوفراس الشعواني', authorName:'أبوفراس الشعواني',
     lsub:'أدخل كلمة المرور', ph:'••••••••', lbt:'دخول',
     vi:['انيميشن ٠١','انيميشن ٠٢','انيميشن ٠٣','انيميشن ٠٤'], vs:'مقطع حركة',
     navHome:'الرئيسية', navWorks:'أعمالي', lb:'EN', dir:'rtl',
@@ -821,9 +821,10 @@ const T = {
     l1:'Art & Story', l2:'Publisher',
     cp1:'Chapter 1 — 16 pages', cp2:'Chapter 2 — 14 pages',
     cp3:'Chapter 3 — Coming Soon — Subscription Required', ch3:'Chapter 3',
-    itag:'Abufarras Shawani',
+    itag:'Abufarras Shawani', authorName:'Abufarras Shawani',
     lsub:'Enter password', ph:'password', lbt:'Enter',
     vi:['Animation 01','Animation 02','Animation 03','Animation 04'], vs:'Motion clip',
+    navHome:'Home', navWorks:'Works', lb:'AR', dir:'ltr',
     cover:'https://zeronero.netlify.app/manga-cover-en.jpg',
     desc2:'A manga artist and animator crafting immersive visual worlds, blending anime aesthetics with authentic Arabic identity.',
     mt:'J.E.T', chBadge:'2 Chapters',
@@ -892,7 +893,7 @@ function applyLang() {
 
   // Inner
   set('tgh', t.gh); set('tah', t.ah); set('tmh', t.mh);
-  set('tl1', t.l1); set('tl2', t.l2);
+  set('tl1', t.l1); set('tl2', t.l2); set('tauthor', t.authorName);
   set('tcp1', t.cp1); set('tcp2', t.cp2);
   set('tcp3', t.cp3); set('ch3-title', t.ch3);
   set('manga-title-txt', t.mt);
@@ -1205,7 +1206,7 @@ document.addEventListener('keydown', e => {
 // ══ 3D MODELS ══
 // أضف نماذج FBX هنا: ضعي ملف الـ .fbx داخل مجلد models/ في الريبو، وأضيفي سطر جديد بالأسفل
 const MD = 'https://zeronero.netlify.app/models/';
-const models3D = [ { name: 'zxx.fbx', file: MD + 'zxx.fbx', thumb: MD + 'model1-thumb.jpg' },
+const models3D = [
   // مثال: { name: 'اسم النموذج', file: MD + 'model1.fbx', thumb: MD + 'model1-thumb.jpg' },
 ];
 
@@ -1347,7 +1348,7 @@ function close3DViewer() {
 const ch1b = 'https://zeronero.netlify.app/jet-pdf/file/chapter1/pages/';
 const ch1p = ['page1.jpg','page2.jpg','page3.jpg','page4.jpg','page5.jpg','page6.jpg','page7.jpg','page8.jpg','page9.jpg','page10.jpg','page11.jpg','page12.jpg','page13.jpg','page14.jpg','page15.jpg','page16.jpg'];
 const ch2b = 'https://zeronero.netlify.app/jet-pdf/file/chapter2/pages2/';
-const ch2p = ['c1.png','c2.png','c3.png','c4.png','c5.png','c6.png','c7.png','c8.png','c9.png','c10.png','c11.png','c12.png','c13.png','c14.png'];
+const ch2p = ['c1.jpg','c2.jpg','c3.jpg','c4.jpg','c5.jpg','c6.jpg','c7.jpg','c8.jpg','c9.jpg','c10.jpg','c11.jpg','c12.jpg','c13.jpg','c14.jpg'];
 // Chapter 3 uses same pages as chapter 2 (copy) — replace when real pages are ready
 const ch3b = 'https://zeronero.netlify.app/jet-pdf/file/chapter2/pages2/';
 const ch3p = ['c1.png','c2.png','c3.png','c4.png','c5.png','c6.png','c7.png','c8.png','c9.png','c10.png','c11.png','c12.png','c13.png','c14.png'];
