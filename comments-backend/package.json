@@ -1,0 +1,9 @@
+{
+  "name": "zero-nero-site",
+  "private": true,
+  "version": "1.0.0",
+  "description": "ZERO NERO — manga & portfolio site",
+  "dependencies": {
+    "@netlify/blobs": "^10.0.0"
+  }
+}
