@@ -1052,10 +1052,10 @@ document.addEventListener('keydown', e => {
 });
 
 // ══ 3D MODELS ══
-// أضف نماذج FBX هنا: ضعي ملف الـ .fbx داخل مجلد models/ في الريبو، وأضيفي سطر جديد بالأسفل
+// أضيفي نماذج FBX أو GLB هنا: ضعي الملف داخل مجلد models/ في الريبو، وأضيفي سطر جديد بالأسفل
 const MD = 'https://zeronero.netlify.app/models/';
 const models3D = [
-  // مثال: { name: 'اسم النموذج', file: MD + 'model1.fbx', thumb: MD + 'model1-thumb.jpg' },
+  { name: 'NRDD', file: MD + 'nrdd.glb', thumb: null },
 ];
 
 function render3DGallery() {
@@ -1093,6 +1093,7 @@ function ensureThreeLoaded() {
     await loadScript('https://unpkg.com/three@0.128.0/build/three.min.js');
     await loadScript('https://unpkg.com/three@0.128.0/examples/js/loaders/inflate.min.js');
     await loadScript('https://unpkg.com/three@0.128.0/examples/js/loaders/FBXLoader.js');
+    await loadScript('https://unpkg.com/three@0.128.0/examples/js/loaders/GLTFLoader.js');
     await loadScript('https://unpkg.com/three@0.128.0/examples/js/controls/OrbitControls.js');
     threeLoaded = true;
   })();
@@ -1118,7 +1119,7 @@ async function open3DViewer(index) {
     return;
   }
   init3DScene();
-  loadFBXModel(m.file, status, t);
+  loadModel3D(m.file, status, t);
 }
 
 function init3DScene() {
@@ -1157,10 +1158,11 @@ function init3DScene() {
   animate3d();
 }
 
-function loadFBXModel(url, status, t) {
+function loadModel3D(url, status, t) {
   if (currentObj3d) { scene3d.remove(currentObj3d); currentObj3d = null; }
-  const loader = new THREE.FBXLoader();
-  loader.load(url, (obj) => {
+
+  const isGLTF = /\.(glb|gltf)$/i.test(url);
+  const finish = (obj) => {
     // توسيط النموذج وضبط حجمه ليملأ الإطار بشكل مناسب لجميع الشاشات (بما فيها الجوال)
     const box = new THREE.Box3().setFromObject(obj);
     const size = box.getSize(new THREE.Vector3());
@@ -1172,9 +1174,16 @@ function loadFBXModel(url, status, t) {
     scene3d.add(obj);
     currentObj3d = obj;
     status.textContent = '';
-  }, undefined, () => {
-    status.textContent = t.m3dError; status.className = 'm3d-status error';
-  });
+  };
+  const fail = () => { status.textContent = t.m3dError; status.className = 'm3d-status error'; };
+
+  if (isGLTF) {
+    const loader = new THREE.GLTFLoader();
+    loader.load(url, (gltf) => finish(gltf.scene), undefined, fail);
+  } else {
+    const loader = new THREE.FBXLoader();
+    loader.load(url, finish, undefined, fail);
+  }
 }
 
 function animate3d() {
@@ -1280,3 +1289,4 @@ function hideInner(id) { document.getElementById('inner-' + id).classList.remove
 </script>
 </body>
 </html>
+
