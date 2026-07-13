@@ -465,7 +465,7 @@ footer strong{color:var(--m3);opacity:1}
         <div class="sr">
           <div class="st"><div class="n">+28</div><div class="l" id="ts1">رسمة</div></div>
           <div class="st"><div class="n">J.E.T</div><div class="l" id="ts2">مانجا</div></div>
-          <div class="st"><div class="n">4</div><div class="l" id="ts3">انيميشن</div></div>
+          <div class="st"><div class="n">6</div><div class="l" id="ts3">انيميشن</div></div>
         </div>
       </div>
       <div class="hr">
@@ -507,7 +507,7 @@ footer strong{color:var(--m3);opacity:1}
 
         <!-- CARD 3: انيميشن -->
         <div class="wc" onclick="showInner('animation')">
-          <div class="wt"><video id="anim-preview" muted loop autoplay playsinline preload="none" style="width:100%;height:100%;object-fit:cover;opacity:.6"></video><div class="ov"></div><div class="wbg">4 مقاطع</div></div>
+          <div class="wt"><video id="anim-preview" muted loop autoplay playsinline preload="none" style="width:100%;height:100%;object-fit:cover;opacity:.6"></video><div class="ov"></div><div class="wbg" id="anim-badge">6 مقاطع</div></div>
           <div class="wb">
             <div class="wtt" id="tc3t">الرسوم الحركية</div>
             <p class="wd" id="tc3d">مقاطع انيميشن من الرسم حتى التحريك الكامل</p>
@@ -720,7 +720,8 @@ const T = {
     cp3:'الفصل الثالث — قريباً', ch3:'الفصل الثالث',
     itag:'أبوفراس الشعواني', authorName:'أبوفراس الشعواني',
     lsub:'أدخل كلمة المرور', ph:'••••••••', lbt:'دخول',
-    vi:['انيميشن ٠١','انيميشن ٠٢','انيميشن ٠٣','انيميشن ٠٤'], vs:'مقطع حركة',
+    vi:['انيميشن ٠١','انيميشن ٠٢','انيميشن ٠٣','انيميشن ٠٤','انيميشن ٠٥','انيميشن ٠٦'], vs:'مقطع حركة',
+    animBadge:'6 مقاطع',
     navHome:'الرئيسية', navWorks:'أعمالي', lb:'EN', dir:'rtl',
     cover:'https://zeronero.netlify.app/manga-cover.jpg',
     desc2:'رسام مانجا ومحرّك متخصص في خلق عوالم بصرية آسرة. أمزج بين روح الأنمي وهوية عربية أصيلة لأروي قصصاً ساحرة.',
@@ -758,7 +759,8 @@ const T = {
     cp3:'Chapter 3 — Coming Soon', ch3:'Chapter 3',
     itag:'Abufarras Shawani', authorName:'Abufarras Shawani',
     lsub:'Enter password', ph:'password', lbt:'Enter',
-    vi:['Animation 01','Animation 02','Animation 03','Animation 04'], vs:'Motion clip',
+    vi:['Animation 01','Animation 02','Animation 03','Animation 04','Animation 05','Animation 06'], vs:'Motion clip',
+    animBadge:'6 clips',
     navHome:'Home', navWorks:'Works', lb:'AR', dir:'ltr',
     cover:'https://zeronero.netlify.app/manga-cover-en.jpg',
     desc2:'A manga artist and animator crafting immersive visual worlds, blending anime aesthetics with authentic Arabic identity.',
@@ -810,6 +812,7 @@ function applyLang() {
   set('tc1t', t.c1t); set('tc1d', t.c1d); set('tc1a', t.c1a);
   set('tc2t', t.c2t); set('tc2d', t.c2d); set('tc2a', t.c2a);
   set('tc3t', t.c3t); set('tc3d', t.c3d); set('tc3a', t.c3a);
+  set('anim-badge', t.animBadge);
   set('tc4t', t.c4t); set('tc4d', t.c4d); set('tc4a', t.c4a);
   set('ch-badge', t.chBadge);
 
@@ -1018,7 +1021,9 @@ const videoSources = [
     { src: 'https://zeronero.netlify.app/my-animations/vid/IMG_1320.MP4', type: 'video/mp4' },
     { src: 'https://zeronero.netlify.app/my-animations/vid/IMG_3582.MOV', type: 'video/mp4' },
     { src: 'https://zeronero.netlify.app/my-animations/vid/0722.mp4', type: 'video/mp4' },
-    { src: 'https://zeronero.netlify.app/my-animations/vid/copy_7ADAA572-AEEF-41E5-B8AF-5E9F950195A2.mov', type: 'video/mp4' }
+    { src: 'https://zeronero.netlify.app/my-animations/vid/copy_7ADAA572-AEEF-41E5-B8AF-5E9F950195A2.mov', type: 'video/mp4' },
+    { src: 'https://zeronero.netlify.app/my-animations/vid/anim5.mp4', type: 'video/mp4' },
+    { src: 'https://zeronero.netlify.app/my-animations/vid/anim6.mp4', type: 'video/mp4' }
   ];
 function setupAnimPreview() {
   const v = document.getElementById('anim-preview');
