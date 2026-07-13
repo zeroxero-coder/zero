@@ -246,6 +246,7 @@ body[dir="ltr"] .sub-features{text-align:left}
 .m3d-canvas-wrap canvas{display:block;width:100%!important;height:100%!important;touch-action:none}
 .m3d-hint{position:fixed;top:16px;left:50%;transform:translateX(-50%);color:var(--w3);font-size:.78rem;letter-spacing:.5px;background:rgba(10,10,10,.6);padding:5px 14px;border-radius:20px;pointer-events:none;z-index:2}
 .m3d-back{position:fixed;top:12px;right:12px;margin:0;background:rgba(10,10,10,.6);z-index:3}
+.m3d-rotate-toggle{top:56px;font-size:1rem}
 .m3d-status{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:var(--w3);font-family:'Tajawal',sans-serif;font-size:.9rem;text-align:center;pointer-events:none}
 .m3d-status.error{color:var(--m3)}
 @media (max-width:600px){
@@ -522,7 +523,7 @@ footer strong{color:var(--m3);opacity:1}
               <polyline points="25,58 100,100 175,58" stroke-linejoin="round"/>
               <line x1="100" y1="100" x2="100" y2="185"/>
             </svg>
-            <div class="ov"></div><div class="wbg" id="m3d-badge">3D</div>
+            <div class="ov"></div><div class="wbg" id="m3d-badge">360°</div>
           </div>
           <div class="wb">
             <div class="wtt" id="tc4t">نماذج ثلاثية الأبعاد</div>
@@ -636,7 +637,8 @@ footer strong{color:var(--m3);opacity:1}
 <div class="m3d-viewer" id="m3dViewer">
   <button class="bk m3d-back" onclick="close3DViewer()" id="m3d-back-btn">← رجوع</button>
   <button class="lbx" onclick="close3DViewer()">✕</button>
-  <div class="m3d-hint" id="m3dHint">🖱 Drag to rotate · Scroll to zoom</div>
+  <button class="lbx m3d-rotate-toggle" id="m3d-rotate-btn" onclick="toggleAutoRotate()" aria-label="Pause rotation">⏸</button>
+  <div class="m3d-hint" id="m3dHint">🖱 360° — اسحبي للتحكم اليدوي · مرري للتقريب</div>
   <div class="m3d-canvas-wrap" id="m3dCanvasWrap"></div>
   <div class="m3d-status" id="m3dStatus"></div>
 </div>
@@ -725,7 +727,8 @@ const T = {
     mt:'J.E.T', chBadge:'فصلان',
     bkDrawings:'← رجوع', bkManga:'← رجوع', bkAnimation:'← رجوع', bkModels:'← رجوع', bkChapters:'← الفصول',
     m3dLoading:'جاري تحميل النموذج...', m3dError:'تعذر تحميل النموذج ثلاثي الأبعاد',
-    m3dEmpty:'لا توجد نماذج بعد — أضف ملفات FBX لعرضها هنا',
+    m3dEmpty:'لا توجد نماذج بعد — أضف ملفات FBX أو GLB لعرضها هنا',
+    m3dHint:'🖱 360° — اسحبي للتحكم اليدوي · مرري للتقريب',
     // panel
     guest:'الزائر', notLogged:'غير مسجّل',
     spLogin:'تسجيل الدخول', spRegister:'إنشاء حساب',
@@ -762,7 +765,8 @@ const T = {
     mt:'J.E.T', chBadge:'2 Chapters',
     bkDrawings:'← Back', bkManga:'← Back', bkAnimation:'← Back', bkModels:'← Back', bkChapters:'← Chapters',
     m3dLoading:'Loading model...', m3dError:'Could not load the 3D model',
-    m3dEmpty:'No models yet — add FBX files to display them here',
+    m3dEmpty:'No models yet — add FBX or GLB files to display them here',
+    m3dHint:'🖱 360° — drag to take manual control · scroll to zoom',
     // panel
     guest:'Guest', notLogged:'Not logged in',
     spLogin:'Sign In', spRegister:'Create Account',
@@ -823,6 +827,7 @@ function applyLang() {
   set('m3d-back-btn', t.bkModels);
   set('bk-chapters', t.bkChapters);
   set('m3d-empty', t.m3dEmpty);
+  set('m3dHint', t.m3dHint);
 
   // Side panel
   set('sp-lbl-account', t.spLblAccount);
@@ -1073,7 +1078,7 @@ function render3DGallery() {
       m.thumb
         ? `<img src="${m.thumb}" alt="${m.name}" loading="lazy" onerror="this.remove()">`
         : `<svg viewBox="0 0 200 200" fill="none" stroke="var(--m3)" stroke-width="3"><polygon points="100,15 175,58 175,142 100,185 25,142 25,58" stroke-linejoin="round"/><polyline points="25,58 100,100 175,58" stroke-linejoin="round"/><line x1="100" y1="100" x2="100" y2="185"/></svg>`
-    }<div class="m3d-card-badge">3D</div></div><div class="m3d-card-name">${m.name}</div>`;
+    }<div class="m3d-card-badge">360°</div></div><div class="m3d-card-name">${m.name}</div>`;
     c.onclick = () => open3DViewer(i);
     wrap.appendChild(c);
   });
@@ -1148,6 +1153,14 @@ function init3DScene() {
   controls3d.dampingFactor = 0.08;
   controls3d.minDistance = 0.5;
   controls3d.maxDistance = 20;
+  controls3d.autoRotate = true;
+  controls3d.autoRotateSpeed = 2.2;
+
+  // تدوير 360° تلقائي يبدأ فور فتح النموذج، ويتوقف بمجرد ما يبدأ المستخدم يسحب بيده
+  controls3d.addEventListener('start', () => {
+    controls3d.autoRotate = false;
+    updateRotateBtn();
+  });
 
   if (resizeObs3d) resizeObs3d.disconnect();
   resizeObs3d = new ResizeObserver(() => {
@@ -1158,7 +1171,21 @@ function init3DScene() {
   });
   resizeObs3d.observe(wrap);
 
+  updateRotateBtn();
   animate3d();
+}
+
+function toggleAutoRotate() {
+  if (!controls3d) return;
+  controls3d.autoRotate = !controls3d.autoRotate;
+  updateRotateBtn();
+}
+
+function updateRotateBtn() {
+  const btn = document.getElementById('m3d-rotate-btn');
+  if (!btn || !controls3d) return;
+  btn.textContent = controls3d.autoRotate ? '⏸' : '↻';
+  btn.setAttribute('aria-label', controls3d.autoRotate ? 'Pause rotation' : 'Resume 360° rotation');
 }
 
 function loadModel3D(url, status, t) {
