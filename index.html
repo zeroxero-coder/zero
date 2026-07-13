@@ -245,6 +245,7 @@ body[dir="ltr"] .sub-features{text-align:left}
 .m3d-canvas-wrap{flex:1;position:relative;border-radius:6px;overflow:hidden;background:radial-gradient(circle at center,#1a1a1e,#0a0a0c)}
 .m3d-canvas-wrap canvas{display:block;width:100%!important;height:100%!important;touch-action:none}
 .m3d-hint{position:fixed;top:16px;left:50%;transform:translateX(-50%);color:var(--w3);font-size:.78rem;letter-spacing:.5px;background:rgba(10,10,10,.6);padding:5px 14px;border-radius:20px;pointer-events:none;z-index:2}
+.m3d-back{position:fixed;top:12px;right:12px;margin:0;background:rgba(10,10,10,.6);z-index:3}
 .m3d-status{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:var(--w3);font-family:'Tajawal',sans-serif;font-size:.9rem;text-align:center;pointer-events:none}
 .m3d-status.error{color:var(--m3)}
 @media (max-width:600px){
@@ -463,7 +464,7 @@ footer strong{color:var(--m3);opacity:1}
         <div class="sr">
           <div class="st"><div class="n">+28</div><div class="l" id="ts1">رسمة</div></div>
           <div class="st"><div class="n">J.E.T</div><div class="l" id="ts2">مانجا</div></div>
-          <div class="st"><div class="n">3</div><div class="l" id="ts3">انيميشن</div></div>
+          <div class="st"><div class="n">4</div><div class="l" id="ts3">انيميشن</div></div>
         </div>
       </div>
       <div class="hr">
@@ -633,6 +634,7 @@ footer strong{color:var(--m3);opacity:1}
 
 <!-- ══ 3D MODEL VIEWER ══ -->
 <div class="m3d-viewer" id="m3dViewer">
+  <button class="bk m3d-back" onclick="close3DViewer()" id="m3d-back-btn">← رجوع</button>
   <button class="lbx" onclick="close3DViewer()">✕</button>
   <div class="m3d-hint" id="m3dHint">🖱 Drag to rotate · Scroll to zoom</div>
   <div class="m3d-canvas-wrap" id="m3dCanvasWrap"></div>
@@ -818,6 +820,7 @@ function applyLang() {
   set('bk-manga', t.bkManga);
   set('bk-animation', t.bkAnimation);
   set('bk-models', t.bkModels);
+  set('m3d-back-btn', t.bkModels);
   set('bk-chapters', t.bkChapters);
   set('m3d-empty', t.m3dEmpty);
 
@@ -1289,4 +1292,3 @@ function hideInner(id) { document.getElementById('inner-' + id).classList.remove
 </script>
 </body>
 </html>
-
