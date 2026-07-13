@@ -238,21 +238,41 @@ body[dir="ltr"] .sub-features{text-align:left}
 .m3d-card-badge{position:absolute;bottom:8px;right:10px;background:rgba(10,10,10,.8);color:var(--w3);font-family:'Bebas Neue',sans-serif;font-size:.72rem;letter-spacing:1px;padding:2px 8px;border-radius:2px}
 .m3d-card-name{padding:.7rem .85rem;font-size:.88rem;color:var(--w2);font-weight:500}
 .m3d-empty-msg{color:var(--w3);font-size:.9rem;margin-top:1rem;opacity:.7}
-
-/* 3D VIEWER MODAL */
-.m3d-viewer{display:none;position:fixed;inset:0;background:rgba(8,8,10,.97);z-index:9999;flex-direction:column;padding:1rem;padding-top:calc(1rem + env(safe-area-inset-top));padding-bottom:calc(1rem + env(safe-area-inset-bottom))}
-.m3d-viewer.open{display:flex}
-.m3d-canvas-wrap{flex:1;position:relative;border-radius:6px;overflow:hidden;background:radial-gradient(circle at center,#1a1a1e,#0a0a0c)}
-.m3d-canvas-wrap canvas{display:block;width:100%!important;height:100%!important;touch-action:none}
-.m3d-hint{position:fixed;top:16px;left:50%;transform:translateX(-50%);color:var(--w3);font-size:.78rem;letter-spacing:.5px;background:rgba(10,10,10,.6);padding:5px 14px;border-radius:20px;pointer-events:none;z-index:2}
-.m3d-back{position:fixed;top:12px;right:12px;margin:0;background:rgba(10,10,10,.6);z-index:3}
-.m3d-rotate-toggle{top:56px;font-size:1rem}
-.m3d-status{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:var(--w3);font-family:'Tajawal',sans-serif;font-size:.9rem;text-align:center;pointer-events:none}
-.m3d-status.error{color:var(--m3)}
 @media (max-width:600px){
   .m3d-gal{grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.7rem}
   .m3d-card-thumb{height:140px}
-  .m3d-hint{font-size:.68rem;top:10px}
+}
+
+/* 3D VIEWER — FULL PAGE */
+.m3d-viewer{display:none;position:fixed;inset:0;background:#0a0a0c;z-index:9999;flex-direction:column;padding-top:env(safe-area-inset-top);padding-bottom:env(safe-area-inset-bottom)}
+.m3d-viewer.open{display:flex}
+.m3d-toolbar{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding:.85rem 1.1rem;background:rgba(10,10,10,.9);border-bottom:1px solid var(--b5);z-index:4;flex-wrap:wrap}
+.m3d-tbtn{display:inline-flex;align-items:center;gap:8px;background:none;border:1px solid var(--b5);color:var(--w3);font-family:'Tajawal',sans-serif;font-size:.82rem;padding:7px 14px;border-radius:20px;cursor:pointer;transition:all .2s;flex-shrink:0}
+.m3d-tbtn:hover{border-color:var(--m3);color:var(--m3)}
+.m3d-title{font-family:'Bebas Neue',sans-serif;font-size:1.1rem;letter-spacing:2px;color:var(--w);flex:1;text-align:center;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.m3d-tools{display:flex;align-items:center;gap:6px;flex-shrink:0}
+.m3d-icon-btn{width:36px;height:36px;border-radius:50%;background:var(--b3);border:1px solid var(--b5);color:var(--w3);font-size:1rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;flex-shrink:0}
+.m3d-icon-btn:hover{border-color:var(--m3);color:var(--m3)}
+.m3d-icon-btn.active{background:var(--m4);border-color:var(--m3);color:var(--m3)}
+.m3d-canvas-wrap{flex:1;position:relative;overflow:hidden;background:radial-gradient(circle at 50% 40%,#1c1c20,#08080a 75%)}
+.m3d-canvas-wrap canvas{display:block;width:100%!important;height:100%!important;touch-action:none}
+.m3d-canvas-wrap.env-warm{background:radial-gradient(circle at 50% 40%,#2a1418,#0a0505 75%)}
+.m3d-canvas-wrap.env-light{background:radial-gradient(circle at 50% 40%,#3a3a3f,#141416 75%)}
+.m3d-hint{position:absolute;top:76px;left:50%;transform:translateX(-50%);color:var(--w3);font-size:.76rem;letter-spacing:.5px;background:rgba(10,10,10,.6);padding:5px 14px;border-radius:20px;pointer-events:none;z-index:2}
+.m3d-status{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:var(--w3);font-family:'Tajawal',sans-serif;font-size:.9rem;text-align:center;pointer-events:none}
+.m3d-status.error{color:var(--m3)}
+.m3d-light-panel{position:absolute;bottom:calc(1.1rem + env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);display:flex;align-items:center;gap:10px;background:rgba(10,10,10,.75);border:1px solid var(--b5);border-radius:24px;padding:8px 16px;z-index:3;backdrop-filter:blur(6px)}
+.m3d-light-icon{font-size:.8rem;color:var(--w3);opacity:.6}
+.m3d-light-icon-lg{font-size:1.05rem;opacity:.9}
+.m3d-light-panel input[type="range"]{width:120px;accent-color:var(--m3);cursor:pointer}
+@media (max-width:600px){
+  .m3d-hint{font-size:.68rem;top:66px}
+  .m3d-toolbar{padding:.7rem .8rem;gap:.5rem}
+  .m3d-title{font-size:.92rem;letter-spacing:1px}
+  .m3d-icon-btn{width:32px;height:32px;font-size:.88rem}
+  .m3d-tbtn{padding:6px 10px;font-size:.76rem}
+  .m3d-light-panel{padding:6px 12px}
+  .m3d-light-panel input[type="range"]{width:84px}
 }
 
 /* GOOGLE AUTH MODAL */
@@ -454,8 +474,8 @@ footer strong{color:var(--m3);opacity:1}
     <div class="hero">
       <div class="hl">
         <div class="ey" id="tr">MANGAKA / ANIMATOR</div>
-        <h1 class="hh" id="tn">أبوفراس<br>علي <em>الشعواني</em></h1>
-        <p class="hsn" id="ten">ABUFARRAS ALI SHAWANI</p>
+        <h1 class="hh" id="tn">أبوفراس <em>الشعواني</em></h1>
+        <p class="hsn" id="ten">ABUFARRAS SHAWANI</p>
         <p class="hd" id="td">رسام مانجا ومحرّك متخصص في خلق عوالم بصرية آسرة. أمزج بين روح الأنمي وهوية عربية أصيلة لأروي قصصاً ساحرة.</p>
         <div class="socs">
           <a class="sb" href="https://discord.gg/4SvfZn5D">𝔻</a>
@@ -622,7 +642,7 @@ footer strong{color:var(--m3);opacity:1}
     </div>
   </div>
 
-  <footer><strong>ZERO NERO</strong> · أبوفراس علي الشعواني · MANGAKA / ANIMATOR</footer>
+  <footer><strong>ZERO NERO</strong> · أبوفراس الشعواني · MANGAKA / ANIMATOR</footer>
 </div>
 
 <!-- ══ LIGHTBOX ══ -->
@@ -635,12 +655,25 @@ footer strong{color:var(--m3);opacity:1}
 
 <!-- ══ 3D MODEL VIEWER ══ -->
 <div class="m3d-viewer" id="m3dViewer">
-  <button class="bk m3d-back" onclick="close3DViewer()" id="m3d-back-btn">← رجوع</button>
-  <button class="lbx" onclick="close3DViewer()">✕</button>
-  <button class="lbx m3d-rotate-toggle" id="m3d-rotate-btn" onclick="toggleAutoRotate()" aria-label="Pause rotation">⏸</button>
-  <div class="m3d-hint" id="m3dHint">🖱 360° — اسحبي للتحكم اليدوي · مرري للتقريب</div>
+  <div class="m3d-toolbar">
+    <button class="m3d-tbtn" onclick="close3DViewer()" id="m3d-back-btn">← رجوع</button>
+    <div class="m3d-title" id="m3d-viewer-title"></div>
+    <div class="m3d-tools">
+      <button class="m3d-icon-btn" id="m3d-rotate-btn" onclick="toggleAutoRotate()" title="Auto-rotate" aria-label="Toggle auto-rotate">⏸</button>
+      <button class="m3d-icon-btn" id="m3d-wire-btn" onclick="toggleWireframe()" title="Wireframe" aria-label="Toggle wireframe">◇</button>
+      <button class="m3d-icon-btn" id="m3d-env-btn" onclick="cycleEnvironment()" title="Background" aria-label="Change background">◐</button>
+      <button class="m3d-icon-btn" onclick="resetCamera3D()" title="Reset view" aria-label="Reset camera">⟲</button>
+      <button class="m3d-icon-btn" id="m3d-fs-btn" onclick="toggleFullscreen3D()" title="Fullscreen" aria-label="Toggle fullscreen">⛶</button>
+    </div>
+  </div>
+  <div class="m3d-hint" id="m3dHint">🖱 360° — اسحب للتحكم اليدوي · مرر للتقريب</div>
   <div class="m3d-canvas-wrap" id="m3dCanvasWrap"></div>
   <div class="m3d-status" id="m3dStatus"></div>
+  <div class="m3d-light-panel">
+    <span class="m3d-light-icon">☀</span>
+    <input type="range" id="m3d-light-slider" min="0.2" max="2.6" step="0.1" value="1" oninput="updateLightIntensity(this.value)" aria-label="Light intensity">
+    <span class="m3d-light-icon m3d-light-icon-lg">☀</span>
+  </div>
 </div>
 
 <!-- ══ AUTH MODAL ══ -->
@@ -685,8 +718,8 @@ let lang = 'ar', dark = true, lbIdx = 0;
 let currentUser = null; // {name, email, photo, subscribed}
 
 // ══ GOOGLE OAUTH CONFIG ══
-// 🔴 مهم: استبدلي القيمة بالأسفل بالـ Client ID اللي تحصلين عليه من Google Cloud Console
-// (راجعي الشرح في الرسالة عشان خطوات الحصول عليه بالضبط)
+// 🔴 مهم: استبدل القيمة بالأسفل بالـ Client ID اللي تحصل عليه من Google Cloud Console
+// (راجع الشرح في الرسالة عشان خطوات الحصول عليه بالضبط)
 const GOOGLE_CLIENT_ID = '56128309639-6e5mllff9bhkltpdp2k9ta1f5tk6ksjt.apps.googleusercontent.com';
 
 // ══ SESSION PERSISTENCE (localStorage) ══
@@ -705,8 +738,8 @@ loadSession();
 const T = {
   ar: {
     role:'MANGAKA / ANIMATOR',
-    name:'أبوفراس<br>علي <em>الشعواني</em>',
-    en:'ABUFARRAS ALI SHAWANI',
+    name:'أبوفراس <em>الشعواني</em>',
+    en:'ABUFARRAS SHAWANI',
     desc:'رسام مانجا ومحرّك متخصص في خلق عوالم بصرية آسرة. أمزج بين روح الأنمي وهوية عربية أصيلة لأروي قصصاً ساحرة.',
     s1:'رسمة', s2:'مانجا', s3:'انيميشن',
     wt:'أعمالي',
@@ -729,7 +762,7 @@ const T = {
     bkDrawings:'← رجوع', bkManga:'← رجوع', bkAnimation:'← رجوع', bkModels:'← رجوع', bkChapters:'← الفصول',
     m3dLoading:'جاري تحميل النموذج...', m3dError:'تعذر تحميل النموذج ثلاثي الأبعاد',
     m3dEmpty:'لا توجد نماذج بعد — أضف ملفات FBX أو GLB لعرضها هنا',
-    m3dHint:'🖱 360° — اسحبي للتحكم اليدوي · مرري للتقريب',
+    m3dHint:'🖱 360° — اسحب للتحكم اليدوي · مرر للتقريب',
     // panel
     guest:'الزائر', notLogged:'غير مسجّل',
     spLogin:'تسجيل الدخول', spRegister:'إنشاء حساب',
@@ -744,8 +777,8 @@ const T = {
   },
   en: {
     role:'MANGAKA / ANIMATOR',
-    name:'Abufarras<br>Ali <em>Shawani</em>',
-    en:'ABUFARRAS ALI SHAWANI',
+    name:'Abufarras <em>Shawani</em>',
+    en:'ABUFARRAS SHAWANI',
     desc:'A manga artist and animator crafting immersive visual worlds, blending anime aesthetics with authentic Arabic identity.',
     s1:'Drawings', s2:'Manga', s3:'Animations',
     wt:'My Works',
@@ -966,13 +999,13 @@ function initGoogleAuth() {
 function googleSignIn() {
   if (GOOGLE_CLIENT_ID.startsWith('YOUR_GOOGLE_CLIENT_ID')) {
     document.getElementById('auth-err').textContent = lang === 'ar'
-      ? 'لم يتم إعداد Google Client ID بعد — راجعي التعليمات'
+      ? 'لم يتم إعداد Google Client ID بعد — راجع التعليمات'
       : 'Google Client ID is not configured yet — check the setup instructions';
     return;
   }
   if (!initGoogleAuth()) {
     document.getElementById('auth-err').textContent = lang === 'ar'
-      ? 'تعذر تحميل خدمة Google، تأكدي من الاتصال بالإنترنت'
+      ? 'تعذر تحميل خدمة Google، تأكد من الاتصال بالإنترنت'
       : 'Could not load Google service, check your connection';
     return;
   }
@@ -1065,10 +1098,11 @@ document.addEventListener('keydown', e => {
 });
 
 // ══ 3D MODELS ══
-// أضيفي نماذج FBX أو GLB هنا: ضعي الملف داخل مجلد models/ في الريبو، وأضيفي سطر جديد بالأسفل
+// أضف نماذج FBX أو GLB هنا: ضع الملف داخل مجلد models/ في الريبو، وأضف سطر جديد بالأسفل
+// ملاحظة: خلي قيمة "name" رقم بسيط (2، 3...) بدل اسم الملف، عشان ما يظهر اسم الملف للزوار
 const MD = 'https://zeronero.netlify.app/models/';
 const models3D = [
-  { name: 'NRDD', file: MD + 'nrdd.glb', thumb: null },
+  { name: '1', file: MD + 'nrdd.glb', thumb: null },
 ];
 
 function render3DGallery() {
@@ -1115,6 +1149,11 @@ function ensureThreeLoaded() {
 
 // ── Viewer state ──
 let scene3d, camera3d, renderer3d, controls3d, currentObj3d, animId3d, resizeObs3d;
+let keyLight3d, fillLight3d, ambLight3d, floor3d;
+let envIndex3d = 0;
+const ENV_PRESETS = ['', 'env-warm', 'env-light']; // '' = default dark studio
+const DEFAULT_CAM_POS = { x: 0, y: 1.4, z: 4 };
+const DEFAULT_TARGET = { x: 0, y: 0, z: 0 };
 
 async function open3DViewer(index) {
   const m = models3D[index];
@@ -1123,7 +1162,14 @@ async function open3DViewer(index) {
   const status = document.getElementById('m3dStatus');
   const t = T[lang];
   viewer.classList.add('open');
+  document.getElementById('m3d-viewer-title').textContent = m.name || '';
   status.textContent = t.m3dLoading; status.className = 'm3d-status';
+
+  // إعادة ضبط عناصر التحكم لوضعها الافتراضي عند فتح نموذج جديد
+  envIndex3d = 0;
+  document.getElementById('m3dCanvasWrap').className = 'm3d-canvas-wrap';
+  document.getElementById('m3d-light-slider').value = 1;
+  document.getElementById('m3d-wire-btn').classList.remove('active');
 
   try {
     await ensureThreeLoaded();
@@ -1142,24 +1188,48 @@ function init3DScene() {
 
   scene3d = new THREE.Scene();
   camera3d = new THREE.PerspectiveCamera(45, w / h, 0.1, 1000);
-  camera3d.position.set(0, 1.4, 4);
+  camera3d.position.set(DEFAULT_CAM_POS.x, DEFAULT_CAM_POS.y, DEFAULT_CAM_POS.z);
 
   renderer3d = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer3d.setPixelRatio(Math.min(window.devicePixelRatio, 2));
   renderer3d.setSize(w, h);
   wrap.appendChild(renderer3d.domElement);
 
-  const amb = new THREE.AmbientLight(0xffffff, 0.7); scene3d.add(amb);
-  const dir1 = new THREE.DirectionalLight(0xffffff, 0.9); dir1.position.set(3, 5, 4); scene3d.add(dir1);
-  const dir2 = new THREE.DirectionalLight(0x88aaff, 0.4); dir2.position.set(-4, 2, -3); scene3d.add(dir2);
+  // ── إضاءة استوديو افتراضية (ثلاث نقاط: رئيسية + تعبئة + محيطة) ──
+  ambLight3d = new THREE.AmbientLight(0xffffff, 0.5); scene3d.add(ambLight3d);
+  keyLight3d = new THREE.DirectionalLight(0xffffff, 1); keyLight3d.position.set(3, 5, 4); scene3d.add(keyLight3d);
+  fillLight3d = new THREE.DirectionalLight(0x88aaff, 0.45); fillLight3d.position.set(-4, 2, -3); scene3d.add(fillLight3d);
+  const rim = new THREE.DirectionalLight(0xffffff, 0.3); rim.position.set(0, 3, -5); scene3d.add(rim);
+
+  // ── أرضية/مساحة افتراضية (دائرة تدرّجية ناعمة تعطي إحساس استوديو بدون تكلفة ظلال) ──
+  const floorCanvas = document.createElement('canvas');
+  floorCanvas.width = floorCanvas.height = 256;
+  const fctx = floorCanvas.getContext('2d');
+  const grad = fctx.createRadialGradient(128, 128, 0, 128, 128, 128);
+  grad.addColorStop(0, 'rgba(193,51,82,0.16)');
+  grad.addColorStop(0.55, 'rgba(40,20,24,0.35)');
+  grad.addColorStop(1, 'rgba(0,0,0,0)');
+  fctx.fillStyle = grad; fctx.fillRect(0, 0, 256, 256);
+  const floorTex = new THREE.CanvasTexture(floorCanvas);
+  floor3d = new THREE.Mesh(
+    new THREE.CircleGeometry(3.2, 48),
+    new THREE.MeshBasicMaterial({ map: floorTex, transparent: true, depthWrite: false })
+  );
+  floor3d.rotation.x = -Math.PI / 2;
+  floor3d.position.y = -1.15;
+  scene3d.add(floor3d);
 
   controls3d = new THREE.OrbitControls(camera3d, renderer3d.domElement);
   controls3d.enableDamping = true;
   controls3d.dampingFactor = 0.08;
+  controls3d.enableZoom = true;
+  controls3d.enablePan = true;
+  controls3d.screenSpacePanning = true;
   controls3d.minDistance = 0.5;
   controls3d.maxDistance = 20;
   controls3d.autoRotate = true;
   controls3d.autoRotateSpeed = 2.2;
+  controls3d.target.set(DEFAULT_TARGET.x, DEFAULT_TARGET.y, DEFAULT_TARGET.z);
 
   // تدوير 360° تلقائي يبدأ فور فتح النموذج، ويتوقف بمجرد ما يبدأ المستخدم يسحب بيده
   controls3d.addEventListener('start', () => {
@@ -1191,6 +1261,56 @@ function updateRotateBtn() {
   if (!btn || !controls3d) return;
   btn.textContent = controls3d.autoRotate ? '⏸' : '↻';
   btn.setAttribute('aria-label', controls3d.autoRotate ? 'Pause rotation' : 'Resume 360° rotation');
+}
+
+// ── التحكم بشدة الإضاءة (زيادة/نقصان) ──
+function updateLightIntensity(val) {
+  const v = parseFloat(val);
+  if (keyLight3d) keyLight3d.intensity = v;
+  if (fillLight3d) fillLight3d.intensity = v * 0.45;
+  if (ambLight3d) ambLight3d.intensity = 0.25 + v * 0.25;
+}
+
+// ── تبديل عرض الشبكي (Wireframe) ──
+function toggleWireframe() {
+  if (!currentObj3d) return;
+  const btn = document.getElementById('m3d-wire-btn');
+  let isWire = null;
+  currentObj3d.traverse((child) => {
+    if (child.isMesh && child.material) {
+      const mats = Array.isArray(child.material) ? child.material : [child.material];
+      mats.forEach((mat) => {
+        mat.wireframe = !mat.wireframe;
+        isWire = mat.wireframe;
+      });
+    }
+  });
+  if (btn) btn.classList.toggle('active', !!isWire);
+}
+
+// ── تبديل بيئة/خلفية العرض ──
+function cycleEnvironment() {
+  envIndex3d = (envIndex3d + 1) % ENV_PRESETS.length;
+  const wrap = document.getElementById('m3dCanvasWrap');
+  wrap.className = 'm3d-canvas-wrap' + (ENV_PRESETS[envIndex3d] ? ' ' + ENV_PRESETS[envIndex3d] : '');
+}
+
+// ── إرجاع الكاميرا لوضعها الافتراضي ──
+function resetCamera3D() {
+  if (!camera3d || !controls3d) return;
+  camera3d.position.set(DEFAULT_CAM_POS.x, DEFAULT_CAM_POS.y, DEFAULT_CAM_POS.z);
+  controls3d.target.set(DEFAULT_TARGET.x, DEFAULT_TARGET.y, DEFAULT_TARGET.z);
+  controls3d.update();
+}
+
+// ── ملء الشاشة ──
+function toggleFullscreen3D() {
+  const el = document.getElementById('m3dViewer');
+  if (!document.fullscreenElement) {
+    (el.requestFullscreen || el.webkitRequestFullscreen || function(){}).call(el);
+  } else {
+    (document.exitFullscreen || document.webkitExitFullscreen || function(){}).call(document);
+  }
 }
 
 function loadModel3D(url, status, t) {
@@ -1229,10 +1349,13 @@ function animate3d() {
 
 function close3DViewer() {
   document.getElementById('m3dViewer').classList.remove('open');
+  if (document.fullscreenElement) {
+    (document.exitFullscreen || document.webkitExitFullscreen || function(){}).call(document);
+  }
   if (animId3d) cancelAnimationFrame(animId3d);
   if (resizeObs3d) resizeObs3d.disconnect();
   if (renderer3d) { renderer3d.dispose(); renderer3d.forceContextLoss(); }
-  scene3d = camera3d = renderer3d = controls3d = currentObj3d = null;
+  scene3d = camera3d = renderer3d = controls3d = currentObj3d = keyLight3d = fillLight3d = ambLight3d = floor3d = null;
   document.getElementById('m3dCanvasWrap').innerHTML = '';
 }
 
