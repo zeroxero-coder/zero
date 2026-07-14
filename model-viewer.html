@@ -1,136 +1,42 @@
 <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<html lang="en">
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-    <title>عرض المجسم ثلاثي الأبعاد — ZERO NERO</title>
-
-    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
+    <title>Millennium Falcon</title>
 
     <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
+
     <script type="importmap">
     {
         "imports": {
-            "three": "https://unpkg.com/three@0.153.0/build/three.module.js",
-            "three/addons/": "https://unpkg.com/three@0.153.0/examples/jsm/"
+            "three": "https://unpkg.com/three@v0.153.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@v0.153.0/examples/jsm/"
         }
     }
     </script>
 
     <style>
-        :root{--b:#0a0a0a;--b2:#111;--b3:#181818;--b5:#2e2e2e;--m3:#C13352;--m4:#5A1020;--w:#f0ebe8;--w3:#c9bfba}
-        *{margin:0;padding:0;box-sizing:border-box}
-        body{
+        body {
+            margin: 0;
             overflow: hidden;
-            background: var(--b);
-            font-family: 'Tajawal', Arial, sans-serif;
-            width: 100%;
-            height: 100vh;
-            height: 100dvh;
-        }
-        canvas{display:block;touch-action:none}
-
-        /* شريط علوي بسيط بنفس هوية الموقع */
-        #topbar{
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            z-index: 10;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 1rem;
-            padding: calc(.85rem + env(safe-area-inset-top)) 1.1rem .85rem;
-            background: linear-gradient(to bottom, rgba(10,10,10,.85), transparent);
-            pointer-events: none;
-        }
-        #backBtn{
-            pointer-events: auto;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(10,10,10,.6);
-            border: 1px solid var(--b5);
-            color: var(--w3);
-            font-family: 'Tajawal', sans-serif;
-            font-size: .82rem;
-            padding: 7px 14px;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all .2s;
-            text-decoration: none;
-        }
-        #backBtn:hover{border-color:var(--m3);color:var(--m3)}
-        #modelTitle{
-            font-family: 'Bebas Neue', sans-serif;
-            font-size: 1.1rem;
-            letter-spacing: 3px;
-            color: var(--w);
-            opacity: .85;
-        }
-
-        #hint{
-            position: fixed;
-            bottom: calc(1.1rem + env(safe-area-inset-bottom));
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 10;
-            color: var(--w3);
-            font-size: .76rem;
-            letter-spacing: .5px;
-            background: rgba(10,10,10,.6);
-            padding: 6px 16px;
-            border-radius: 20px;
-            pointer-events: none;
-            white-space: nowrap;
-        }
-
-        #status{
-            position: fixed;
-            top: 50%; left: 50%;
-            transform: translate(-50%,-50%);
-            z-index: 5;
-            color: var(--w3);
-            font-family: 'Tajawal', sans-serif;
-            font-size: .9rem;
-            text-align: center;
-            pointer-events: none;
-        }
-        #status.error{color:var(--m3)}
-
-        @media (max-width:600px){
-            #modelTitle{font-size:.95rem;letter-spacing:2px}
-            #backBtn{padding:6px 11px;font-size:.76rem}
-            #hint{font-size:.68rem;padding:5px 12px}
+            background: black;
+            font-family: Arial, sans-serif;
         }
     </style>
 </head>
 
 <body>
 
-<div id="topbar">
-    <a href="index.html" id="backBtn">← رجوع</a>
-    <div id="modelTitle"></div>
-    <div style="width:70px"></div>
+<div id="heading">
+    <h1>THE MILLENNIUM FALCON</h1>
+    <div class="border"></div>
 </div>
-
-<div id="hint">🖱 اسحب للتدوير · مرر للتقريب · اسحب بإصبعين للتحريك</div>
-<div id="status">جاري تحميل النموذج...</div>
 
 <script type="module">
 
 import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
-
-// ── قراءة اسم الملف ورقم/اسم النموذج من رابط الصفحة ──
-// مثال: model-viewer.html?f=nrdd.glb&n=1
-const params = new URLSearchParams(window.location.search);
-const modelFile = params.get('f') || 'nrdd.glb';
-const modelLabel = params.get('n') || '1';
-document.getElementById('modelTitle').textContent = modelLabel;
-document.title = 'نموذج ' + modelLabel + ' — ZERO NERO';
-
-const statusEl = document.getElementById('status');
 
 const renderer = new THREE.WebGLRenderer({
     antialias: true
@@ -139,7 +45,7 @@ const renderer = new THREE.WebGLRenderer({
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
-renderer.setClearColor(0x0a0a0a);
+renderer.setClearColor(0x000000);
 
 document.body.appendChild(renderer.domElement);
 
@@ -191,23 +97,17 @@ scene.add(ambientLight);
 
 
 // تحميل المجسم
-const loader = new GLTFLoader().setPath('models/');
+const loader = new GLTFLoader().setPath('millennium_falcon/');
 
-loader.load(
-   'models-folder/nrdd.glb',
-    (gltf) => {
-        const mesh = gltf.scene;
-        mesh.position.set(0, 1.05, -1);
-        scene.add(mesh);
-        statusEl.style.display = 'none';
-    },
-    undefined,
-    (err) => {
-        statusEl.textContent = 'تعذر تحميل النموذج ثلاثي الأبعاد';
-        statusEl.classList.add('error');
-        console.error(err);
-    }
-);
+loader.load('nrdd.glb', (gltf) => {
+
+    const mesh = gltf.scene;
+
+    mesh.position.set(0, 1.05, -1);
+
+    scene.add(mesh);
+
+});
 
 
 // التحريك
