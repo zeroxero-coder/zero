@@ -2,7 +2,10 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Millennium Falcon</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+    <title>ZERONERO 3D Models</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
 
     <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
 
@@ -16,20 +19,116 @@
     </script>
 
     <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-            background: black;
-            font-family: Arial, sans-serif;
+        :root{
+            --b:#0a0a0a;
+            --b5:#2e2e2e;
+            --m3:#C13352;
+            --w:#f0ebe8;
+            --w3:#c9bfba;
+        }
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            margin:0;
+            overflow:hidden;
+            background:black;
+            font-family:'Tajawal',Arial,sans-serif;
+        }
+
+        canvas{
+            display:block;
+            touch-action:none;
+        }
+
+        #topbar{
+            position:fixed;
+            top:0;
+            left:0;
+            right:0;
+            z-index:10;
+            display:flex;
+            align-items:center;
+            justify-content:space-between;
+            padding:calc(.85rem + env(safe-area-inset-top)) 1rem .85rem;
+            background:linear-gradient(to bottom,rgba(0,0,0,.8),transparent);
+            pointer-events:none;
+        }
+
+        #backBtn{
+            pointer-events:auto;
+            text-decoration:none;
+            color:var(--w3);
+            border:1px solid var(--b5);
+            border-radius:20px;
+            padding:7px 14px;
+            background:rgba(0,0,0,.55);
+            transition:.2s;
+        }
+
+        #backBtn:hover{
+            color:var(--m3);
+            border-color:var(--m3);
+        }
+
+        #modelTitle{
+            font-family:'Bebas Neue',sans-serif;
+            color:var(--w);
+            letter-spacing:3px;
+            font-size:1.1rem;
+        }
+
+        #hint{
+            position:fixed;
+            left:50%;
+            bottom:calc(1rem + env(safe-area-inset-bottom));
+            transform:translateX(-50%);
+            background:rgba(0,0,0,.6);
+            color:var(--w3);
+            padding:7px 16px;
+            border-radius:20px;
+            font-size:.8rem;
+            pointer-events:none;
+            white-space:nowrap;
+            z-index:10;
+        }
+
+        #status{
+            position:fixed;
+            left:50%;
+            top:50%;
+            transform:translate(-50%,-50%);
+            color:var(--w3);
+            z-index:20;
+            font-size:.95rem;
+            text-align:center;
+            pointer-events:none;
+        }
+
+        #status.error{
+            color:var(--m3);
         }
     </style>
 </head>
 
 <body>
 
-<div id="heading">
-    <h1>THE MILLENNIUM FALCON</h1>
-    <div class="border"></div>
+<div id="topbar">
+    <a href="index.html" id="backBtn">← Back</a>
+    <div id="modelTitle"></div>
+    <div style="width:70px;"></div>
+</div>
+
+<div id="hint">
+    🖱 Drag to rotate · Scroll to zoom · Two fingers to pan
+</div>
+
+<div id="status">
+    Loading 3D Model...
 </div>
 
 <script type="module">
@@ -38,8 +137,22 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
+document.title = "ZERONERO 3D Models";
+
+// قراءة اسم الملف واسم النموذج من الرابط
+// model-viewer.html?f=nrdd.glb&n=NRDD
+
+const params = new URLSearchParams(window.location.search);
+
+const modelFile = params.get("f") || "nrdd.glb";
+const modelLabel = params.get("n") || "NRDD";
+
+document.getElementById("modelTitle").textContent = modelLabel;
+
+const statusEl = document.getElementById("status");
+
 const renderer = new THREE.WebGLRenderer({
-    antialias: true
+    antialias:true
 });
 
 renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -58,9 +171,10 @@ const camera = new THREE.PerspectiveCamera(
     1000
 );
 
-camera.position.set(4, 5, 11);
+camera.position.set(4,5,11);
 
 // التحكم بالكاميرا
+
 const controls = new OrbitControls(camera, renderer.domElement);
 
 controls.enableDamping = true;
@@ -73,65 +187,83 @@ controls.enableRotate = true;
 controls.minDistance = 1;
 controls.maxDistance = 100;
 
-// حرية كاملة تقريبًا
 controls.minPolarAngle = 0;
 controls.maxPolarAngle = Math.PI;
 
-controls.target.set(0, 1, 0);
+controls.target.set(0,1,0);
 
 controls.update();
 
-
 // الإضاءة
-const spotLight = new THREE.SpotLight(0xffffff, 3);
-spotLight.position.set(30, 30, 30);
+
+const spotLight = new THREE.SpotLight(0xffffff,3);
+spotLight.position.set(30,30,30);
 scene.add(spotLight);
 
-const spotLight2 = new THREE.SpotLight(0xffffff, 3);
-spotLight2.position.set(-30, 30, -30);
+const spotLight2 = new THREE.SpotLight(0xffffff,3);
+spotLight2.position.set(-30,30,-30);
 scene.add(spotLight2);
 
-// إضاءة خفيفة عامة
-const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+const ambientLight = new THREE.AmbientLight(0xffffff,0.5);
 scene.add(ambientLight);
 
-
 // تحميل المجسم
-const loader = new GLTFLoader().setPath('models-folder/');
 
-loader.load('nrdd.glb', (gltf) => {
+const loader = new GLTFLoader().setPath("models-folder/");
 
-    const mesh = gltf.scene;
+loader.load(
 
-    mesh.position.set(0, 1.05, -1);
+    modelFile,
 
-    scene.add(mesh);
+    (gltf)=>{
 
-});
+        const mesh = gltf.scene;
 
+        mesh.position.set(0,1.05,-1);
+
+        scene.add(mesh);
+
+        statusEl.style.display="none";
+
+    },
+
+    undefined,
+
+    (error)=>{
+
+        console.error(error);
+
+        statusEl.textContent="Failed to load 3D model.";
+
+        statusEl.classList.add("error");
+
+    }
+
+);
 
 // التحريك
-function animate() {
+
+function animate(){
 
     requestAnimationFrame(animate);
 
     controls.update();
 
-    renderer.render(scene, camera);
+    renderer.render(scene,camera);
 
 }
 
 animate();
 
-
 // تغيير حجم الشاشة
-window.addEventListener('resize', () => {
+
+window.addEventListener("resize",()=>{
 
     camera.aspect = window.innerWidth / window.innerHeight;
 
     camera.updateProjectionMatrix();
 
-    renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setSize(window.innerWidth,window.innerHeight);
 
 });
 
