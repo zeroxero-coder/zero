@@ -194,7 +194,7 @@ scene.add(ambientLight);
 const loader = new GLTFLoader().setPath('models/');
 
 loader.load(
-    modelFile,
+   'models-folder/nrdd.glb',
     (gltf) => {
         const mesh = gltf.scene;
         mesh.position.set(0, 1.05, -1);
