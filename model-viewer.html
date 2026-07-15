@@ -144,9 +144,9 @@ document.title = "ZERONERO 3D Models";
 
 const params = new URLSearchParams(window.location.search);
 
-const modelFile = params.get("f") || "room1.glb";
-const modelLabel = params.get("n") || "NRDD";
-
+const modelFile = "room1.glb";
+const modelLabel = "ROOM1";
+    
 document.getElementById("modelTitle").textContent = modelLabel;
 
 const statusEl = document.getElementById("status");
