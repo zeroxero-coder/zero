@@ -1,116 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-    <title>ZERONERO 3D Models</title>
+    <title>عرض المجسم ثلاثي الأبعاد — ZERO NERO</title>
 
     <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Bebas+Neue&display=swap" rel="stylesheet">
 
     <script async src="https://unpkg.com/es-module-shims@1.6.3/dist/es-module-shims.js"></script>
-
     <script type="importmap">
     {
         "imports": {
-            "three": "https://unpkg.com/three@v0.153.0/build/three.module.js",
-            "three/addons/": "https://unpkg.com/three@v0.153.0/examples/jsm/"
+            "three": "https://unpkg.com/three@0.153.0/build/three.module.js",
+            "three/addons/": "https://unpkg.com/three@0.153.0/examples/jsm/"
         }
     }
     </script>
 
     <style>
-        :root{
-            --b:#0a0a0a;
-            --b5:#2e2e2e;
-            --m3:#C13352;
-            --w:#f0ebe8;
-            --w3:#c9bfba;
-        }
-
-        *{
-            margin:0;
-            padding:0;
-            box-sizing:border-box;
-        }
-
+        :root{--b:#0a0a0a;--b2:#111;--b3:#181818;--b5:#2e2e2e;--m3:#C13352;--m4:#5A1020;--w:#f0ebe8;--w3:#c9bfba}
+        *{margin:0;padding:0;box-sizing:border-box}
         body{
-            margin:0;
-            overflow:hidden;
-            background:black;
-            font-family:'Tajawal',Arial,sans-serif;
+            overflow: hidden;
+            background: var(--b);
+            font-family: 'Tajawal', Arial, sans-serif;
+            width: 100%;
+            height: 100vh;
+            height: 100dvh;
         }
+        canvas{display:block;touch-action:none}
 
-        canvas{
-            display:block;
-            touch-action:none;
-        }
-
+        /* شريط علوي بسيط بنفس هوية الموقع */
         #topbar{
-            position:fixed;
-            top:0;
-            left:0;
-            right:0;
-            z-index:10;
-            display:flex;
-            align-items:center;
-            justify-content:space-between;
-            padding:calc(.85rem + env(safe-area-inset-top)) 1rem .85rem;
-            background:linear-gradient(to bottom,rgba(0,0,0,.8),transparent);
-            pointer-events:none;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: calc(.85rem + env(safe-area-inset-top)) 1.1rem .85rem;
+            background: linear-gradient(to bottom, rgba(10,10,10,.85), transparent);
+            pointer-events: none;
         }
-
         #backBtn{
-            pointer-events:auto;
-            text-decoration:none;
-            color:var(--w3);
-            border:1px solid var(--b5);
-            border-radius:20px;
-            padding:7px 14px;
-            background:rgba(0,0,0,.55);
-            transition:.2s;
+            pointer-events: auto;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(10,10,10,.6);
+            border: 1px solid var(--b5);
+            color: var(--w3);
+            font-family: 'Tajawal', sans-serif;
+            font-size: .82rem;
+            padding: 7px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all .2s;
+            text-decoration: none;
         }
-
-        #backBtn:hover{
-            color:var(--m3);
-            border-color:var(--m3);
-        }
-
+        #backBtn:hover{border-color:var(--m3);color:var(--m3)}
         #modelTitle{
-            font-family:'Bebas Neue',sans-serif;
-            color:var(--w);
-            letter-spacing:3px;
-            font-size:1.1rem;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 1.1rem;
+            letter-spacing: 3px;
+            color: var(--w);
+            opacity: .85;
         }
 
         #hint{
-            position:fixed;
-            left:50%;
-            bottom:calc(1rem + env(safe-area-inset-bottom));
-            transform:translateX(-50%);
-            background:rgba(0,0,0,.6);
-            color:var(--w3);
-            padding:7px 16px;
-            border-radius:20px;
-            font-size:.8rem;
-            pointer-events:none;
-            white-space:nowrap;
-            z-index:10;
+            position: fixed;
+            bottom: calc(1.1rem + env(safe-area-inset-bottom));
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 10;
+            color: var(--w3);
+            font-size: .76rem;
+            letter-spacing: .5px;
+            background: rgba(10,10,10,.6);
+            padding: 6px 16px;
+            border-radius: 20px;
+            pointer-events: none;
+            white-space: nowrap;
         }
 
         #status{
-            position:fixed;
-            left:50%;
-            top:50%;
-            transform:translate(-50%,-50%);
-            color:var(--w3);
-            z-index:20;
-            font-size:.95rem;
-            text-align:center;
-            pointer-events:none;
+            position: fixed;
+            top: 50%; left: 50%;
+            transform: translate(-50%,-50%);
+            z-index: 5;
+            color: var(--w3);
+            font-family: 'Tajawal', sans-serif;
+            font-size: .9rem;
+            text-align: center;
+            pointer-events: none;
         }
+        #status.error{color:var(--m3)}
 
-        #status.error{
-            color:var(--m3);
+        @media (max-width:600px){
+            #modelTitle{font-size:.95rem;letter-spacing:2px}
+            #backBtn{padding:6px 11px;font-size:.76rem}
+            #hint{font-size:.68rem;padding:5px 12px}
         }
     </style>
 </head>
@@ -118,18 +108,13 @@
 <body>
 
 <div id="topbar">
-    <a href="index.html" id="backBtn">← Back</a>
+    <a href="index.html" id="backBtn">← رجوع</a>
     <div id="modelTitle"></div>
-    <div style="width:70px;"></div>
+    <div style="width:70px"></div>
 </div>
 
-<div id="hint">
-    🖱 Drag to rotate · Scroll to zoom · Two fingers to pan
-</div>
-
-<div id="status">
-    Loading 3D Model...
-</div>
+<div id="hint">🖱 اسحب للتدوير · مرر للتقريب · اسحب بإصبعين للتحريك</div>
+<div id="status">جاري تحميل النموذج...</div>
 
 <script type="module">
 
@@ -137,28 +122,24 @@ import * as THREE from 'three';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 
-document.title = "ZERONERO 3D Models";
-
-// قراءة اسم الملف واسم النموذج من الرابط
-// model-viewer.html?f=nrdd.glb&n=NRDD
-
+// ── قراءة اسم الملف ورقم/اسم النموذج من رابط الصفحة ──
+// مثال: model-viewer.html?f=phg2.glb&n=1
 const params = new URLSearchParams(window.location.search);
+const modelFile = params.get('f') || 'phg2.glb';
+const modelLabel = params.get('n') || '1';
+document.getElementById('modelTitle').textContent = modelLabel;
+document.title = 'نموذج ' + modelLabel + ' — ZERO NERO';
 
-const modelFile = "phg2.glb";
-const modelLabel = "ROOM1";
-    
-document.getElementById("modelTitle").textContent = modelLabel;
-
-const statusEl = document.getElementById("status");
+const statusEl = document.getElementById('status');
 
 const renderer = new THREE.WebGLRenderer({
-    antialias:true
+    antialias: true
 });
 
 renderer.outputColorSpace = THREE.SRGBColorSpace;
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
-renderer.setClearColor(0x000000);
+renderer.setClearColor(0x0a0a0a);
 
 document.body.appendChild(renderer.domElement);
 
@@ -171,10 +152,9 @@ const camera = new THREE.PerspectiveCamera(
     1000
 );
 
-camera.position.set(4,5,11);
+camera.position.set(4, 5, 11);
 
 // التحكم بالكاميرا
-
 const controls = new OrbitControls(camera, renderer.domElement);
 
 controls.enableDamping = true;
@@ -187,38 +167,32 @@ controls.enableRotate = true;
 controls.minDistance = 1;
 controls.maxDistance = 100;
 
+// حرية كاملة تقريبًا
 controls.minPolarAngle = 0;
 controls.maxPolarAngle = Math.PI;
 
-controls.target.set(0,1,0);
+controls.target.set(0, 1, 0);
 
 controls.update();
 
-// الإضاءة
 
-// =====================
-// Cinematic Lighting
-// =====================
-
+// ══ إضاءة سينمائية (Cinematic Lighting) ══
 // إضاءة رئيسية برتقالية (Key Light)
 const keyLight = new THREE.SpotLight(0xff9a3c, 4.5);
-keyLight.position.set(-6, 3,3);
+keyLight.position.set(-6, 3, 3);
 keyLight.angle = Math.PI / 6;
 keyLight.penumbra = 0.7;
 scene.add(keyLight);
 
-// إضاءة رئيسية برتقالية (Key Light)
 const keyLight2 = new THREE.SpotLight(0xff9a3c, 4.5);
-keyLight2.position.set(9,1,1);
+keyLight2.position.set(9, 1, 1);
 keyLight2.angle = Math.PI / 6;
 keyLight2.penumbra = 0.7;
 scene.add(keyLight2);
 
 const monitorLight = new THREE.SpotLight(0xcfe8ff, 4);
-
 monitorLight.position.set(0, 1.5, 4);
 monitorLight.distance = 30;
-
 scene.add(monitorLight);
 
 // إضاءة تعبئة بنفسجية (Fill Light)
@@ -239,63 +213,49 @@ scene.add(rimLight);
 const ambientLight = new THREE.AmbientLight(0x1b2248, 0.28);
 scene.add(ambientLight);
 
-// تحميل المجسم
 
-const loader = new GLTFLoader().setPath("models-folder/");
+// تحميل المجسم
+const loader = new GLTFLoader().setPath('models-folder/');
 
 loader.load(
-
     modelFile,
-
-    (gltf)=>{
-
+    (gltf) => {
         const mesh = gltf.scene;
-
-        mesh.position.set(0,1.05,-1);
-
+        mesh.position.set(0, 1.05, -1);
         scene.add(mesh);
-
-        statusEl.style.display="none";
-
+        statusEl.style.display = 'none';
     },
-
     undefined,
-
-    (error)=>{
-
-        console.error(error);
-
-        statusEl.textContent="Failed to load 3D model.";
-
-        statusEl.classList.add("error");
-
+    (err) => {
+        statusEl.textContent = 'تعذر تحميل النموذج ثلاثي الأبعاد';
+        statusEl.classList.add('error');
+        console.error(err);
     }
-
 );
 
-// التحريك
 
-function animate(){
+// التحريك
+function animate() {
 
     requestAnimationFrame(animate);
 
     controls.update();
 
-    renderer.render(scene,camera);
+    renderer.render(scene, camera);
 
 }
 
 animate();
 
-// تغيير حجم الشاشة
 
-window.addEventListener("resize",()=>{
+// تغيير حجم الشاشة
+window.addEventListener('resize', () => {
 
     camera.aspect = window.innerWidth / window.innerHeight;
 
     camera.updateProjectionMatrix();
 
-    renderer.setSize(window.innerWidth,window.innerHeight);
+    renderer.setSize(window.innerWidth, window.innerHeight);
 
 });
 
