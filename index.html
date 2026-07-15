@@ -30,6 +30,7 @@ img,video{max-width:100%}
 
 /* GOOGLE LOGIN BTN */
 .gbtn{width:100%;background:var(--b3);border:1px solid var(--b5);color:var(--w);font-family:'Tajawal',sans-serif;font-size:.9rem;padding:10px;border-radius:4px;cursor:pointer;transition:all .2s;display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:1rem}
+.gsi-btn-wrap{display:flex;justify-content:center;margin-bottom:1rem;min-height:44px}
 .gbtn:hover{border-color:var(--m3);color:var(--m3)}
 .gbtn svg{width:18px;height:18px;flex-shrink:0}
 .ldiv{display:flex;align-items:center;gap:10px;margin-bottom:1rem}
@@ -394,13 +395,9 @@ footer strong{color:var(--m3);opacity:1}
     </div>
 
     <div class="sp-label" id="sp-lbl-account">الحساب</div>
-    <button class="sp-btn primary" id="sp-login-btn" onclick="openAuthModal('login')">
+    <button class="sp-btn primary" id="sp-login-btn" onclick="openAuthModal()">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4"/><polyline points="10 17 15 12 10 7"/><line x1="15" y1="12" x2="3" y2="12"/></svg>
       <span id="sp-login-txt">تسجيل الدخول</span>
-    </button>
-    <button class="sp-btn" id="sp-register-btn" onclick="openAuthModal('register')">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-      <span id="sp-register-txt">إنشاء حساب</span>
     </button>
 
     <div class="sp-divider" id="sp-logout-div" style="display:none"></div>
@@ -626,33 +623,8 @@ footer strong{color:var(--m3);opacity:1}
   <div class="auth-box">
     <button class="auth-close" onclick="closeAuthModal()">✕</button>
     <h2>ZERO NERO</h2>
-    <div class="auth-tabs">
-      <button class="auth-tab active" id="tab-login" onclick="switchAuthTab('login')" id="auth-tab-login-btn">تسجيل الدخول</button>
-      <button class="auth-tab" id="tab-register" onclick="switchAuthTab('register')" id="auth-tab-reg-btn">إنشاء حساب</button>
-    </div>
-    <!-- LOGIN TAB -->
-    <div class="auth-section active" id="auth-login">
-      <button class="gbtn" onclick="googleSignIn()">
-        <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-        <span id="auth-google-login-txt">تسجيل الدخول بـ Google</span>
-      </button>
-      <div class="auth-or"><span id="auth-or-txt">أو</span></div>
-      <input class="linput" id="login-email" type="email" placeholder="البريد الإلكتروني">
-      <input class="linput" id="login-pass" type="password" placeholder="كلمة المرور">
-      <button class="lbtn" onclick="emailLogin()" id="auth-login-btn-txt">دخول</button>
-    </div>
-    <!-- REGISTER TAB -->
-    <div class="auth-section" id="auth-register">
-      <button class="gbtn" onclick="googleSignIn()">
-        <svg viewBox="0 0 24 24"><path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/><path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/><path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" fill="#FBBC05"/><path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/></svg>
-        <span id="auth-google-reg-txt">التسجيل بـ Google</span>
-      </button>
-      <div class="auth-or"><span>أو</span></div>
-      <input class="linput" id="reg-name" type="text" placeholder="الاسم">
-      <input class="linput" id="reg-email" type="email" placeholder="البريد الإلكتروني">
-      <input class="linput" id="reg-pass" type="password" placeholder="كلمة المرور">
-      <button class="lbtn" onclick="emailRegister()" id="auth-reg-btn-txt">إنشاء حساب</button>
-    </div>
+    <p id="auth-desc" style="margin-bottom:1.5rem">سجّل دخولك عشان تحفظ تقدمك وتخصص تجربتك بالموقع</p>
+    <div id="gsiLoginBtn" class="gsi-btn-wrap"></div>
     <div class="lerr" id="auth-err"></div>
   </div>
 </div>
@@ -660,24 +632,34 @@ footer strong{color:var(--m3);opacity:1}
 <script>
 // ══ CONSTANTS ══
 let lang = 'ar', dark = true, lbIdx = 0;
-let currentUser = null; // {name, email, photo, subscribed}
+let currentUser = null; // {name, email, photo}
 
 // ══ GOOGLE OAUTH CONFIG ══
-// 🔴 مهم: استبدل القيمة بالأسفل بالـ Client ID اللي تحصل عليه من Google Cloud Console
-// (راجع الشرح في الرسالة عشان خطوات الحصول عليه بالضبط)
+// 🔴 مهم: لازم تكون نفس القيمة بالضبط بملف netlify/functions/auth-verify.js
 const GOOGLE_CLIENT_ID = '56128309639-6e5mllff9bhkltpdp2k9ta1f5tk6ksjt.apps.googleusercontent.com';
 
-// ══ SESSION PERSISTENCE (localStorage) ══
-function saveSession() {
-  try { localStorage.setItem('zn_user', JSON.stringify(currentUser)); } catch (e) {}
-}
-function loadSession() {
+// ══ الجلسة الحقيقية — يتم التحقق منها من طرف السيرفر عبر كوكي HttpOnly موقّع رقمياً ══
+// (عكس localStorage اللي أي شخص يقدر يعدله يدوياً من متصفحه، هذا التوكن موجود بكوكي
+// ما تقدر جافاسكربت وصوله أصلاً، وموقّع بمفتاح سري السيرفر بس هو اللي يعرفه)
+const AUTH_API = '/.netlify/functions';
+
+async function checkSession() {
   try {
-    const raw = localStorage.getItem('zn_user');
-    if (raw) currentUser = JSON.parse(raw);
-  } catch (e) { currentUser = null; }
+    const r = await fetch(AUTH_API + '/auth-me', { credentials: 'include' });
+    const data = await r.json();
+    currentUser = data.user || null;
+  } catch (e) {
+    currentUser = null;
+  }
+  updatePanelUser();
 }
-loadSession();
+
+async function clearSession() {
+  try {
+    await fetch(AUTH_API + '/auth-logout', { method: 'POST', credentials: 'include' });
+  } catch (e) {}
+  currentUser = null;
+}
 
 // ══ TRANSLATIONS ══
 const T = {
@@ -710,15 +692,11 @@ const T = {
     m3dHint:'🖱 360° — اسحب للتحكم اليدوي · مرر للتقريب',
     // panel
     guest:'الزائر', notLogged:'غير مسجّل',
-    spLogin:'تسجيل الدخول', spRegister:'إنشاء حساب',
+    spLogin:'تسجيل الدخول',
     spLogout:'تسجيل الخروج',
     spLblAccount:'الحساب',
     // auth modal
-    authGoogleLogin:'تسجيل الدخول بـ Google',
-    authGoogleReg:'التسجيل بـ Google',
-    authOr:'أو',
-    authLoginTab:'تسجيل الدخول', authRegTab:'إنشاء حساب',
-    authLoginBtn:'دخول', authRegBtn:'إنشاء حساب',
+    authDesc:'سجّل دخولك عشان تحفظ تقدمك وتخصص تجربتك بالموقع',
   },
   en: {
     role:'MANGAKA / ANIMATOR',
@@ -749,15 +727,11 @@ const T = {
     m3dHint:'🖱 360° — drag to take manual control · scroll to zoom',
     // panel
     guest:'Guest', notLogged:'Not logged in',
-    spLogin:'Sign In', spRegister:'Create Account',
+    spLogin:'Sign In',
     spLogout:'Sign Out',
     spLblAccount:'Account',
     // auth modal
-    authGoogleLogin:'Sign in with Google',
-    authGoogleReg:'Sign up with Google',
-    authOr:'or',
-    authLoginTab:'Sign In', authRegTab:'Create Account',
-    authLoginBtn:'Sign In', authRegBtn:'Create Account',
+    authDesc:'Sign in to save your progress and personalize your experience',
   }
 };
 
@@ -813,18 +787,11 @@ function applyLang() {
   // Side panel
   set('sp-lbl-account', t.spLblAccount);
   set('sp-login-txt', t.spLogin);
-  set('sp-register-txt', t.spRegister);
   set('sp-logout-txt', t.spLogout);
   updatePanelUser();
 
   // Auth modal
-  set('tab-login', t.authLoginTab);
-  set('tab-register', t.authRegTab);
-  set('auth-google-login-txt', t.authGoogleLogin);
-  set('auth-google-reg-txt', t.authGoogleReg);
-  set('auth-or-txt', t.authOr);
-  set('auth-login-btn-txt', t.authLoginBtn);
-  set('auth-reg-btn-txt', t.authRegBtn);
+  set('auth-desc', t.authDesc);
 
   // Manga cover
   document.getElementById('manga-cover-thumb').src = t.cover;
@@ -832,6 +799,9 @@ function applyLang() {
 
   // Videos
   rebuildVids();
+
+  // إعادة عرض صفحات الفصل الحالي (لو القارئ مفتوح) بلغة الفصل الجديدة
+  renderChapterPages();
 }
 
 function toggleLang() { lang = lang === 'ar' ? 'en' : 'ar'; applyLang(); }
@@ -858,7 +828,6 @@ function updatePanelUser() {
   const uemail = document.getElementById('sp-uemail');
   const avatar = document.getElementById('sp-avatar');
   const loginBtn = document.getElementById('sp-login-btn');
-  const regBtn = document.getElementById('sp-register-btn');
   const logoutBtn = document.getElementById('sp-logout-btn');
   const logoutDiv = document.getElementById('sp-logout-div');
 
@@ -871,7 +840,6 @@ function updatePanelUser() {
       avatar.textContent = currentUser.name.charAt(0).toUpperCase();
     }
     loginBtn.style.display = 'none';
-    regBtn.style.display = 'none';
     logoutBtn.style.display = 'flex';
     logoutDiv.style.display = 'block';
   } else {
@@ -879,103 +847,69 @@ function updatePanelUser() {
     uemail.textContent = t.notLogged;
     avatar.textContent = 'ZN';
     loginBtn.style.display = 'flex';
-    regBtn.style.display = 'flex';
     logoutBtn.style.display = 'none';
     logoutDiv.style.display = 'none';
   }
 }
 
 function doLogout() {
-  currentUser = null;
-  saveSession();
-  updatePanelUser();
-  closePanel();
+  clearSession().then(() => {
+    updatePanelUser();
+    closePanel();
+  });
 }
 
 // ══ AUTH MODAL ══
-function openAuthModal(tab) {
+function openAuthModal() {
   document.getElementById('authModal').classList.add('open');
-  switchAuthTab(tab || 'login');
+  document.getElementById('auth-err').textContent = '';
 }
 function closeAuthModal() { document.getElementById('authModal').classList.remove('open'); }
 
-function switchAuthTab(tab) {
-  ['login','register'].forEach(t => {
-    document.getElementById('tab-'+t).classList.toggle('active', t===tab);
-    document.getElementById('auth-'+t).classList.toggle('active', t===tab);
-  });
-}
+// ══ GOOGLE SIGN-IN (ID token verified server-side — real, forgery-proof session) ══
+let gsiInitialized = false;
 
-// ══ GOOGLE SIGN-IN (real OAuth via Google Identity Services) ══
-let googleTokenClient = null;
 function initGoogleAuth() {
-  if (googleTokenClient) return true;
-  if (typeof google === 'undefined' || !google.accounts || !google.accounts.oauth2) return false;
-  googleTokenClient = google.accounts.oauth2.initTokenClient({
+  if (gsiInitialized) return true;
+  if (typeof google === 'undefined' || !google.accounts || !google.accounts.id) return false;
+
+  google.accounts.id.initialize({
     client_id: GOOGLE_CLIENT_ID,
-    scope: 'openid email profile',
-    callback: async (resp) => {
-      if (resp.error) {
-        document.getElementById('auth-err').textContent = lang === 'ar' ? 'تعذر تسجيل الدخول بواسطة Google' : 'Google sign-in failed';
-        return;
-      }
-      try {
-        const r = await fetch('https://www.googleapis.com/oauth2/v3/userinfo', {
-          headers: { Authorization: 'Bearer ' + resp.access_token }
-        });
-        const profile = await r.json();
-        currentUser = {
-          name: profile.name || profile.email.split('@')[0],
-          email: profile.email,
-          photo: profile.picture || null,
-          subscribed: (currentUser && currentUser.email === profile.email) ? currentUser.subscribed : false
-        };
-        saveSession();
-        updatePanelUser();
-        closeAuthModal();
-        closePanel();
-      } catch (e) {
-        document.getElementById('auth-err').textContent = lang === 'ar' ? 'تعذر جلب بيانات الحساب' : 'Could not fetch account data';
-      }
-    }
+    callback: handleCredentialResponse,
+    auto_select: false
   });
+
+  const btnOpts = { theme: 'filled_black', size: 'large', shape: 'pill', text: 'signin_with', width: 260 };
+  const loginWrap = document.getElementById('gsiLoginBtn');
+  if (loginWrap) google.accounts.id.renderButton(loginWrap, btnOpts);
+
+  gsiInitialized = true;
   return true;
 }
-function googleSignIn() {
-  if (GOOGLE_CLIENT_ID.startsWith('YOUR_GOOGLE_CLIENT_ID')) {
-    document.getElementById('auth-err').textContent = lang === 'ar'
-      ? 'لم يتم إعداد Google Client ID بعد — راجع التعليمات'
-      : 'Google Client ID is not configured yet — check the setup instructions';
-    return;
-  }
-  if (!initGoogleAuth()) {
-    document.getElementById('auth-err').textContent = lang === 'ar'
-      ? 'تعذر تحميل خدمة Google، تأكد من الاتصال بالإنترنت'
-      : 'Could not load Google service, check your connection';
-    return;
-  }
-  googleTokenClient.requestAccessToken();
-}
 
-function emailLogin() {
-  const email = document.getElementById('login-email').value.trim();
-  const pass = document.getElementById('login-pass').value;
-  if (!email || !pass) { document.getElementById('auth-err').textContent = lang === 'ar' ? 'الرجاء تعبئة جميع الحقول' : 'Please fill all fields'; return; }
-  currentUser = { name: email.split('@')[0], email, photo: null, subscribed: false };
-  saveSession();
-  updatePanelUser();
-  closeAuthModal();
-}
-
-function emailRegister() {
-  const name = document.getElementById('reg-name').value.trim();
-  const email = document.getElementById('reg-email').value.trim();
-  const pass = document.getElementById('reg-pass').value;
-  if (!name || !email || !pass) { document.getElementById('auth-err').textContent = lang === 'ar' ? 'الرجاء تعبئة جميع الحقول' : 'Please fill all fields'; return; }
-  currentUser = { name, email, photo: null, subscribed: false };
-  saveSession();
-  updatePanelUser();
-  closeAuthModal();
+async function handleCredentialResponse(response) {
+  const err = document.getElementById('auth-err');
+  err.textContent = '';
+  try {
+    // نرسل الـ ID token (موقّع من Google) للسيرفر يتحقق منه ويصدر جلسة حقيقية موقّعة
+    const r = await fetch(AUTH_API + '/auth-verify', {
+      method: 'POST',
+      credentials: 'include',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ credential: response.credential })
+    });
+    const data = await r.json();
+    if (!r.ok || !data.user) {
+      err.textContent = lang === 'ar' ? (data.error || 'تعذر التحقق من الحساب') : (data.error || 'Could not verify account');
+      return;
+    }
+    currentUser = data.user;
+    updatePanelUser();
+    closeAuthModal();
+    closePanel();
+  } catch (e) {
+    err.textContent = lang === 'ar' ? 'تعذر الاتصال بالسيرفر' : 'Could not reach the server';
+  }
 }
 
 // ══ AUTO-START (password gate removed — intro plays automatically) ══
@@ -991,6 +925,11 @@ function runIntro() {
     document.getElementById('app').classList.add('show');
     applyLang();
     setupAnimPreview();
+    checkSession();
+    // GIS تحتاج وقت تحمّل السكربت الخارجي؛ نحاول فوراً وأيضاً عند اكتمال تحميل الصفحة كاملة كضمان إضافي
+    if (!initGoogleAuth()) {
+      window.addEventListener('load', () => setTimeout(initGoogleAuth, 300));
+    }
   }, 2750);
 }
 
@@ -1069,29 +1008,73 @@ function render3DGallery() {
 render3DGallery();
 
 // ══ MANGA CHAPTERS ══
-const ch1b = 'https://zeronero.netlify.app/jet-pdf/file/chapter1/pages/';
-const ch1p = ['page1.jpg','page2.jpg','page3.jpg','page4.jpg','page5.jpg','page6.jpg','page7.jpg','page8.jpg','page9.jpg','page10.jpg','page11.jpg','page12.jpg','page13.jpg','page14.jpg','page15.jpg','page16.jpg'];
-const ch2b = 'https://zeronero.netlify.app/jet-pdf/file/chapter2/pages2/';
-const ch2p = ['c1.jpg','c2.jpg','c3.jpg','c4.jpg','c5.jpg','c6.jpg','c7.jpg','c8.jpg','c9.jpg','c10.jpg','c11.jpg','c12.jpg','c13.jpg','c14.jpg'];
-// Chapter 3 uses same pages as chapter 2 (copy) — replace when real pages are ready
-const ch3b = 'https://zeronero.netlify.app/jet-pdf/file/chapter2/pages2/';
-const ch3p = ['c1.png','c2.png','c3.png','c4.png','c5.png','c6.png','c7.png','c8.png','c9.png','c10.png','c11.png','c12.png','c13.png','c14.png'];
+// كل فصل عنده نسخة عربي ونسخة إنجليزي منفصلة. إذا ما رفعتِ صفحات إنجليزية لفصل معين،
+// يرجع تلقائياً يعرض نسخة العربي (fallback) بدل ما يطلع فاضي.
+const chaptersData = {
+  1: {
+    ar: {
+      base: 'https://zeronero.netlify.app/jet-pdf/file/chapter1/pages/',
+      pages: ['page1.jpg','page2.jpg','page3.jpg','page4.jpg','page5.jpg','page6.jpg','page7.jpg','page8.jpg','page9.jpg','page10.jpg','page11.jpg','page12.jpg','page13.jpg','page14.jpg','page15.jpg','page16.jpg']
+    },
+    en: {
+      base: 'https://zeronero.netlify.app/jet-pdf/file/chapter1-en/pages/',
+      pages: ['page1.jpg','page2.jpg','page3.jpg','page4.jpg','page5.jpg','page6.jpg','page7.jpg','page8.jpg','page9.jpg','page10.jpg','page11.jpg','page12.jpg','page13.jpg','page14.jpg','page15.jpg','page16.jpg']
+    }
+  },
+  2: {
+    ar: {
+      base: 'https://zeronero.netlify.app/jet-pdf/file/chapter2/pages2/',
+      pages: ['c1.jpg','c2.jpg','c3.jpg','c4.jpg','c5.jpg','c6.jpg','c7.jpg','c8.jpg','c9.jpg','c10.jpg','c11.jpg','c12.jpg','c13.jpg','c14.jpg']
+    },
+    en: {
+      // 🔴 لما ترفعين صفحات الفصل الثاني بالإنجليزي، حطيها بمسار جديد مثل:
+      // jet-pdf/file/chapter2-en/pages/  وحطي أسماء الملفات هنا
+      base: 'https://zeronero.netlify.app/jet-pdf/file/chapter2-en/pages/',
+      pages: []
+    }
+  },
+  3: {
+    // الفصل الثالث لسه مو جاهز — نفس صفحات الفصل الثاني مؤقتاً (بديل placeholder)
+    ar: {
+      base: 'https://zeronero.netlify.app/jet-pdf/file/chapter2/pages2/',
+      pages: ['c1.png','c2.png','c3.png','c4.png','c5.png','c6.png','c7.png','c8.png','c9.png','c10.png','c11.png','c12.png','c13.png','c14.png']
+    },
+    en: { base: '', pages: [] }
+  }
+};
+
+let currentOpenChapter = null; // { n, title, total }
+
+// يرجع نسخة الفصل المناسبة للغة الحالية، ولو ما فيها صفحات يرجع نسخة العربي تلقائياً
+function getChapterVariant(n) {
+  const data = chaptersData[n];
+  if (!data) return null;
+  const variant = data[lang];
+  if (variant && variant.pages && variant.pages.length) return variant;
+  return data.ar;
+}
+
+function renderChapterPages() {
+  if (!currentOpenChapter) return;
+  const { n, total } = currentOpenChapter;
+  const variant = getChapterVariant(n);
+  if (!variant) return;
+  const c = document.getElementById('rpgs');
+  c.innerHTML = '';
+  variant.pages.forEach((f, i) => {
+    const w = document.createElement('div'); w.className = 'mp';
+    w.innerHTML = `<img src="${variant.base + f}" alt="${i+1}" loading="lazy"><div class="pn">${i+1}/${total}</div>`;
+    c.appendChild(w);
+  });
+}
 
 function openChapter(n, title, total) {
+  currentOpenChapter = { n, title, total };
   document.getElementById('mm').style.display = 'none';
   const r = document.getElementById('rdr'); r.classList.add('active');
   document.getElementById('rtitle').textContent = `CH.0${n} — ${title}`;
   document.getElementById('rcnt').textContent = `${total} pg`;
-  const c = document.getElementById('rpgs'); c.innerHTML = '';
-  let base, pages;
-  if (n === 1) { base = ch1b; pages = ch1p; }
-  else if (n === 2) { base = ch2b; pages = ch2p; }
-  else { base = ch3b; pages = ch3p; }
-  pages.forEach((f, i) => {
-    const w = document.createElement('div'); w.className = 'mp';
-    w.innerHTML = `<img src="${base + f}" alt="${i+1}" loading="lazy"><div class="pn">${i+1}/${total}</div>`;
-    c.appendChild(w);
-  });
+  renderChapterPages();
   requestAnimationFrame(() => {
     const nav = document.querySelector('nav');
     const navH = nav ? nav.offsetHeight : 58;
@@ -1100,6 +1083,7 @@ function openChapter(n, title, total) {
   });
 }
 function closeReader() {
+  currentOpenChapter = null;
   document.getElementById('rdr').classList.remove('active');
   document.getElementById('mm').style.display = 'block';
   document.getElementById('rpgs').innerHTML = '';
