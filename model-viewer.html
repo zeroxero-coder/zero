@@ -144,7 +144,7 @@ document.title = "ZERONERO 3D Models";
 
 const params = new URLSearchParams(window.location.search);
 
-const modelFile = "room1.glb";
+const modelFile = "phone craer 22.glb";
 const modelLabel = "ROOM1";
     
 document.getElementById("modelTitle").textContent = modelLabel;
@@ -196,15 +196,47 @@ controls.update();
 
 // الإضاءة
 
-const spotLight = new THREE.SpotLight(0xffffff,3);
-spotLight.position.set(30,30,30);
-scene.add(spotLight);
+// =====================
+// Cinematic Lighting
+// =====================
 
-const spotLight2 = new THREE.SpotLight(0xffffff,3);
-spotLight2.position.set(-30,30,-30);
-scene.add(spotLight2);
+// إضاءة رئيسية برتقالية (Key Light)
+const keyLight = new THREE.SpotLight(0xff9a3c, 4.5);
+keyLight.position.set(-6, 3,3);
+keyLight.angle = Math.PI / 6;
+keyLight.penumbra = 0.7;
+scene.add(keyLight);
 
-const ambientLight = new THREE.AmbientLight(0xffffff,0.5);
+// إضاءة رئيسية برتقالية (Key Light)
+const keyLight2 = new THREE.SpotLight(0xff9a3c, 4.5);
+keyLight2.position.set(9,1,1);
+keyLight2.angle = Math.PI / 6;
+keyLight2.penumbra = 0.7;
+scene.add(keyLight2);
+
+const monitorLight = new THREE.SpotLight(0xcfe8ff, 4);
+
+monitorLight.position.set(0, 2.5, 4);
+monitorLight.distance = 30;
+
+scene.add(monitorLight);
+
+// إضاءة تعبئة بنفسجية (Fill Light)
+const fillLight = new THREE.SpotLight(0x8a4dff, 2.6);
+fillLight.position.set(-18, 15, -20);
+fillLight.angle = Math.PI / 5;
+fillLight.penumbra = 0.8;
+scene.add(fillLight);
+
+// إضاءة خلفية زرقاء داكنة (Rim Light)
+const rimLight = new THREE.SpotLight(0x234dff, 3);
+rimLight.position.set(0, 20, -35);
+rimLight.angle = Math.PI / 4;
+rimLight.penumbra = 1;
+scene.add(rimLight);
+
+// إضاءة عامة خفيفة جداً
+const ambientLight = new THREE.AmbientLight(0x1b2248, 0.28);
 scene.add(ambientLight);
 
 // تحميل المجسم
