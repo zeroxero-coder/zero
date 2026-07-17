@@ -817,6 +817,9 @@ function applyLang() {
 
   // إعادة عرض صفحات الفصل الحالي (لو القارئ مفتوح) بلغة الفصل الجديدة
   renderChapterPages();
+
+  // إعادة عرض أسماء بطاقات النماذج ثلاثية الأبعاد باللغة الجديدة
+  if (typeof render3DGallery === 'function') render3DGallery();
 }
 
 function toggleLang() { lang = lang === 'ar' ? 'en' : 'ar'; applyLang(); }
@@ -1000,12 +1003,12 @@ document.addEventListener('keydown', e => {
 // أضف نماذج FBX أو GLB هنا: ضع الملف داخل مجلد models/ في الريبو، وأضف سطر جديد بالأسفل
 // كل نموذج يفتح بصفحة مستقلة خاصة فيه (model-viewer.html) عشان يشتغل بأعلى أداء ممكن
 const models3D = [
-  { name: '1', page: 'model-viewer.html?f=phg2.glb&n=1', thumb: null },
+  { name: { ar: 'المكتب', en: 'Desk' }, page: 'model-viewer.html?f=phg2.glb&n=1', thumb: 'models-thumbs/model1-thumb.jpg' },
+  { name: { ar: 'القطار', en: 'Metro' }, page: 'model-viewer.html?f=model2.glb&n=2', thumb: 'models-thumbs/model2-thumb.jpg' },
+  { name: { ar: 'الغرفة', en: 'Room' }, page: 'model-viewer.html?f=model3.glb&n=3', thumb: 'models-thumbs/model3-thumb.jpg' },
+  { name: { ar: 'الكهرمان الأسود', en: 'JET' }, page: 'model-viewer.html?f=model4.glb&n=4', thumb: 'models-thumbs/model4-thumb.jpg' },
   // 🔴 قوالب جاهزة — لما تجهز الملفات الحقيقية، بدّلي فقط اسم الملف بعد "f="
-  { name: '2', page: 'model-viewer.html?f=model2.glb&n=2', thumb: null },
-  { name: '3', page: 'model-viewer.html?f=model3.glb&n=3', thumb: null },
-  { name: '4', page: 'model-viewer.html?f=model4.glb&n=4', thumb: null },
-  { name: '5', page: 'model-viewer.html?f=model5.glb&n=5', thumb: null },
+  { name: { ar: '5', en: '5' }, page: 'model-viewer.html?f=model5.glb&n=5', thumb: null },
 ];
 
 function render3DGallery() {
@@ -1015,12 +1018,13 @@ function render3DGallery() {
   if (!models3D.length) { empty.style.display = 'block'; return; }
   empty.style.display = 'none';
   models3D.forEach((m) => {
+    const displayName = (m.name && m.name[lang]) || m.name || '';
     const c = document.createElement('div'); c.className = 'm3d-card';
     c.innerHTML = `<div class="m3d-card-thumb">${
       m.thumb
-        ? `<img src="${m.thumb}" alt="${m.name}" loading="lazy" onerror="this.remove()">`
+        ? `<img src="${m.thumb}" alt="${displayName}" loading="lazy" onerror="this.remove()">`
         : `<svg viewBox="0 0 200 200" fill="none" stroke="var(--m3)" stroke-width="3"><polygon points="100,15 175,58 175,142 100,185 25,142 25,58" stroke-linejoin="round"/><polyline points="25,58 100,100 175,58" stroke-linejoin="round"/><line x1="100" y1="100" x2="100" y2="185"/></svg>`
-    }<div class="m3d-card-badge">360°</div></div><div class="m3d-card-name">${m.name}</div>`;
+    }<div class="m3d-card-badge">360°</div></div><div class="m3d-card-name">${displayName}</div>`;
     c.onclick = () => { window.location.href = m.page; };
     wrap.appendChild(c);
   });
