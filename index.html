@@ -190,6 +190,19 @@ body.day .wc{background:var(--b2);border-color:var(--b4)}
 .mp img{width:100%;display:block;border-radius:2px}
 .pn{position:absolute;bottom:8px;right:10px;background:rgba(10,10,10,.8);color:var(--w3);font-family:'Bebas Neue',sans-serif;font-size:.72rem;letter-spacing:1px;padding:2px 8px;border-radius:2px}
 
+/* END-OF-CHAPTER NAVIGATION */
+.ch-nav{display:flex;flex-wrap:wrap;gap:.75rem;justify-content:center;margin-top:1.5rem;padding-top:1.5rem;border-top:1px solid var(--b4)}
+.ch-nav-btn{display:inline-flex;align-items:center;gap:8px;background:var(--b2);border:1px solid var(--b5);color:var(--w2);font-family:'Tajawal',sans-serif;font-size:.88rem;font-weight:500;padding:11px 22px;border-radius:24px;cursor:pointer;transition:all .2s}
+.ch-nav-btn:hover{border-color:var(--m3);color:var(--m3);transform:translateY(-2px)}
+.ch-nav-btn.primary{background:var(--m);border-color:var(--m);color:var(--w)}
+.ch-nav-btn.primary:hover{background:var(--m2);border-color:var(--m2);color:var(--w)}
+.ch-nav-btn.jet{background:linear-gradient(135deg,var(--m4),var(--b3));border-color:var(--m3)}
+.ch-nav-btn.jet:hover{background:linear-gradient(135deg,var(--m3),var(--m4))}
+@media (max-width:600px){
+  .ch-nav{gap:.6rem;margin-top:1.1rem;padding-top:1.1rem}
+  .ch-nav-btn{font-size:.8rem;padding:10px 16px;flex:1;justify-content:center;min-width:120px}
+}
+
 /* ANIMATION */
 .vg{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:1.2rem;margin-top:1.5rem}
 .vc{background:var(--b2);border:1px solid var(--b5);border-radius:3px;overflow:hidden;transition:border-color .2s}
@@ -677,6 +690,7 @@ const T = {
     gh:'رسوماتي', ah:'مقاطع الحركة', mh:'النماذج ثلاثية الأبعاد',
     l1:'رسم وكتابة', l2:'الناشر',
     cp1:'الفصل الأول — 16 صفحة', cp2:'الفصل الثاني — 14 صفحة',
+    chNextLabel:'الفصل التالي', chPrevLabel:'الفصل السابق', chJetLabel:'الكهرمان الأسود (JET)',
     cp3:'الفصل الثالث — قريباً', ch3:'الفصل الثالث',
     itag:'أبوفراس الشعواني', authorName:'أبوفراس الشعواني',
     lsub:'أدخل كلمة المرور', ph:'••••••••', lbt:'دخول',
@@ -712,6 +726,7 @@ const T = {
     gh:'Drawings', ah:'Animation Clips', mh:'3D Models',
     l1:'Art & Story', l2:'Publisher',
     cp1:'Chapter 1 — 16 pages', cp2:'Chapter 2 — 14 pages',
+    chNextLabel:'Next Chapter', chPrevLabel:'Previous Chapter', chJetLabel:'JET Model',
     cp3:'Chapter 3 — Coming Soon', ch3:'Chapter 3',
     itag:'Abufarras Shawani', authorName:'Abufarras Shawani',
     lsub:'Enter password', ph:'password', lbt:'Enter',
@@ -1057,11 +1072,28 @@ function getChapterVariant(n) {
   return data.ar;
 }
 
+// معلومات أساسية عن كل فصل (يستخدمها زر "التالي/السابق" للتنقل السريع)
+const chapterMeta = {
+  1: { title: 'Jet Stone', total: 16 },
+  2: { title: 'Outcasts', total: 14 }
+};
+
+function goToChapter(n) {
+  const m = chapterMeta[n];
+  if (!m) return;
+  openChapter(n, m.title, m.total);
+}
+
+function goToModel4() {
+  window.location.href = 'model-viewer.html?f=model4.glb&n=4';
+}
+
 function renderChapterPages() {
   if (!currentOpenChapter) return;
   const { n, total } = currentOpenChapter;
   const variant = getChapterVariant(n);
   if (!variant) return;
+  const t = T[lang];
   const c = document.getElementById('rpgs');
   c.innerHTML = '';
   variant.pages.forEach((f, i) => {
@@ -1069,6 +1101,21 @@ function renderChapterPages() {
     w.innerHTML = `<img src="${variant.base + f}" alt="${i+1}" loading="lazy"><div class="pn">${i+1}/${total}</div>`;
     c.appendChild(w);
   });
+
+  // ── أزرار نهاية الفصل (التالي/السابق + رابط مباشر لموديل الكهرمان الأسود) ──
+  const navRow = document.createElement('div');
+  navRow.className = 'ch-nav';
+  if (n === 1) {
+    navRow.innerHTML = `
+      <button class="ch-nav-btn primary" onclick="goToChapter(2)">→ ${t.chNextLabel}</button>
+      <button class="ch-nav-btn jet" onclick="goToModel4()">→ ${t.chJetLabel}</button>
+    `;
+  } else if (n === 2) {
+    navRow.innerHTML = `
+      <button class="ch-nav-btn primary" onclick="goToChapter(1)">← ${t.chPrevLabel}</button>
+    `;
+  }
+  if (navRow.innerHTML.trim()) c.appendChild(navRow);
 }
 
 function openChapter(n, title, total) {
